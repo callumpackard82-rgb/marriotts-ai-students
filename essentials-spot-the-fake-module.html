@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Essentials · Spot the fake — Student AI Guide</title>
+<style>
+  :root{
+    --paper:#f7f5ef;--card:#ffffff;--ink:#1f2421;--ink-soft:#4a534d;--line:#e3ded2;
+    --coral:#d0452e;--coral-deep:#9e3320;--coral-tint:#fbe9e4;--clay:#b4532a;--amber:#e8b04b;
+    --safe:#1f7a4d;--safe-tint:#e8f3ec;
+    --shadow:0 1px 2px rgba(31,36,33,.05),0 6px 22px rgba(31,36,33,.07);
+  }
+  *{box-sizing:border-box}html{scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.62;font-size:17px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:760px;margin:0 auto;padding:0 22px 90px}
+  h1,h2,h3{font-family:Georgia,"Times New Roman",serif;line-height:1.22;letter-spacing:-.01em}
+  h2{font-size:1.5rem;margin:0 0 .5rem}h3{font-size:1.12rem;margin:0 0 .4rem}
+  p{margin:.55rem 0}a{color:var(--coral-deep)}
+  header{background:linear-gradient(155deg,#d0452e 0%,#9e3320 100%);color:#f3efe4;padding:42px 22px 38px;border-bottom:4px solid var(--amber)}
+  .header-inner{max-width:760px;margin:0 auto}
+  .programme{font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;opacity:.82;margin:0 0 16px}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+  .badge{font-size:.74rem;letter-spacing:.04em;text-transform:uppercase;font-weight:600;padding:4px 11px;border-radius:999px;border:1px solid rgba(243,239,228,.35)}
+  .badge.path{background:var(--amber);color:#3a2a06;border-color:transparent}
+  header h1{font-size:2.05rem;margin:.1rem 0 .5rem;color:#fff}
+  .meta{display:flex;flex-wrap:wrap;gap:18px;font-size:.86rem;opacity:.9;margin-top:14px}
+  .meta span{display:flex;align-items:center;gap:6px}
+  section{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;margin:26px 0;box-shadow:var(--shadow)}
+  .kicker{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--coral);margin-bottom:10px}
+  .kicker .num{width:22px;height:22px;border-radius:50%;background:var(--coral);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-family:Georgia,serif;font-size:.8rem}
+  .lead{font-size:1.06rem}
+  .note{background:var(--coral-tint);border-radius:10px;padding:12px 15px;font-size:.92rem;margin:14px 0}
+  .note strong{color:var(--coral-deep)}
+  .toggle-btn{background:var(--coral);color:#fff;border:none;border-radius:9px;padding:10px 16px;font-size:.9rem;font-weight:600;cursor:pointer;margin:8px 0;transition:.15s}
+  .toggle-btn:hover{background:var(--coral-deep)}
+  .reveal{display:none}.reveal.show{display:block;animation:fade .3s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  .safety{background:var(--safe-tint);border:1px solid #bfe0cb;border-left:5px solid var(--safe)}
+  .safety .kicker{color:var(--safe)}.safety .kicker .num{background:var(--safe)}
+  .shield{font-size:1.15rem}
+  .check-item{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border:1px solid var(--line);border-radius:11px;margin:8px 0;cursor:pointer;transition:.15s;background:#fbfaf6}
+  .check-item:hover{border-color:var(--coral)}
+  .check-item.done{background:var(--coral-tint);border-color:var(--coral)}
+  .check-item .box{flex:0 0 22px;width:22px;height:22px;border:2px solid var(--coral);border-radius:6px;display:flex;align-items:center;justify-content:center;margin-top:1px;color:#fff;font-weight:700;font-size:.9rem}
+  .check-item.done .box{background:var(--coral)}.check-item .txt{font-size:.95rem}
+  .progress{font-size:.9rem;color:var(--ink-soft);margin:6px 0 14px;font-weight:600}.progress b{color:var(--coral-deep)}
+  .lights{display:flex;gap:10px;margin:16px 0 4px}
+  .light{flex:1;text-align:center;border:1px solid var(--line);border-radius:11px;padding:12px 8px;cursor:pointer;font-size:.85rem;font-weight:600;transition:.15s;background:#fbfaf6}
+  .light .em{font-size:1.4rem;display:block;margin-bottom:3px}
+  .light.sel{border-width:2px;transform:translateY(-2px)}
+  .light.r.sel{border-color:#c0392b;background:#fbeae6}.light.y.sel{border-color:#d9a528;background:#fbf3df}.light.g.sel{border-color:var(--safe);background:var(--safe-tint)}
+  .next{background:linear-gradient(155deg,#d0452e,#9e3320);color:#f3efe4;border:none;text-align:center}
+  .next h2{color:#fff}.next p{opacity:.92}.next .arrow{font-size:1.6rem;display:block;margin-bottom:6px;color:var(--amber)}
+  .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(120%);background:var(--ink);color:#fff;padding:11px 20px;border-radius:10px;font-size:.9rem;box-shadow:var(--shadow);transition:.3s;z-index:50}
+  .toast.show{transform:translateX(-50%) translateY(0)}
+  ul.clean{padding-left:1.15rem}ul.clean li{margin:.3rem 0}
+  /* SIFT steps */
+  .sift{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+  .sift .s{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:#fbfaf6;font-size:.92rem}
+  .sift .s b{display:block;font-family:Georgia,serif;font-size:1.02rem;margin-bottom:3px;color:var(--coral-deep)}
+  @media(max-width:560px){.sift{grid-template-columns:1fr}}
+  /* feed cards */
+  .post{border:1px solid var(--line);border-radius:14px;margin:14px 0;background:#fff;overflow:hidden}
+  .post .ph{display:flex;align-items:center;gap:10px;padding:11px 15px;border-bottom:1px solid var(--line);background:#fbfaf6}
+  .post .av{width:34px;height:34px;border-radius:50%;background:var(--coral-tint);display:flex;align-items:center;justify-content:center;font-size:1.05rem;flex:0 0 auto}
+  .post .who{font-size:.88rem;font-weight:700}.post .who span{display:block;font-weight:400;color:var(--ink-soft);font-size:.78rem}
+  .post .body{padding:14px 16px}
+  .post .body p{margin:.2rem 0;font-size:.95rem}
+  .post .scene{background:#eee9dd;border-radius:9px;padding:12px 14px;font-size:.88rem;color:var(--ink-soft);font-style:italic;margin:10px 0}
+  .post .opts{display:flex;gap:9px;padding:0 16px 14px}
+  .post .opts button{flex:1;border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 8px;font-size:.88rem;font-weight:600;cursor:pointer;font-family:inherit;transition:.15s;color:var(--ink)}
+  .post .opts button:hover{border-color:var(--coral)}
+  .post.answered .opts button{cursor:default;opacity:.55}
+  .post.answered .opts button.right{opacity:1;border-color:var(--safe);background:var(--safe-tint);color:var(--safe)}
+  .post.answered .opts button.wrong{opacity:1;border-color:#c0392b;background:#fbeae6;color:#c0392b}
+  .post .why{display:none;margin:0 16px 14px;font-size:.9rem;border-top:1px dashed var(--line);padding-top:11px}
+  .post.answered .why{display:block;animation:fade .3s ease}
+  .scorebox{font-size:.92rem;font-weight:600;color:var(--ink-soft);margin-top:14px}
+  .scorebox b{color:var(--coral-deep)}
+</style>
+  <link rel="icon" href="logo.svg">
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:12px;margin:0 0 14px"><img src="logo.svg" alt="Marriotts School" width="42" height="42" style="background:#fff;border-radius:9px;padding:5px;box-sizing:border-box;flex:0 0 auto"><p class="programme" style="margin:0">Marriotts School &middot; Student AI Guide</p></div>
+    <div class="badges"><span class="badge path">Essentials · E3</span><span class="badge">No AI tool needed</span></div>
+    <h1>Spot the fake</h1>
+    <div class="meta"><span>⏱ About 12 minutes</span><span>🎯 A habit, not a superpower</span><span>📱 Four posts to judge</span></div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section>
+    <span class="kicker"><span class="num">1</span> Why this matters</span>
+    <p class="lead">A video of a celebrity saying something they never said. A "news photo" from a disaster that never happened. A voice note that sounds exactly like someone's mum. All of this is cheap to make now, and most of it is never labelled.</p>
+    <p>Here's the uncomfortable truth this module is built on: <strong>you are not going to out-stare a deepfake.</strong> The old advice — count the fingers, look at the eyes — worked for about a year. Modern AI images and video are often flawless. The people who don't get fooled aren't the ones with sharper eyes; they're the ones with a better <em>habit</em>.</p>
+  </section>
+
+  <section>
+    <span class="kicker"><span class="num">2</span> The idea</span>
+    <h2>Stop asking "does it look real?" Start asking "where's it from?"</h2>
+    <p>Since you can't reliably judge the <em>pixels</em>, judge the <em>provenance</em> — the trail of where something came from. That's a four-step habit called <strong>SIFT</strong>, and it takes about 30 seconds:</p>
+    <div class="sift">
+      <div class="s"><b>S · Stop</b> The moment something makes you feel a big emotion — outrage, fear, "no WAY" — that's the moment to pause. Strong emotion is exactly what fakes are engineered to trigger, because it makes you share before you think.</div>
+      <div class="s"><b>I · Investigate the source</b> Who posted this? A news organisation with a reputation to lose, or an account called @truthbomb_2026 created last month? Tap the profile. Thirty seconds.</div>
+      <div class="s"><b>F · Find better coverage</b> If a plane really crashed, every news outlet on Earth has it within minutes. If you can only find it on the one account that posted it — that silence is your answer.</div>
+      <div class="s"><b>T · Trace to the original</b> Cropped screenshots and re-uploads hide context. Find where the clip or image <em>first</em> appeared and when. Old footage relabelled as "breaking news" is one of the most common fakes of all.</div>
+    </div>
+    <div class="note"><strong>One more tell that still works:</strong> the too-perfect coincidence. The clip that confirms <em>exactly</em> what one side wants to believe, filmed at the perfect angle, surfacing at the perfect moment, from an account nobody's heard of? Reality is rarely that convenient.</div>
+  </section>
+
+  <section>
+    <span class="kicker"><span class="num">3</span> See it in action</span>
+    <h2>Thirty seconds on a viral clip</h2>
+    <p>A clip is flying around: <em>a shark swimming up a flooded high street</em>, captioned "Storm Imogen hits Norfolk — UNREAL 😱". Two million views. Watch SIFT take it apart:</p>
+    <ul class="clean">
+      <li><strong>Stop:</strong> it's astonishing and scary — exactly the feeling that should slow you down, not speed you up.</li>
+      <li><strong>Investigate:</strong> posted by a meme account that posts "unbelievable" clips daily. Not a news source, no location, no original claim of filming it.</li>
+      <li><strong>Find better coverage:</strong> BBC and local Norfolk news cover the storm — flooding, school closures, no sharks. A two-million-view shark would be the headline. It isn't.</li>
+      <li><strong>Trace:</strong> a reverse-image search finds the same shark, same angle, posted during a US hurricane <em>years ago</em> — it's a recycled fake that resurfaces in every flood, somewhere, every single year.</li>
+    </ul>
+    <p>No pixel-staring required. The fake fell apart on <strong>source, coverage and history</strong> — things AI can't fake nearly as easily as faces.</p>
+  </section>
+
+  <section>
+    <span class="kicker"><span class="num">4</span> Your turn</span>
+    <h2>Trust it, or check it?</h2>
+    <p>Four posts from a feed. You can't see the actual images — just like you can't see the truth behind a real post. Use the SIFT clues in each one and decide: <strong>seems trustworthy</strong>, or <strong>needs checking before you believe or share it</strong>?</p>
+
+    <div class="post" data-ans="c">
+      <div class="ph"><div class="av">⚡</div><div class="who">@breaking_now_uk <span>Account created 3 weeks ago · 112 followers</span></div></div>
+      <div class="body"><p>"🚨 LEAKED: footage of a Premier League star refusing to shake a kid's hand. Disgusting. RT before they take it down!!"</p><div class="scene">Video: blurry stadium tunnel, the star's face clearly visible, no date, no match named.</div></div>
+      <div class="opts"><button data-v="t" onclick="pick(this)">✅ Seems trustworthy</button><button data-v="c" onclick="pick(this)">🔍 Check before believing</button></div>
+      <div class="why">🔍 <strong>Check — and this one screams fake.</strong> Brand-new anonymous account, maximum-outrage caption, "before they take it down" urgency (a classic trick to stop you checking), and no date, match or source to verify. If it were real, sports media would have it everywhere within the hour. Searching for better coverage would settle it in seconds.</div>
+    </div>
+
+    <div class="post" data-ans="t">
+      <div class="ph"><div class="av">📰</div><div class="who">BBC News <span>Verified · posted 2 hours ago</span></div></div>
+      <div class="body"><p>"Flooding closes three schools in Hertfordshire after overnight storms. Live updates on road closures."</p><div class="scene">Photos: flooded roads, named locations, quotes from the county council. Same story on ITV News and the local paper.</div></div>
+      <div class="opts"><button data-v="t" onclick="pick(this)">✅ Seems trustworthy</button><button data-v="c" onclick="pick(this)">🔍 Check before believing</button></div>
+      <div class="why">✅ <strong>Trustworthy.</strong> Accountable source with a reputation to lose, specific checkable details, and — the big one — <em>independent confirmation from multiple outlets</em>. That's what real news looks like: boring, specific, and everywhere at once.</div>
+    </div>
+
+    <div class="post" data-ans="c">
+      <div class="ph"><div class="av">🎙️</div><div class="who">Forwarded voice note <span>via the group chat</span></div></div>
+      <div class="body"><p>"Listen to this — it's literally Mr [a teacher]'s voice slagging off Year 11. Someone recorded him!!"</p><div class="scene">Audio: sounds exactly like him. Forwarded four times; nobody knows who recorded it, where, or when.</div></div>
+      <div class="opts"><button data-v="t" onclick="pick(this)">✅ Seems trustworthy</button><button data-v="c" onclick="pick(this)">🔍 Check before believing</button></div>
+      <div class="why">🔍 <strong>Check — voices are the easiest thing to fake.</strong> A few seconds of someone's real voice is enough to clone it convincingly. No origin, no context, forwarded chain — that's all the warning you need. And think about the harm side: sharing it spreads what may be a fabricated attack on a real person. Don't forward it; flag it to an adult.</div>
+    </div>
+
+    <div class="post" data-ans="c">
+      <div class="ph"><div class="av">😢</div><div class="who">@history_in_pics_daily <span>"Unbelievable moments from history"</span></div></div>
+      <div class="body"><p>"A mother finds her son alive after the earthquake. The most powerful photo of the decade. 💔"</p><div class="scene">Photo: emotionally perfect composition, dramatic lighting, no photographer credit, no date, no location.</div></div>
+      <div class="opts"><button data-v="t" onclick="pick(this)">✅ Seems trustworthy</button><button data-v="c" onclick="pick(this)">🔍 Check before believing</button></div>
+      <div class="why">🔍 <strong>Check.</strong> Emotionally overwhelming + zero verifiable details (no credit, date or place) + an engagement-farming account = the classic profile of an AI-generated "history" photo. Real photojournalism comes with a photographer's name, an agency and a date. Reverse-image search would likely find nothing before last week.</div>
+    </div>
+
+    <p class="scorebox"><b id="score">0</b> of 4 judged · <span id="scoreRight">0</span> matched the careful call</p>
+  </section>
+
+  <section class="safety">
+    <span class="kicker"><span class="num">5</span> <span class="shield">🛡️</span> Safety checkpoint</span>
+    <h2>When the fake is of a person — it's serious</h2>
+    <p>Everything above is about not being fooled. This part is about not being harmed, and not harming:</p>
+    <ul class="clean">
+      <li><strong>Making fake images of real people is never a joke.</strong> Using AI to put a classmate's face on another body, fake their voice, or make them "say" things is bullying at minimum — and if the image is sexual, <strong>it is a crime, full stop, including when the person making it is under 18</strong>. "It's AI, it's not really them" is not a defence in law or in life.</li>
+      <li><strong>If it happens to you, it is not your fault — and it is fixable.</strong> Don't panic, don't negotiate with anyone threatening you, and don't delete everything: keep evidence (screenshots, usernames). Then tell an adult you trust — a parent/carer or any teacher.</li>
+      <li><strong>There are real tools that work:</strong> <a href="https://www.childline.org.uk/info-advice/bullying-abuse-safety/online-mobile-safety/report-remove/" style="color:var(--safe);font-weight:600">Report Remove</a> (Childline + the Internet Watch Foundation) can get sexual images of under-18s — including AI-made ones — taken down. Threats and pressure can be reported to <a href="https://www.ceop.police.uk" style="color:var(--safe);font-weight:600">CEOP</a>. <a href="https://www.childline.org.uk" style="color:var(--safe);font-weight:600">Childline (0800 1111)</a> is free and confidential.</li>
+    </ul>
+  </section>
+
+  <section>
+    <span class="kicker"><span class="num">6</span> Self-check</span>
+    <h2>Have you got it?</h2>
+    <p class="progress"><b id="pcount">0</b> of 4 ticked</p>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="box">✓</div><div class="txt">I know why "it looks real" means almost nothing any more — and what to judge instead.</div></div>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="box">✓</div><div class="txt">I can name the four <strong>SIFT</strong> moves and do them in about 30 seconds.</div></div>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="box">✓</div><div class="txt">I know that a strong emotional reaction is a signal to slow down, not share faster.</div></div>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="box">✓</div><div class="txt">I know fake images of real people can be a crime, and exactly where to get help if it ever touches me or a friend.</div></div>
+
+    <button class="toggle-btn" onclick="toggleReveal('exemplar')">Show me a model answer ↓</button>
+    <div class="reveal" id="exemplar">
+      <div class="note" style="margin-top:6px">"I can't reliably tell a deepfake by looking at it, so I judge where things come from instead: Stop when something makes me feel a big emotion, Investigate the account that posted it, Find out whether anyone reputable is reporting the same thing, and Trace it back to the original. And if a fake involves a real person — especially anything sexual — that's not drama, it's a crime with real help available: trusted adult, Report Remove, CEOP."</div>
+    </div>
+
+    <h3 style="margin-top:20px">How sharp does your feed radar feel?</h3>
+    <div class="lights">
+      <div class="light r" onclick="setLight(this)"><span class="em">🔴</span>I've been fooled before</div>
+      <div class="light y" onclick="setLight(this)"><span class="em">🟡</span>Getting there</div>
+      <div class="light g" onclick="setLight(this)"><span class="em">🟢</span>SIFT is my habit now</div>
+    </div>
+    <div class="note" style="margin-top:16px">🎒 <strong>This week:</strong> the next time something in your feed makes you go "no way" — do the four steps before you share it. Just once. See what you find.</div>
+  </section>
+
+  <section class="next">
+    <span class="arrow">↓</span>
+    <h2>Where next</h2>
+    <p>One module left in Essentials — and it's the one this whole site is named after. The principle that decides whether AI makes you sharper or slowly replaces you.</p>
+    <p style="margin-top:10px"><strong>Up next → Essentials · E4: Copilot, not pilot</strong></p>
+    <div style="margin-top:22px">
+      <a href="essentials-copilot-not-pilot-module.html" data-done="E3" style="display:inline-block;background:#e8b04b;color:#3a2a06;font-weight:700;text-decoration:none;padding:13px 26px;border-radius:11px;font-size:1.02rem;box-shadow:0 4px 14px rgba(0,0,0,.18)">✓ Mark complete &amp; continue →</a>
+      <div style="margin-top:13px"><a href="index.html" data-done="E3" style="color:rgba(255,255,255,.82);font-size:.9rem">Save &amp; back to dashboard</a></div>
+    </div>
+  </section>
+
+</div>
+
+<div class="toast" id="toast">Nice ✓</div>
+<script>
+  var toastTimer;function showToast(msg){var el=document.getElementById('toast');el.textContent=msg||'Nice ✓';el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(function(){el.classList.remove('show')},1700);}
+  function toggleReveal(id){var el=document.getElementById(id);el.classList.toggle('show');var btn=event.currentTarget;if(el.classList.contains('show')){btn.innerHTML=btn.innerHTML.replace('↓','↑');}else{btn.innerHTML=btn.innerHTML.replace('↑','↓');}}
+  function toggleCheck(el){el.classList.toggle('done');document.getElementById('pcount').innerText=document.querySelectorAll('.check-item.done').length;}
+  function setLight(el){el.parentElement.querySelectorAll('.light').forEach(function(l){l.classList.remove('sel')});el.classList.add('sel');}
+
+  // trust-or-check sorter
+  var answered=0, right=0;
+  function pick(btn){
+    var post=btn.closest('.post');
+    if(post.classList.contains('answered')) return;
+    post.classList.add('answered');
+    var ans=post.getAttribute('data-ans'), choice=btn.getAttribute('data-v');
+    post.querySelectorAll('.opts button').forEach(function(b){
+      if(b.getAttribute('data-v')===ans){ b.classList.add('right'); }
+      else if(b===btn){ b.classList.add('wrong'); }
+    });
+    answered++; if(choice===ans) right++;
+    document.getElementById('score').textContent=answered;
+    document.getElementById('scoreRight').textContent=right;
+    if(answered===4){ showToast(right===4?'4/4 — sharp radar 🕵️':'Done — '+right+'/4. The explanations are the lesson ↑'); }
+  }
+
+  // progress save links (script-block listener — never inline onclick on <a>, Netlify corrupts it)
+  (function(){document.querySelectorAll('a[data-done]').forEach(function(a){a.addEventListener('click',function(){try{var id=a.getAttribute('data-done');var d=JSON.parse(localStorage.getItem('saig_done')||'[]');if(d.indexOf(id)<0){d.push(id);localStorage.setItem('saig_done',JSON.stringify(d));}}catch(e){}});});})();
+</script>
+</body>
+</html>

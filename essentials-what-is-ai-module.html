@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Essentials · What AI actually is — Student AI Guide</title>
+<style>
+  :root{
+    --paper:#f7f5ef;--card:#ffffff;--ink:#1f2421;--ink-soft:#4a534d;--line:#e3ded2;
+    --coral:#d0452e;--coral-deep:#9e3320;--coral-tint:#fbe9e4;--clay:#b4532a;--amber:#e8b04b;
+    --safe:#1f7a4d;--safe-tint:#e8f3ec;
+    --shadow:0 1px 2px rgba(31,36,33,.05),0 6px 22px rgba(31,36,33,.07);
+  }
+  *{box-sizing:border-box}html{scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.62;font-size:17px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:760px;margin:0 auto;padding:0 22px 90px}
+  h1,h2,h3{font-family:Georgia,"Times New Roman",serif;line-height:1.22;letter-spacing:-.01em}
+  h2{font-size:1.5rem;margin:0 0 .5rem}h3{font-size:1.12rem;margin:0 0 .4rem}
+  p{margin:.55rem 0}a{color:var(--coral-deep)}
+  header{background:linear-gradient(155deg,#d0452e 0%,#9e3320 100%);color:#f3efe4;padding:42px 22px 38px;border-bottom:4px solid var(--amber)}
+  .header-inner{max-width:760px;margin:0 auto}
+  .programme{font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;opacity:.82;margin:0 0 16px}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+  .badge{font-size:.74rem;letter-spacing:.04em;text-transform:uppercase;font-weight:600;padding:4px 11px;border-radius:999px;border:1px solid rgba(243,239,228,.35)}
+  .badge.path{background:var(--amber);color:#3a2a06;border-color:transparent}
+  header h1{font-size:2.05rem;margin:.1rem 0 .5rem;color:#fff}
+  .meta{display:flex;flex-wrap:wrap;gap:18px;font-size:.86rem;opacity:.9;margin-top:14px}
+  .meta span{display:flex;align-items:center;gap:6px}
+  section{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;margin:26px 0;box-shadow:var(--shadow)}
+  .kicker{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--coral);margin-bottom:10px}
+  .kicker .num{width:22px;height:22px;border-radius:50%;background:var(--coral);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-family:Georgia,serif;font-size:.8rem}
+  .lead{font-size:1.06rem}
+  .note{background:var(--coral-tint);border-radius:10px;padding:12px 15px;font-size:.92rem;margin:14px 0}
+  .note strong{color:var(--coral-deep)}
+  .toggle-btn{background:var(--coral);color:#fff;border:none;border-radius:9px;padding:10px 16px;font-size:.9rem;font-weight:600;cursor:pointer;margin:8px 0;transition:.15s}
+  .toggle-btn:hover{background:var(--coral-deep)}
+  .reveal{display:none}.reveal.show{display:block;animation:fade .3s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  .twocol{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+  .twocol .c{border-radius:12px;padding:15px 16px;font-size:.93rem}
+  .twocol .good{background:var(--safe-tint);border:1px solid #bfe0cb}
+  .twocol .bad{background:#fbeae6;border:1px solid #eac6bb}
+  .twocol .tag{font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;display:block;margin-bottom:5px}
+  .twocol .good .tag{color:var(--safe)}.twocol .bad .tag{color:var(--clay)}
+  @media(max-width:560px){.twocol{grid-template-columns:1fr}}
+  .safety{background:var(--safe-tint);border:1px solid #bfe0cb;border-left:5px solid var(--safe)}
+  .safety .kicker{color:var(--safe)}.safety .kicker .num{background:var(--safe)}
+  .shield{font-size:1.15rem}
+  .check-item{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border:1px solid var(--line);border-radius:11px;margin:8px 0;cursor:pointer;transition:.15s;background:#fbfaf6}
+  .check-item:hover{border-color:var(--coral)}
+  .check-item.done{background:var(--coral-tint);border-color:var(--coral)}
+  .check-item .box{flex:0 0 22px;width:22px;height:22px;border:2px solid var(--coral);border-radius:6px;display:flex;align-items:center;justify-content:center;margin-top:1px;color:#fff;font-weight:700;font-size:.9rem}
+  .check-item.done .box{background:var(--coral)}.check-item .txt{font-size:.95rem}
+  .progress{font-size:.9rem;color:var(--ink-soft);margin:6px 0 14px;font-weight:600}.progress b{color:var(--coral-deep)}
+  .lights{display:flex;gap:10px;margin:16px 0 4px}
+  .light{flex:1;text-align:center;border:1px solid var(--line);border-radius:11px;padding:12px 8px;cursor:pointer;font-size:.85rem;font-weight:600;transition:.15s;background:#fbfaf6}
+  .light .em{font-size:1.4rem;display:block;margin-bottom:3px}
+  .light.sel{border-width:2px;transform:translateY(-2px)}
+  .light.r.sel{border-color:#c0392b;background:#fbeae6}.light.y.sel{border-color:#d9a528;background:#fbf3df}.light.g.sel{border-color:var(--safe);background:var(--safe-tint)}
+  .next{background:linear-gradient(155deg,#d0452e,#9e3320);color:#f3efe4;border:none;text-align:center}
+  .next h2{color:#fff}.next p{opacity:.92}.next .arrow{font-size:1.6rem;display:block;margin-bottom:6px;color:var(--amber)}
+  .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(120%);background:var(--ink);color:#fff;padding:11px 20px;border-radius:10px;font-size:.9rem;box-shadow:var(--shadow);transition:.3s;z-index:50}
+  .toast.show{transform:translateX(-50%) translateY(0)}
+  ul.clean{padding-left:1.15rem}ul.clean li{margin:.3rem 0}
+  /* next-word predictor */
+  .predict{background:#fbfaf6;border:1px solid var(--line);border-radius:12px;padding:18px;margin:14px 0}
+  .predict .stem{font-family:Georgia,serif;font-size:1.15rem;margin-bottom:14px}
+  .predict .stem .blank{display:inline-block;min-width:120px;border-bottom:2px dashed var(--coral);text-align:center;color:var(--coral-deep);font-weight:600}
+  .word-opts{display:flex;flex-wrap:wrap;gap:9px}
+  .word-opts button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 18px;font-size:.95rem;font-weight:600;cursor:pointer;font-family:inherit;transition:.15s;color:var(--ink)}
+  .word-opts button:hover{border-color:var(--coral)}
+  .pbar{display:flex;align-items:center;gap:10px;margin:7px 0;font-size:.9rem}
+  .pbar .w{flex:0 0 110px;font-weight:600}
+  .pbar .track{flex:1;height:14px;background:#eee9dd;border-radius:99px;overflow:hidden}
+  .pbar .fill{height:100%;background:var(--coral);border-radius:99px;width:0;transition:width .7s ease}
+  .pbar .pc{flex:0 0 44px;text-align:right;color:var(--ink-soft);font-weight:600;font-size:.85rem}
+  /* hallucination quiz */
+  .q{border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0;background:#fbfaf6;cursor:pointer;transition:.15s}
+  .q:hover{border-color:var(--coral)}
+  .q .src{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:6px}
+  .q p{margin:.2rem 0;font-size:.95rem}
+  .q.locked{cursor:default}
+  .q.right{border-color:var(--safe);background:var(--safe-tint)}
+  .q.wrong{border-color:#c0392b;background:#fbeae6}
+  .q .verdict{display:none;margin-top:10px;font-size:.9rem;border-top:1px dashed var(--line);padding-top:10px}
+  .q.locked .verdict{display:block}
+</style>
+  <link rel="icon" href="logo.svg">
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:12px;margin:0 0 14px"><img src="logo.svg" alt="Marriotts School" width="42" height="42" style="background:#fff;border-radius:9px;padding:5px;box-sizing:border-box;flex:0 0 auto"><p class="programme" style="margin:0">Marriotts School &middot; Student AI Guide</p></div>
+    <div class="badges"><span class="badge path">Essentials · E1</span><span class="badge">No AI tool needed</span></div>
+    <h1>What AI actually is (and isn't)</h1>
+    <div class="meta"><span>⏱ About 10 minutes</span><span>🎯 One idea that explains everything</span><span>🕵️ Catch a lie at the end</span></div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section>
+    <span class="kicker"><span class="num">1</span> Why this matters</span>
+    <p class="lead">You've seen AI answers screenshotted into the group chat. You've seen it write essays, make images, fake voices. Some people talk about it like it's a genius; others like it's a scam. Neither is right.</p>
+    <p>There is <strong>one simple idea</strong> that explains what these tools really are — why they're genuinely impressive, why they confidently lie, and why people who don't get this idea keep getting embarrassed by it. Ten minutes, no tech background needed, and you'll understand AI better than most adults do.</p>
+  </section>
+
+  <section>
+    <span class="kicker"><span class="num">2</span> The idea</span>
+    <h2>It's autocomplete with superpowers</h2>
+    <p>Tools like ChatGPT and Gemini are <strong>prediction machines</strong>. They were trained on a colossal amount of text — books, websites, articles — and learned the patterns of how words follow other words. When you type something, the AI predicts the most likely next word. Then the next. Then the next. Over and over, very fast, until it has written an answer.</p>
+    <p>Try being the AI for a second. Predict the next word:</p>
+    <div class="predict">
+      <div class="stem">"The mitochondria is the <span class="blank" id="blank">______</span> of the cell."</div>
+      <div class="word-opts" id="wordOpts">
+        <button onclick="predictWord(this)">kitchen</button>
+        <button onclick="predictWord(this)">powerhouse</button>
+        <button onclick="predictWord(this)">manager</button>
+        <button onclick="predictWord(this)">engine</button>
+      </div>
+      <div class="reveal" id="predictReveal">
+        <div class="pbar"><span class="w">powerhouse</span><div class="track"><div class="fill" data-w="94"></div></div><span class="pc">94%</span></div>
+        <div class="pbar"><span class="w">engine</span><div class="track"><div class="fill" data-w="4"></div></div><span class="pc">4%</span></div>
+        <div class="pbar"><span class="w">manager</span><div class="track"><div class="fill" data-w="1"></div></div><span class="pc">1%</span></div>
+        <div class="pbar"><span class="w">kitchen</span><div class="track"><div class="fill" data-w="1"></div></div><span class="pc">&lt;1%</span></div>
+        <p style="font-size:.92rem;margin-top:12px">You picked "powerhouse" because you've heard that sentence a hundred times. <strong>So has the AI — millions of times.</strong> That's the whole trick. It doesn't <em>know</em> any biology. It knows which words tend to follow which words.</p>
+      </div>
+    </div>
+    <p>That one fact explains both sides of AI:</p>
+    <ul class="clean">
+      <li><strong>Why it's genuinely brilliant</strong> at explaining, summarising, rewording and translating — those are pattern jobs, and it has seen more patterns than any human ever could.</li>
+      <li><strong>Why it confidently makes things up.</strong> It isn't looking up facts — it's predicting plausible words. When it invents a quote, a date or a statistic that <em>sounds</em> right but is wrong, that's called a <strong>hallucination</strong>. And it will state it with total confidence, because it has no idea it's wrong.</li>
+    </ul>
+    <div class="note"><strong>The mental model to keep:</strong> it's not Google (it isn't searching for facts), and it's not a calculator (it isn't following rules). It's a machine that produces <em>extremely plausible text</em> — and "plausible" is not the same as "true". It will never say "I don't know" unless it's been trained to fake that too.</div>
+  </section>
+
+  <section>
+    <span class="kicker"><span class="num">3</span> See it in action</span>
+    <h2>The same machine, at its best and worst</h2>
+    <div class="twocol">
+      <div class="c good">
+        <span class="tag">✓ Where it shines</span>
+        "Explain osmosis like I'm 12, then again like I'm an A-level student." Two clear, accurate explanations in seconds — because explaining osmosis is a pattern it has seen thousands of times. This is the kind of thing it's genuinely great at.
+      </div>
+      <div class="c bad">
+        <span class="tag">✗ Where it lies to you</span>
+        "Give me three quotes from <em>An Inspector Calls</em> about social class." It may hand you two real quotes and one it <strong>invented</strong> — perfectly in style, sounds exactly like Priestley, doesn't exist in the play. Hand that in and your teacher will know in seconds.
+      </div>
+    </div>
+    <p>Same tool, same confident tone in both. The difference isn't in how the answer <em>looks</em> — it's in what kind of question you asked. <strong>Patterns and explanations: usually solid. Specific facts, quotes, dates and numbers: check every single one.</strong></p>
+  </section>
+
+  <section>
+    <span class="kicker"><span class="num">4</span> Your turn</span>
+    <h2>Catch the hallucination</h2>
+    <p>Below are three answers in the style of an AI chatbot. Two are accurate. One contains a confident lie. <strong>Tap the one you think is hallucinating.</strong></p>
+    <div class="q" data-h="0" onclick="pickQ(this)">
+      <div class="src">Answer A · asked about photosynthesis</div>
+      <p>"Photosynthesis is the process plants use to make glucose. Chlorophyll in the leaves absorbs light energy, which is used to convert carbon dioxide and water into glucose and oxygen."</p>
+      <div class="verdict">✅ <strong>Accurate.</strong> Standard KS3/KS4 science — exactly the kind of well-worn pattern AI almost never gets wrong.</div>
+    </div>
+    <div class="q" data-h="1" onclick="pickQ(this)">
+      <div class="src">Answer B · asked about Macbeth</div>
+      <p>"Ambition is central to the play. In Act 1, Macbeth admits 'I have no spur to prick the sides of my intent, but only vaulting ambition', and later tells Lady Macbeth that 'ambition is a ladder to the stars, and I must climb it'."</p>
+      <div class="verdict">🚨 <strong>Hallucination.</strong> The first quote is real. The second — "ambition is a ladder to the stars" — is <strong>completely invented</strong>. It sounds Shakespearean, it fits the theme, and it appears nowhere in the play. This is exactly how hallucinations work: one lie hidden among truths, in a perfect imitation of the right style.</div>
+    </div>
+    <div class="q" data-h="0" onclick="pickQ(this)">
+      <div class="src">Answer C · asked about World War One</div>
+      <p>"The assassination of Archduke Franz Ferdinand in Sarajevo in June 1914 triggered a chain of events. Austria-Hungary declared war on Serbia, and the alliance system pulled in Russia, Germany, France and Britain within weeks."</p>
+      <div class="verdict">✅ <strong>Accurate.</strong> Dates, places and sequence all check out.</div>
+    </div>
+    <div class="reveal" id="quizDone">
+      <div class="note">The scary part: if you hadn't studied <em>Macbeth</em>, answer B would look <em>identical</em> to the real thing. That's the lesson — <strong>you can't spot a hallucination by how confident it sounds</strong>. You spot it by checking against something real: the book, your notes, your teacher.</div>
+    </div>
+  </section>
+
+  <section class="safety">
+    <span class="kicker"><span class="num">5</span> <span class="shield">🛡️</span> Safety checkpoint</span>
+    <h2>It's not your diary, and it's not your friend</h2>
+    <p>Two things to lock in from day one:</p>
+    <ul class="clean">
+      <li><strong>What you type can be stored.</strong> On free chatbot accounts, your conversations may be kept and even used to train future versions. Treat every chat like a postcard, not a diary — <strong>never type in your full name, address, school, photos, passwords, or anything private about you or anyone else.</strong></li>
+      <li><strong>It sounds human. It isn't.</strong> It has no idea who you are, doesn't remember you between chats (unless it's been set up to), and doesn't care about you — it predicts words. Friendly tone is a pattern, not a feeling.</li>
+    </ul>
+    <p>And the school line, stated plainly: <strong>AI tools stay off the school network and school devices.</strong> Everything in this module ran right here in your browser — no AI was needed, and none of these modules will ever ask you to use one.</p>
+  </section>
+
+  <section>
+    <span class="kicker"><span class="num">6</span> Self-check</span>
+    <h2>Have you got it?</h2>
+    <p>Tick each one you could honestly explain to a mate:</p>
+    <p class="progress"><b id="pcount">0</b> of 4 ticked</p>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="box">✓</div><div class="txt">I can say in one sentence what AI chatbots actually do (<em>predict likely next words from patterns</em>).</div></div>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="box">✓</div><div class="txt">I know what a <strong>hallucination</strong> is — and that it sounds exactly as confident as the truth.</div></div>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="box">✓</div><div class="txt">I can name something AI is genuinely great at, and something I'd have to double-check.</div></div>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="box">✓</div><div class="txt">I know never to give a chatbot personal details — mine or anyone else's.</div></div>
+
+    <button class="toggle-btn" onclick="toggleReveal('exemplar')">Show me a model answer ↓</button>
+    <div class="reveal" id="exemplar">
+      <div class="note" style="margin-top:6px">"AI chatbots predict the most likely next words based on patterns in the massive amount of text they were trained on. That's why they're brilliant at explaining and rewording, but they can <em>hallucinate</em> — confidently invent quotes, dates and facts — because they're producing plausible words, not looking things up. So anything factual gets checked against something real. And nothing personal ever goes in the chat box."</div>
+    </div>
+
+    <h3 style="margin-top:20px">How do you feel about AI now?</h3>
+    <div class="lights">
+      <div class="light r" onclick="setLight(this)"><span class="em">🔴</span>More wary than before</div>
+      <div class="light y" onclick="setLight(this)"><span class="em">🟡</span>Curious</div>
+      <div class="light g" onclick="setLight(this)"><span class="em">🟢</span>I get it now</div>
+    </div>
+    <div class="note" style="margin-top:16px">🎒 <strong>This week:</strong> next time someone shares an AI answer in the group chat, ask one question: "did anyone check that?" Watch what happens.</div>
+  </section>
+
+  <section class="next">
+    <span class="arrow">↓</span>
+    <h2>Where next</h2>
+    <p>Now you know what it is, the next question is the one everyone argues about: <em>what are the actual rules — and why do they exist?</em></p>
+    <p style="margin-top:10px"><strong>Up next → Essentials · E2: The rules — and the real risks</strong></p>
+    <div style="margin-top:22px">
+      <a href="essentials-rules-and-risks-module.html" data-done="E1" style="display:inline-block;background:#e8b04b;color:#3a2a06;font-weight:700;text-decoration:none;padding:13px 26px;border-radius:11px;font-size:1.02rem;box-shadow:0 4px 14px rgba(0,0,0,.18)">✓ Mark complete &amp; continue →</a>
+      <div style="margin-top:13px"><a href="index.html" data-done="E1" style="color:rgba(255,255,255,.82);font-size:.9rem">Save &amp; back to dashboard</a></div>
+    </div>
+  </section>
+
+</div>
+
+<div class="toast" id="toast">Nice ✓</div>
+<script>
+  var toastTimer;function showToast(msg){var el=document.getElementById('toast');el.textContent=msg||'Nice ✓';el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(function(){el.classList.remove('show')},1700);}
+  function toggleReveal(id){var el=document.getElementById(id);el.classList.toggle('show');var btn=event.currentTarget;if(el.classList.contains('show')){btn.innerHTML=btn.innerHTML.replace('↓','↑');}else{btn.innerHTML=btn.innerHTML.replace('↑','↓');}}
+  function toggleCheck(el){el.classList.toggle('done');document.getElementById('pcount').innerText=document.querySelectorAll('.check-item.done').length;}
+  function setLight(el){el.parentElement.querySelectorAll('.light').forEach(function(l){l.classList.remove('sel')});el.classList.add('sel');}
+
+  // next-word predictor
+  var predicted=false;
+  function predictWord(btn){
+    if(predicted) return; predicted=true;
+    document.getElementById('blank').textContent=btn.textContent;
+    var r=document.getElementById('predictReveal'); r.classList.add('show');
+    setTimeout(function(){ r.querySelectorAll('.fill').forEach(function(f){ f.style.width=f.getAttribute('data-w')+'%'; }); },60);
+    document.getElementById('wordOpts').querySelectorAll('button').forEach(function(b){ b.style.opacity=(b===btn)?'1':'.45'; b.style.cursor='default'; });
+  }
+
+  // hallucination quiz
+  var quizLocked=false;
+  function pickQ(el){
+    if(quizLocked) return; quizLocked=true;
+    var isH=el.getAttribute('data-h')==='1';
+    document.querySelectorAll('.q').forEach(function(q){
+      q.classList.add('locked');
+      if(q.getAttribute('data-h')==='1'){ q.classList.add(q===el?'right':'wrong'); }
+    });
+    if(isH){ el.classList.remove('wrong'); el.classList.add('right'); showToast('Caught it 🕵️'); }
+    else { el.classList.add('wrong'); showToast('It fooled you — read on'); }
+    document.getElementById('quizDone').classList.add('show');
+  }
+
+  // progress save links (script-block listener — never inline onclick on <a>, Netlify corrupts it)
+  (function(){document.querySelectorAll('a[data-done]').forEach(function(a){a.addEventListener('click',function(){try{var id=a.getAttribute('data-done');var d=JSON.parse(localStorage.getItem('saig_done')||'[]');if(d.indexOf(id)<0){d.push(id);localStorage.setItem('saig_done',JSON.stringify(d));}}catch(e){}});});})();
+</script>
+</body>
+</html>

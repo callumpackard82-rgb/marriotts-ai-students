@@ -1,0 +1,13 @@
+# Serve files exactly as written. Netlify's asset post-processing (pretty URLs +
+# JS/HTML minification) corrupts inline onclick handlers on <a> tags (turning '...'
+# into invalid \'...\'), which breaks "Mark complete" saving. Belt-and-braces: the
+# pages also avoid inline onclick on anchors entirely (data-done + script listener).
+[build.processing]
+  skip_processing = true
+
+# Always serve the latest HTML - never let a stale cached page mask an update.
+# Pages are tiny self-contained HTML files, so revalidating on each load is cheap.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"

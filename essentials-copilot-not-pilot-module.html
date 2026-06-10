@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Essentials · Copilot, not pilot — Student AI Guide</title>
+<style>
+  :root{
+    --paper:#f7f5ef;--card:#ffffff;--ink:#1f2421;--ink-soft:#4a534d;--line:#e3ded2;
+    --coral:#d0452e;--coral-deep:#9e3320;--coral-tint:#fbe9e4;--clay:#b4532a;--amber:#e8b04b;
+    --safe:#1f7a4d;--safe-tint:#e8f3ec;
+    --shadow:0 1px 2px rgba(31,36,33,.05),0 6px 22px rgba(31,36,33,.07);
+  }
+  *{box-sizing:border-box}html{scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.62;font-size:17px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:760px;margin:0 auto;padding:0 22px 90px}
+  h1,h2,h3{font-family:Georgia,"Times New Roman",serif;line-height:1.22;letter-spacing:-.01em}
+  h2{font-size:1.5rem;margin:0 0 .5rem}h3{font-size:1.12rem;margin:0 0 .4rem}
+  p{margin:.55rem 0}a{color:var(--coral-deep)}
+  header{background:linear-gradient(155deg,#d0452e 0%,#9e3320 100%);color:#f3efe4;padding:42px 22px 38px;border-bottom:4px solid var(--amber)}
+  .header-inner{max-width:760px;margin:0 auto}
+  .programme{font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;opacity:.82;margin:0 0 16px}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+  .badge{font-size:.74rem;letter-spacing:.04em;text-transform:uppercase;font-weight:600;padding:4px 11px;border-radius:999px;border:1px solid rgba(243,239,228,.35)}
+  .badge.path{background:var(--amber);color:#3a2a06;border-color:transparent}
+  header h1{font-size:2.05rem;margin:.1rem 0 .5rem;color:#fff}
+  .meta{display:flex;flex-wrap:wrap;gap:18px;font-size:.86rem;opacity:.9;margin-top:14px}
+  .meta span{display:flex;align-items:center;gap:6px}
+  section{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;margin:26px 0;box-shadow:var(--shadow)}
+  .kicker{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--coral);margin-bottom:10px}
+  .kicker .num{width:22px;height:22px;border-radius:50%;background:var(--coral);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-family:Georgia,serif;font-size:.8rem}
+  .lead{font-size:1.06rem}
+  .note{background:var(--coral-tint);border-radius:10px;padding:12px 15px;font-size:.92rem;margin:14px 0}
+  .note strong{color:var(--coral-deep)}
+  .toggle-btn{background:var(--coral);color:#fff;border:none;border-radius:9px;padding:10px 16px;font-size:.9rem;font-weight:600;cursor:pointer;margin:8px 0;transition:.15s}
+  .toggle-btn:hover{background:var(--coral-deep)}
+  .reveal{display:none}.reveal.show{display:block;animation:fade .3s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  .twocol{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+  .twocol .c{border-radius:12px;padding:15px 16px;font-size:.93rem}
+  .twocol .good{background:var(--safe-tint);border:1px solid #bfe0cb}
+  .twocol .bad{background:#fbeae6;border:1px solid #eac6bb}
+  .twocol .tag{font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;display:block;margin-bottom:5px}
+  .twocol .good .tag{color:var(--safe)}.twocol .bad .tag{color:var(--clay)}
+  @media(max-width:560px){.twocol{grid-template-columns:1fr}}
+  .safety{background:var(--safe-tint);border:1px solid #bfe0cb;border-left:5px solid var(--safe)}
+  .safety .kicker{color:var(--safe)}.safety .kicker .num{background:var(--safe)}
+  .shield{font-size:1.15rem}
+  .check-item{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border:1px solid var(--line);border-radius:11px;margin:8px 0;cursor:pointer;transition:.15s;background:#fbfaf6}
+  .check-item:hover{border-color:var(--coral)}
+  .check-item.done{background:var(--coral-tint);border-color:var(--coral)}
+  .check-item .box{flex:0 0 22px;width:22px;height:22px;border:2px solid var(--coral);border-radius:6px;display:flex;align-items:center;justify-content:center;margin-top:1px;color:#fff;font-weight:700;font-size:.9rem}
+  .check-item.done .box{background:var(--coral)}.check-item .txt{font-size:.95rem}
+  .progress{font-size:.9rem;color:var(--ink-soft);margin:6px 0 14px;font-weight:600}.progress b{color:var(--coral-deep)}
+  .lights{display:flex;gap:10px;margin:16px 0 4px}
+  .light{flex:1;text-align:center;border:1px solid var(--line);border-radius:11px;padding:12px 8px;cursor:pointer;font-size:.85rem;font-weight:600;transition:.15s;background:#fbfaf6}
+  .light .em{font-size:1.4rem;display:block;margin-bottom:3px}
+  .light.sel{border-width:2px;transform:translateY(-2px)}
+  .light.r.sel{border-color:#c0392b;background:#fbeae6}.light.y.sel{border-color:#d9a528;background:#fbf3df}.light.g.sel{border-color:var(--safe);background:var(--safe-tint)}
+  .next{background:linear-gradient(155deg,#d0452e,#9e3320);color:#f3efe4;border:none;text-align:center}
+  .next h2{color:#fff}.next p{opacity:.92}.next .arrow{font-size:1.6rem;display:block;margin-bottom:6px;color:var(--amber)}
+  .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(120%);background:var(--ink);color:#fff;padding:11px 20px;border-radius:10px;font-size:.9rem;box-shadow:var(--shadow);transition:.3s;z-index:50}
+  .toast.show{transform:translateX(-50%) translateY(0)}
+  ul.clean{padding-left:1.15rem}ul.clean li{margin:.3rem 0}
+  /* pilot-or-passenger sorter */
+  .q{border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0;background:#fbfaf6}
+  .q .qtxt{margin:.1rem 0 .7rem;font-size:.97rem}
+  .q .qtxt em{font-family:Georgia,serif}
+  .opts{display:flex;gap:9px}
+  .opts button{flex:1;border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 8px;font-size:.9rem;font-weight:600;cursor:pointer;font-family:inherit;transition:.15s;color:var(--ink)}
+  .opts button:hover{border-color:var(--coral)}
+  .q.answered .opts button{cursor:default;opacity:.55}
+  .q.answered .opts button.right{opacity:1;border-color:var(--safe);background:var(--safe-tint);color:var(--safe)}
+  .q.answered .opts button.wrong{opacity:1;border-color:#c0392b;background:#fbeae6;color:#c0392b}
+  .q .why{display:none;margin-top:11px;font-size:.9rem;border-top:1px dashed var(--line);padding-top:10px}
+  .q.answered .why{display:block;animation:fade .3s ease}
+  .scorebox{font-size:.92rem;font-weight:600;color:var(--ink-soft);margin-top:14px}
+  .scorebox b{color:var(--coral-deep)}
+</style>
+  <link rel="icon" href="logo.svg">
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:12px;margin:0 0 14px"><img src="logo.svg" alt="Marriotts School" width="42" height="42" style="background:#fff;border-radius:9px;padding:5px;box-sizing:border-box;flex:0 0 auto"><p class="programme" style="margin:0">Marriotts School &middot; Student AI Guide</p></div>
+    <div class="badges"><span class="badge path">Essentials · E4</span><span class="badge">The Marriotts principle</span></div>
+    <h1>Copilot, not pilot</h1>
+    <div class="meta"><span>⏱ About 10 minutes</span><span>🎯 The principle behind everything</span><span>✈️ Six flights to call</span></div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section>
+    <span class="kicker"><span class="num">1</span> Why this matters</span>
+    <p class="lead">Here's the question nobody asks about AI doing your homework: <em>if the AI does the learning, what exactly do you walk away with?</em></p>
+    <p>A copied essay gets you a grade — maybe — exactly once. But the grade was never the product. <strong>The brain that could write the essay is the product.</strong> That's what you take into the exam hall (handwritten, no AI, no exceptions), into interviews, into every job that's worth having in a world full of AI. This module is the one principle the whole of Marriotts runs on — staff included, in their own training: <strong>AI is the copilot. You are the pilot. Never the other way round.</strong></p>
+  </section>
+
+  <section>
+    <span class="kicker"><span class="num">2</span> The idea</span>
+    <h2>Who's flying the plane?</h2>
+    <p>In a cockpit, the <strong>pilot</strong> decides where to go, flies the plane, and is responsible for getting it down safely. The <strong>copilot</strong> assists: checks, challenges, suggests, catches mistakes. The copilot makes the pilot <em>better</em> — but the moment the copilot is flying and the pilot is asleep, that's not assistance any more. That's a passenger in a captain's hat.</p>
+    <p>Apply it to AI and the line becomes razor sharp:</p>
+    <ul class="clean">
+      <li><strong>Copilot uses (you're flying):</strong> "explain this until I get it", "quiz me", "I've written this — what's weak about it?", "give me three ways to think about this problem". The thinking happens <em>in your head</em>; the AI feeds it.</li>
+      <li><strong>Pilot uses (it's flying):</strong> "write my essay", "do these questions", "just give me the answer". The thinking happens in the machine; you transcribe. You learned how to copy and paste, which you already knew.</li>
+    </ul>
+    <p>And here's the part that's actually about your brain, not about rules: <strong>the struggle is the workout.</strong> The moment when an essay is hard, when you can't remember the quote, when the maths won't click — that effort is literally what builds the connections in your head. Scientists call it <em>desirable difficulty</em>. Skip the struggle and you skip the learning, the same way watching someone else do press-ups builds none of your muscle.</p>
+    <div class="note"><strong>The one-question test:</strong> before you use AI for anything, ask — <em>"after this, will I be able to do it without the AI?"</em> If yes, it's a copilot use. If no — if you'd be helpless without it — it just flew the plane, and you were luggage.</div>
+  </section>
+
+  <section>
+    <span class="kicker"><span class="num">3</span> See it in action</span>
+    <h2>Same homework, two students</h2>
+    <p>Two Year 10 students get the same English essay: <em>"How does Priestley present responsibility in An Inspector Calls?"</em> Both use AI at home. Watch the difference:</p>
+    <div class="twocol">
+      <div class="c bad">
+        <span class="tag">🧳 The passenger</span>
+        Pastes the question in. Copies the answer out. Changes a few words so it "sounds like him". Hands it in.<br><br>
+        <strong>What he got:</strong> a paragraph his teacher instantly clocks as not-his-voice, a quote in it that doesn't exist (E1 says hi), zero revision value — and in the real exam, with no AI and a pen in his hand, nothing. The essay was never the point. The <em>ability to write it</em> was.
+      </div>
+      <div class="c good">
+        <span class="tag">✈️ The pilot</span>
+        Writes her own plan and draft first. Then: "Quiz me on responsibility quotes until I know five cold." Then: "Here's my paragraph — what would a strict marker say is the weakest part?" Fixes it <em>herself</em>.<br><br>
+        <strong>What she got:</strong> five quotes in her memory, a sharper argument in her own voice, and practice at exactly the skill the exam tests. The AI worked hard — but every bit of thinking happened in her head.
+      </div>
+    </div>
+    <p>Same tool. Same evening. One of them gets better every time she does this; the other gets more dependent every time he does. That gap compounds for years.</p>
+  </section>
+
+  <section>
+    <span class="kicker"><span class="num">4</span> Your turn</span>
+    <h2>Pilot or passenger?</h2>
+    <p>Six students using AI at home. For each: who's flying?</p>
+
+    <div class="q" data-ans="p">
+      <p class="qtxt"><em>"Explain how electricity bills are calculated three different ways until one clicks — I don't get it from my notes."</em></p>
+      <div class="opts"><button data-v="p" onclick="pick(this)">✈️ Pilot</button><button data-v="x" onclick="pick(this)">🧳 Passenger</button></div>
+      <div class="why">✈️ <strong>Pilot.</strong> She's using AI as an unlimited-patience explainer to get something <em>into</em> her head. After this, she can do it without the AI — that's the test passed.</div>
+    </div>
+
+    <div class="q" data-ans="x">
+      <p class="qtxt"><em>"Translate my French homework paragraph into French." Copies it out, hands it in.</em></p>
+      <div class="opts"><button data-v="p" onclick="pick(this)">✈️ Pilot</button><button data-v="x" onclick="pick(this)">🧳 Passenger</button></div>
+      <div class="why">🧳 <strong>Passenger.</strong> The AI did 100% of the French; he did 100% of the handwriting. His teacher now thinks he's better than he is — which means the help he actually needs never comes. And French exams are done with his brain only.</div>
+    </div>
+
+    <div class="q" data-ans="p">
+      <p class="qtxt"><em>"I've finished my history answer. Act as a strict examiner — mark it against this list of things a top answer needs, and don't be nice."</em></p>
+      <div class="opts"><button data-v="p" onclick="pick(this)">✈️ Pilot</button><button data-v="x" onclick="pick(this)">🧳 Passenger</button></div>
+      <div class="why">✈️ <strong>Pilot — one of the best uses there is.</strong> The work is hers, done first. The AI is a feedback engine, and she decides what to do with the feedback. (One catch from E1: an "examiner" made of word-prediction can be confidently wrong — so weigh its feedback, don't obey it.)</div>
+    </div>
+
+    <div class="q" data-ans="x">
+      <p class="qtxt"><em>"Write me a poem for the school competition. Something about the sea. Make it feel personal."</em></p>
+      <div class="opts"><button data-v="p" onclick="pick(this)">✈️ Pilot</button><button data-v="x" onclick="pick(this)">🧳 Passenger</button></div>
+      <div class="why">🧳 <strong>Passenger — and something worse.</strong> Entering AI work as your own creative work isn't just skipping a workout; it's claiming a voice that isn't yours. If "make it feel personal" has to go in the prompt, that's the giveaway. Competitions, like coursework, are about what <em>you</em> can make.</div>
+    </div>
+
+    <div class="q" data-ans="x">
+      <p class="qtxt"><em>It's 11pm, the maths is due tomorrow. "Just give me the answers to these eight questions, quickly."</em></p>
+      <div class="opts"><button data-v="p" onclick="pick(this)">✈️ Pilot</button><button data-v="x" onclick="pick(this)">🧳 Passenger</button></div>
+      <div class="why">🧳 <strong>Passenger — the most tempting kind.</strong> Everyone has the 11pm night. But eight copied answers tell the teacher "he's got this" when he hasn't, and the gap shows up in the test where it costs most. The honest 11pm move: do what you can, and tell your teacher you got stuck on the rest. That message takes more courage than copying — and gets you actual help.</div>
+    </div>
+
+    <div class="q" data-ans="p">
+      <p class="qtxt"><em>"Give me a plan for revising AQA Biology Paper 1 in three weeks — I'll tell you which topics I'm weakest on, you build the schedule."</em></p>
+      <div class="opts"><button data-v="p" onclick="pick(this)">✈️ Pilot</button><button data-v="x" onclick="pick(this)">🧳 Passenger</button></div>
+      <div class="why">✈️ <strong>Pilot.</strong> The AI is organising the work; she's still going to <em>do</em> the work — every hour of actual revision happens in her brain. Letting a copilot handle the admin so the pilot can fly is exactly the division of labour.</div>
+    </div>
+
+    <p class="scorebox"><b id="score">0</b> of 6 called · <span id="scoreRight">0</span> matched the pilot's call</p>
+  </section>
+
+  <section class="safety">
+    <span class="kicker"><span class="num">5</span> <span class="shield">🛡️</span> Safety checkpoint</span>
+    <h2>The honesty line is also a legal-ish line</h2>
+    <ul class="clean">
+      <li><strong>For GCSE and A-level coursework and assessments</strong>, the exam boards (JCQ) treat passing off AI work as your own as <strong>malpractice</strong> — the same category as copying from another student. It can mean losing marks for the piece or, in serious cases, the whole qualification. Not a detention. The qualification.</li>
+      <li><strong>Exams are handwritten, no AI, no exceptions.</strong> Every passenger-mode shortcut between now and then is borrowing against the version of you who sits in that hall.</li>
+      <li><strong>The simplest test of all:</strong> if you'd be uncomfortable telling your teacher <em>exactly</em> how you used AI on a piece of work, you already know which side of the line you're on.</li>
+    </ul>
+    <p>And as always: <strong>none of this happens at school</strong> — AI stays off the school network and school devices — and <strong>nothing personal ever goes in the box</strong>.</p>
+  </section>
+
+  <section>
+    <span class="kicker"><span class="num">6</span> Self-check</span>
+    <h2>Have you got it?</h2>
+    <p class="progress"><b id="pcount">0</b> of 4 ticked</p>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="box">✓</div><div class="txt">I can explain the difference between AI as copilot and AI as pilot, with one example of each.</div></div>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="box">✓</div><div class="txt">I can explain why skipping the struggle skips the learning (<em>the struggle is the workout</em>).</div></div>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="box">✓</div><div class="txt">I know the one-question test: <em>"after this, could I do it without the AI?"</em></div></div>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="box">✓</div><div class="txt">I know what JCQ malpractice means for coursework — and that exams are my brain only.</div></div>
+
+    <button class="toggle-btn" onclick="toggleReveal('exemplar')">Show me a model answer ↓</button>
+    <div class="reveal" id="exemplar">
+      <div class="note" style="margin-top:6px">"The pilot decides and does the thinking; the copilot assists and challenges. Used as a copilot — explaining, quizzing, critiquing work I've already done — AI makes me genuinely better. Used as a pilot — writing my work for me — it makes me weaker every time, because the struggle it removed was the actual learning. My test is: could I do this without the AI afterwards? And for coursework it's not just about learning — unacknowledged AI work is malpractice that can cost the whole qualification."</div>
+    </div>
+
+    <h3 style="margin-top:20px">Be honest — which seat have you been sitting in?</h3>
+    <div class="lights">
+      <div class="light r" onclick="setLight(this)"><span class="em">🧳</span>Passenger, mostly</div>
+      <div class="light y" onclick="setLight(this)"><span class="em">🔁</span>A bit of both</div>
+      <div class="light g" onclick="setLight(this)"><span class="em">✈️</span>Pilot from here on</div>
+    </div>
+    <div class="note" style="margin-top:16px">🎒 <strong>This week:</strong> take one thing you'd normally be tempted to let AI do, and flip it into copilot mode — do it yourself, then (if you're old enough and at home) ask for critique. Feel the difference in what stays in your head.</div>
+  </section>
+
+  <section class="next">
+    <span class="arrow">↓</span>
+    <h2>Essentials: complete ✈️</h2>
+    <p>That's the foundation — what AI is, where the lines are, how to spot fakes, and the principle that holds it all together. The <strong>Thinking</strong> pathway (studying smarter, honesty, asking better questions) and the <strong>Creating</strong> pathway are coming next.</p>
+    <div style="margin-top:22px">
+      <a href="index.html" data-done="E4" style="display:inline-block;background:#e8b04b;color:#3a2a06;font-weight:700;text-decoration:none;padding:13px 26px;border-radius:11px;font-size:1.02rem;box-shadow:0 4px 14px rgba(0,0,0,.18)">✓ Mark Essentials complete →</a>
+      <div style="margin-top:13px"><a href="index.html" data-done="E4" style="color:rgba(255,255,255,.82);font-size:.9rem">Back to dashboard</a></div>
+    </div>
+  </section>
+
+</div>
+
+<div class="toast" id="toast">Nice ✓</div>
+<script>
+  var toastTimer;function showToast(msg){var el=document.getElementById('toast');el.textContent=msg||'Nice ✓';el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(function(){el.classList.remove('show')},1700);}
+  function toggleReveal(id){var el=document.getElementById(id);el.classList.toggle('show');var btn=event.currentTarget;if(el.classList.contains('show')){btn.innerHTML=btn.innerHTML.replace('↓','↑');}else{btn.innerHTML=btn.innerHTML.replace('↑','↓');}}
+  function toggleCheck(el){el.classList.toggle('done');document.getElementById('pcount').innerText=document.querySelectorAll('.check-item.done').length;}
+  function setLight(el){el.parentElement.querySelectorAll('.light').forEach(function(l){l.classList.remove('sel')});el.classList.add('sel');}
+
+  // pilot-or-passenger sorter
+  var answered=0, right=0;
+  function pick(btn){
+    var q=btn.closest('.q');
+    if(q.classList.contains('answered')) return;
+    q.classList.add('answered');
+    var ans=q.getAttribute('data-ans'), choice=btn.getAttribute('data-v');
+    q.querySelectorAll('.opts button').forEach(function(b){
+      if(b.getAttribute('data-v')===ans){ b.classList.add('right'); }
+      else if(b===btn){ b.classList.add('wrong'); }
+    });
+    answered++; if(choice===ans) right++;
+    document.getElementById('score').textContent=answered;
+    document.getElementById('scoreRight').textContent=right;
+    if(answered===6){ showToast(right===6?'6/6 — captain material ✈️':'Done — '+right+'/6. The reasoning is the lesson ↑'); }
+  }
+
+  // progress save links (script-block listener — never inline onclick on <a>, Netlify corrupts it)
+  (function(){document.querySelectorAll('a[data-done]').forEach(function(a){a.addEventListener('click',function(){try{var id=a.getAttribute('data-done');var d=JSON.parse(localStorage.getItem('saig_done')||'[]');if(d.indexOf(id)<0){d.push(id);localStorage.setItem('saig_done',JSON.stringify(d));}}catch(e){}});});})();
+</script>
+</body>
+</html>

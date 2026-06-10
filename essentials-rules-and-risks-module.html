@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Essentials · The rules and the real risks — Student AI Guide</title>
+<style>
+  :root{
+    --paper:#f7f5ef;--card:#ffffff;--ink:#1f2421;--ink-soft:#4a534d;--line:#e3ded2;
+    --coral:#d0452e;--coral-deep:#9e3320;--coral-tint:#fbe9e4;--clay:#b4532a;--amber:#e8b04b;
+    --safe:#1f7a4d;--safe-tint:#e8f3ec;
+    --shadow:0 1px 2px rgba(31,36,33,.05),0 6px 22px rgba(31,36,33,.07);
+  }
+  *{box-sizing:border-box}html{scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.62;font-size:17px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:760px;margin:0 auto;padding:0 22px 90px}
+  h1,h2,h3{font-family:Georgia,"Times New Roman",serif;line-height:1.22;letter-spacing:-.01em}
+  h2{font-size:1.5rem;margin:0 0 .5rem}h3{font-size:1.12rem;margin:0 0 .4rem}
+  p{margin:.55rem 0}a{color:var(--coral-deep)}
+  header{background:linear-gradient(155deg,#d0452e 0%,#9e3320 100%);color:#f3efe4;padding:42px 22px 38px;border-bottom:4px solid var(--amber)}
+  .header-inner{max-width:760px;margin:0 auto}
+  .programme{font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;opacity:.82;margin:0 0 16px}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+  .badge{font-size:.74rem;letter-spacing:.04em;text-transform:uppercase;font-weight:600;padding:4px 11px;border-radius:999px;border:1px solid rgba(243,239,228,.35)}
+  .badge.path{background:var(--amber);color:#3a2a06;border-color:transparent}
+  header h1{font-size:2.05rem;margin:.1rem 0 .5rem;color:#fff}
+  .meta{display:flex;flex-wrap:wrap;gap:18px;font-size:.86rem;opacity:.9;margin-top:14px}
+  .meta span{display:flex;align-items:center;gap:6px}
+  section{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;margin:26px 0;box-shadow:var(--shadow)}
+  .kicker{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--coral);margin-bottom:10px}
+  .kicker .num{width:22px;height:22px;border-radius:50%;background:var(--coral);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-family:Georgia,serif;font-size:.8rem}
+  .lead{font-size:1.06rem}
+  .note{background:var(--coral-tint);border-radius:10px;padding:12px 15px;font-size:.92rem;margin:14px 0}
+  .note strong{color:var(--coral-deep)}
+  .toggle-btn{background:var(--coral);color:#fff;border:none;border-radius:9px;padding:10px 16px;font-size:.9rem;font-weight:600;cursor:pointer;margin:8px 0;transition:.15s}
+  .toggle-btn:hover{background:var(--coral-deep)}
+  .reveal{display:none}.reveal.show{display:block;animation:fade .3s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  .safety{background:var(--safe-tint);border:1px solid #bfe0cb;border-left:5px solid var(--safe)}
+  .safety .kicker{color:var(--safe)}.safety .kicker .num{background:var(--safe)}
+  .shield{font-size:1.15rem}
+  .check-item{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border:1px solid var(--line);border-radius:11px;margin:8px 0;cursor:pointer;transition:.15s;background:#fbfaf6}
+  .check-item:hover{border-color:var(--coral)}
+  .check-item.done{background:var(--coral-tint);border-color:var(--coral)}
+  .check-item .box{flex:0 0 22px;width:22px;height:22px;border:2px solid var(--coral);border-radius:6px;display:flex;align-items:center;justify-content:center;margin-top:1px;color:#fff;font-weight:700;font-size:.9rem}
+  .check-item.done .box{background:var(--coral)}.check-item .txt{font-size:.95rem}
+  .progress{font-size:.9rem;color:var(--ink-soft);margin:6px 0 14px;font-weight:600}.progress b{color:var(--coral-deep)}
+  .lights{display:flex;gap:10px;margin:16px 0 4px}
+  .light{flex:1;text-align:center;border:1px solid var(--line);border-radius:11px;padding:12px 8px;cursor:pointer;font-size:.85rem;font-weight:600;transition:.15s;background:#fbfaf6}
+  .light .em{font-size:1.4rem;display:block;margin-bottom:3px}
+  .light.sel{border-width:2px;transform:translateY(-2px)}
+  .light.r.sel{border-color:#c0392b;background:#fbeae6}.light.y.sel{border-color:#d9a528;background:#fbf3df}.light.g.sel{border-color:var(--safe);background:var(--safe-tint)}
+  .next{background:linear-gradient(155deg,#d0452e,#9e3320);color:#f3efe4;border:none;text-align:center}
+  .next h2{color:#fff}.next p{opacity:.92}.next .arrow{font-size:1.6rem;display:block;margin-bottom:6px;color:var(--amber)}
+  .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(120%);background:var(--ink);color:#fff;padding:11px 20px;border-radius:10px;font-size:.9rem;box-shadow:var(--shadow);transition:.3s;z-index:50}
+  .toast.show{transform:translateX(-50%) translateY(0)}
+  ul.clean{padding-left:1.15rem}ul.clean li{margin:.3rem 0}
+  .current{background:#fbf6ea;border:1px dashed #ddc488;border-radius:11px;padding:14px 16px;margin:18px 0;font-size:.88rem}
+  .current .hd{font-weight:700;color:#8a6516;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px}
+  table.ages{width:100%;border-collapse:collapse;font-size:.9rem;margin:8px 0}
+  table.ages th{text-align:left;font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);padding:6px 8px;border-bottom:2px solid var(--line)}
+  table.ages td{padding:8px;border-bottom:1px solid var(--line);vertical-align:top}
+  table.ages td.age{font-weight:700;white-space:nowrap}
+  table.ages td.age.adult{color:#c0392b}
+  /* would-you-type-it sorter */
+  .q{border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0;background:#fbfaf6}
+  .q .qtxt{margin:.1rem 0 .7rem;font-size:.97rem}
+  .q .qtxt em{font-family:Georgia,serif}
+  .opts{display:flex;gap:9px}
+  .opts button{flex:1;border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 8px;font-size:.9rem;font-weight:600;cursor:pointer;font-family:inherit;transition:.15s;color:var(--ink)}
+  .opts button:hover{border-color:var(--coral)}
+  .q.answered .opts button{cursor:default;opacity:.55}
+  .q.answered .opts button.right{opacity:1;border-color:var(--safe);background:var(--safe-tint);color:var(--safe)}
+  .q.answered .opts button.wrong{opacity:1;border-color:#c0392b;background:#fbeae6;color:#c0392b}
+  .q .why{display:none;margin-top:11px;font-size:.9rem;border-top:1px dashed var(--line);padding-top:10px}
+  .q.answered .why{display:block;animation:fade .3s ease}
+  .scorebox{font-size:.92rem;font-weight:600;color:var(--ink-soft);margin-top:14px}
+  .scorebox b{color:var(--coral-deep)}
+</style>
+  <link rel="icon" href="logo.svg">
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:12px;margin:0 0 14px"><img src="logo.svg" alt="Marriotts School" width="42" height="42" style="background:#fff;border-radius:9px;padding:5px;box-sizing:border-box;flex:0 0 auto"><p class="programme" style="margin:0">Marriotts School &middot; Student AI Guide</p></div>
+    <div class="badges"><span class="badge path">Essentials · E2</span><span class="badge">No AI tool needed</span></div>
+    <h1>The rules — and the real risks</h1>
+    <div class="meta"><span>⏱ About 12 minutes</span><span>🎯 Why the lines exist</span><span>⚖️ Six judgement calls to make</span></div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section>
+    <span class="kicker"><span class="num">1</span> Why this matters</span>
+    <p class="lead">"AI is banned at school" sounds like adults being adults. But the rules around AI aren't really about school — they're about <strong>you</strong>, and they keep applying when no one's watching.</p>
+    <p>This module gives it to you straight: what the school rule actually is and the real reasons behind it, what the law and the companies' own age limits say, and — most importantly — the lines <em>you</em> should draw for yourself, because they protect you everywhere, forever.</p>
+  </section>
+
+  <section>
+    <span class="kicker"><span class="num">2</span> The idea</span>
+    <h2>Two kinds of rules</h2>
+    <h3>1 · The school's line</h3>
+    <p><strong>No AI tools on the school network or school devices.</strong> Not because the school thinks AI is evil — the staff are literally being trained to use it — but because in school the school is legally responsible for you. That means it has to guarantee things no free chatbot can guarantee: that your personal data is protected, that what you see is appropriate, that everyone's work is genuinely theirs, and that tools meet age rules for <em>every</em> student in the room, Year 7 included.</p>
+    <h3 style="margin-top:18px">2 · Your own lines</h3>
+    <p>Outside school, the school can't make rules for you. But here's the thing the apps don't put on the tin: <strong>what you type into a chatbot can be stored, read by the company, and used to train future AI.</strong> On most free accounts, your chats are not private letters — they're more like postcards passing through a sorting office.</p>
+    <p>So the rule that protects you everywhere is the <strong>screenshot test</strong>:</p>
+    <div class="note"><strong>The screenshot test:</strong> before you hit send, ask — "would I be okay if this exact message was screenshotted and shown to my form tutor, my parents, and my whole year group?" If not, it doesn't go in a chatbot. Ever.</div>
+    <p>Things that <em>never</em> pass the screenshot test: your full name + school + address, photos of yourself or friends, passwords, anything about your health or feelings you'd want kept private, and — this one matters — <strong>other people's private stuff</strong>. Your friend's secret is not yours to feed to a machine.</p>
+
+    <div class="current">
+      <div class="hd">Current as of June 2026 — age limits (companies change these; check the current terms)</div>
+      <table class="ages">
+        <tr><th>Tool</th><th>Minimum age</th><th>Worth knowing</th></tr>
+        <tr><td>ChatGPT (OpenAI)</td><td class="age">13+</td><td>Under-18s are supposed to have parent/carer permission.</td></tr>
+        <tr><td>Gemini (Google)</td><td class="age">13+</td><td>Teen accounts get a restricted experience.</td></tr>
+        <tr><td>Copilot (Microsoft)</td><td class="age">13+</td><td>Consumer version — not the school's systems.</td></tr>
+        <tr><td>Claude (Anthropic)</td><td class="age adult">18+</td><td>Flat rule: not for under-18s at all.</td></tr>
+        <tr><td>Meta AI / Snapchat My AI</td><td class="age">13+</td><td>Built into apps you may already use — it's still a chatbot, same rules apply.</td></tr>
+        <tr><td>"AI friend" apps (Character.AI etc.)</td><td class="age adult">Restricted</td><td>Open-ended "AI companion" chat is restricted for under-18s — there are real, documented risks. More in the Thinking pathway.</td></tr>
+      </table>
+      <p style="margin:.4rem 0 0">These aren't suggestions — they're the companies' own terms, mostly there because the law (UK GDPR and children's privacy rules) requires it. If you're under the limit, the honest move is: don't, or talk to a parent/carer about it.</p>
+    </div>
+  </section>
+
+  <section>
+    <span class="kicker"><span class="num">3</span> See it in action</span>
+    <h2>How "just a chat" goes wrong</h2>
+    <p>A made-up student — call her Maya, Year 10 — does three things that each feel harmless:</p>
+    <ul class="clean">
+      <li>She tells a chatbot her full name, school and form group "so it can write a funny poem about her week".</li>
+      <li>She vents to it about a falling-out, naming the friend and what they did.</li>
+      <li>She uploads a group selfie and asks it to "make us look like anime characters".</li>
+    </ul>
+    <p>Nothing explodes. Nothing ever <em>seems</em> to happen — and that's exactly the trap. Maya now has no idea where that information lives, who can see it, or what it trains. Her friend never agreed to be in a company's dataset. The photo of four people was uploaded with one person's consent.</p>
+    <button class="toggle-btn" onclick="toggleReveal('mayafix')">What should Maya have done? ↓</button>
+    <div class="reveal" id="mayafix">
+      <div class="note" style="margin-top:6px"><strong>Same fun, zero risk:</strong> "Write a funny poem about a Year 10 girl whose week included a soggy PE lesson and a maths test" — no name, no school. Vent about the falling-out to an actual human who cares. And the selfie stays out entirely — <strong>other people's faces are other people's property.</strong> The trick is almost never "don't do it"; it's "do it without handing over the personal bits".</div>
+    </div>
+  </section>
+
+  <section>
+    <span class="kicker"><span class="num">4</span> Your turn</span>
+    <h2>Would you type it?</h2>
+    <p>Six messages about to be sent to a chatbot (at home, on someone's own account). For each one: <strong>fine to send, or never send?</strong></p>
+
+    <div class="q" data-ans="g">
+      <p class="qtxt"><em>"Explain Pythagoras' theorem like I'm terrible at maths, with a really simple example."</em></p>
+      <div class="opts"><button data-v="g" onclick="pick(this)">🟢 Fine to send</button><button data-v="r" onclick="pick(this)">🔴 Never send</button></div>
+      <div class="why">🟢 <strong>Fine.</strong> No personal information, nothing private — this is exactly the kind of use AI is good at. (Whether AI <em>explaining</em> beats AI <em>doing your homework</em> is module E4's whole point.)</div>
+    </div>
+
+    <div class="q" data-ans="r">
+      <p class="qtxt"><em>"My friend Chloe in 9R told me she's been self-harming. What should I say to her?"</em></p>
+      <div class="opts"><button data-v="g" onclick="pick(this)">🟢 Fine to send</button><button data-v="r" onclick="pick(this)">🔴 Never send</button></div>
+      <div class="why">🔴 <strong>Never — twice over.</strong> It names Chloe and exposes her most private struggle to a company's servers. And this is far too important for a word-predictor: a situation like this needs a real adult — a parent, your head of year, or any teacher — today. Caring about your friend means telling a human.</div>
+    </div>
+
+    <div class="q" data-ans="g">
+      <p class="qtxt"><em>"Quiz me on French food vocabulary, one question at a time, and keep score."</em></p>
+      <div class="opts"><button data-v="g" onclick="pick(this)">🟢 Fine to send</button><button data-v="r" onclick="pick(this)">🔴 Never send</button></div>
+      <div class="why">🟢 <strong>Fine.</strong> Zero personal data, and it's the AI working for your brain rather than instead of it.</div>
+    </div>
+
+    <div class="q" data-ans="r">
+      <p class="qtxt"><em>"Here's a photo of my classmate — make it look like he's crying."</em></p>
+      <div class="opts"><button data-v="g" onclick="pick(this)">🟢 Fine to send</button><button data-v="r" onclick="pick(this)">🔴 Never send</button></div>
+      <div class="why">🔴 <strong>Never.</strong> His face, his consent — and he didn't give it. Editing images of real people to mock or embarrass them is bullying with extra steps, and depending on the edit it can cross into something illegal. Module E3 goes deeper on this.</div>
+    </div>
+
+    <div class="q" data-ans="r">
+      <p class="qtxt"><em>"I'm [full name], I go to Marriotts in Stevenage and I live on [street]. Write my personal statement for sixth form."</em></p>
+      <div class="opts"><button data-v="g" onclick="pick(this)">🟢 Fine to send</button><button data-v="r" onclick="pick(this)">🔴 Never send</button></div>
+      <div class="why">🔴 <strong>Not like this.</strong> Fails the screenshot test: full identity package handed to a server. The task itself is fine if you strip the personal bits — "write a sixth-form personal statement for a Year 11 student who loves design and plays football" — then add your real details yourself, on your own device, afterwards. (And a personal statement should sound like <em>you</em> — see E4.)</div>
+    </div>
+
+    <div class="q" data-ans="r">
+      <p class="qtxt"><em>"I've had this weird rash for two weeks, here's a photo — what is it and do I need a doctor?"</em></p>
+      <div class="opts"><button data-v="g" onclick="pick(this)">🟢 Fine to send</button><button data-v="r" onclick="pick(this)">🔴 Never send</button></div>
+      <div class="why">🔴 <strong>Never.</strong> Health stuff is the most private data you have, and a prediction machine is not a doctor — it can confidently reassure you about something serious, or terrify you about something harmless. Two weeks of a weird rash = tell a parent/carer and see a real professional.</div>
+    </div>
+
+    <p class="scorebox"><b id="score">0</b> of 6 answered · <span id="scoreRight">0</span> matched the safe call</p>
+  </section>
+
+  <section class="safety">
+    <span class="kicker"><span class="num">5</span> <span class="shield">🛡️</span> Safety checkpoint</span>
+    <h2>The lines, one more time</h2>
+    <ul class="clean">
+      <li><strong>At school: no AI on the network or school devices.</strong> That's the policy and it protects everyone — including you.</li>
+      <li><strong>Anywhere: nothing personal goes in the box.</strong> Not your details, not your photos, not your friends' secrets. Screenshot test, every time.</li>
+      <li><strong>Age limits are real rules,</strong> not loading screens to skip. If you're under them, that's a conversation with a parent/carer, not a fake birthday.</li>
+      <li><strong>Serious problems go to humans.</strong> Health, safety, friends in trouble — a chatbot is the wrong tool, every time. A parent/carer, any teacher, or <a href="https://www.childline.org.uk" style="color:var(--safe);font-weight:600">Childline (0800 1111)</a> is the right one.</li>
+    </ul>
+  </section>
+
+  <section>
+    <span class="kicker"><span class="num">6</span> Self-check</span>
+    <h2>Have you got it?</h2>
+    <p class="progress"><b id="pcount">0</b> of 4 ticked</p>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="box">✓</div><div class="txt">I can explain <em>why</em> the school bans AI on its network — in terms of what the school must guarantee, not "because they said so".</div></div>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="box">✓</div><div class="txt">I can describe the <strong>screenshot test</strong> and use it before sending anything to a chatbot.</div></div>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="box">✓</div><div class="txt">I know the age limits exist in the tools' own terms — and that Claude is 18+ full stop.</div></div>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="box">✓</div><div class="txt">I know which problems should never go to a chatbot, and who they go to instead.</div></div>
+
+    <button class="toggle-btn" onclick="toggleReveal('exemplar')">Show me a model answer ↓</button>
+    <div class="reveal" id="exemplar">
+      <div class="note" style="margin-top:6px">"School bans AI on its network because it's legally responsible for protecting every student's data, age limits and work — things free chatbots can't guarantee. Outside school my rule is the screenshot test: nothing goes in a chatbot that I wouldn't be okay with everyone seeing, and that includes other people's photos and secrets, not just mine. Age limits are in the companies' own terms. And anything serious — health, safety, a friend in trouble — goes to a real person, not a prediction machine."</div>
+    </div>
+
+    <h3 style="margin-top:20px">How confident are you about where the lines are?</h3>
+    <div class="lights">
+      <div class="light r" onclick="setLight(this)"><span class="em">🔴</span>Still fuzzy</div>
+      <div class="light y" onclick="setLight(this)"><span class="em">🟡</span>Mostly clear</div>
+      <div class="light g" onclick="setLight(this)"><span class="em">🟢</span>Crystal</div>
+    </div>
+    <div class="note" style="margin-top:16px">🎒 <strong>This week:</strong> run the screenshot test once for real — on anything you're about to post or send anywhere, not just AI. It works everywhere.</div>
+  </section>
+
+  <section class="next">
+    <span class="arrow">↓</span>
+    <h2>Where next</h2>
+    <p>You know the rules. But what about everyone else's AI — the fake videos, cloned voices and "real" photos filling your feed?</p>
+    <p style="margin-top:10px"><strong>Up next → Essentials · E3: Spot the fake</strong></p>
+    <div style="margin-top:22px">
+      <a href="essentials-spot-the-fake-module.html" data-done="E2" style="display:inline-block;background:#e8b04b;color:#3a2a06;font-weight:700;text-decoration:none;padding:13px 26px;border-radius:11px;font-size:1.02rem;box-shadow:0 4px 14px rgba(0,0,0,.18)">✓ Mark complete &amp; continue →</a>
+      <div style="margin-top:13px"><a href="index.html" data-done="E2" style="color:rgba(255,255,255,.82);font-size:.9rem">Save &amp; back to dashboard</a></div>
+    </div>
+  </section>
+
+</div>
+
+<div class="toast" id="toast">Nice ✓</div>
+<script>
+  var toastTimer;function showToast(msg){var el=document.getElementById('toast');el.textContent=msg||'Nice ✓';el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(function(){el.classList.remove('show')},1700);}
+  function toggleReveal(id){var el=document.getElementById(id);el.classList.toggle('show');var btn=event.currentTarget;if(el.classList.contains('show')){btn.innerHTML=btn.innerHTML.replace('↓','↑');}else{btn.innerHTML=btn.innerHTML.replace('↑','↓');}}
+  function toggleCheck(el){el.classList.toggle('done');document.getElementById('pcount').innerText=document.querySelectorAll('.check-item.done').length;}
+  function setLight(el){el.parentElement.querySelectorAll('.light').forEach(function(l){l.classList.remove('sel')});el.classList.add('sel');}
+
+  // would-you-type-it sorter
+  var answered=0, right=0;
+  function pick(btn){
+    var q=btn.closest('.q');
+    if(q.classList.contains('answered')) return;
+    q.classList.add('answered');
+    var ans=q.getAttribute('data-ans'), choice=btn.getAttribute('data-v');
+    q.querySelectorAll('.opts button').forEach(function(b){
+      if(b.getAttribute('data-v')===ans){ b.classList.add('right'); }
+      else if(b===btn){ b.classList.add('wrong'); }
+    });
+    answered++; if(choice===ans) right++;
+    document.getElementById('score').textContent=answered;
+    document.getElementById('scoreRight').textContent=right;
+    if(answered===6){ showToast(right===6?'6/6 — your lines are solid 🛡️':'Done — '+right+'/6. Read the explanations ↑'); }
+  }
+
+  // progress save links (script-block listener — never inline onclick on <a>, Netlify corrupts it)
+  (function(){document.querySelectorAll('a[data-done]').forEach(function(a){a.addEventListener('click',function(){try{var id=a.getAttribute('data-done');var d=JSON.parse(localStorage.getItem('saig_done')||'[]');if(d.indexOf(id)<0){d.push(id);localStorage.setItem('saig_done',JSON.stringify(d));}}catch(e){}});});})();
+</script>
+</body>
+</html>

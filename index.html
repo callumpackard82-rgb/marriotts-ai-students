@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student AI Guide — Marriotts School</title>
+<style>
+  :root{
+    --paper:#f7f5ef;--card:#ffffff;--ink:#1f2421;--ink-soft:#4a534d;--line:#e3ded2;
+    --coral:#d0452e;--coral-deep:#9e3320;--coral-tint:#fbe9e4;
+    --think:#3f6e72;--think-deep:#294b4e;--think-tint:#e6eef0;
+    --create:#565b5e;--create-deep:#3a3f42;--create-tint:#eceef0;
+    --amber:#e8b04b;--safe:#1f7a4d;--safe-tint:#e8f3ec;
+    --shadow:0 1px 2px rgba(31,36,33,.05),0 6px 22px rgba(31,36,33,.07);
+  }
+  *{box-sizing:border-box}html{scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.6;font-size:17px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:880px;margin:0 auto;padding:0 22px 90px}
+  h1,h2,h3{font-family:Georgia,"Times New Roman",serif;line-height:1.18;letter-spacing:-.01em}
+  a{color:var(--coral-deep)}
+  /* hero */
+  header{background:linear-gradient(150deg,#d0452e 0%,#9e3320 55%,#7d2718 100%);color:#f3efe4;padding:54px 22px 48px;border-bottom:4px solid var(--amber);position:relative;overflow:hidden}
+  header::after{content:"";position:absolute;right:-60px;top:-60px;width:240px;height:240px;border-radius:50%;background:rgba(232,176,75,.12)}
+  .header-inner{max-width:880px;margin:0 auto;position:relative}
+  .programme{font-size:.82rem;letter-spacing:.18em;text-transform:uppercase;opacity:.85;margin:0 0 14px}
+  header h1{font-size:2.5rem;margin:0 0 .35rem;color:#fff;max-width:640px}
+  header p.sub{font-size:1.1rem;opacity:.92;margin:0;max-width:580px}
+  .overall{display:flex;align-items:center;gap:18px;margin-top:26px;background:rgba(255,255,255,.1);border:1px solid rgba(243,239,228,.25);border-radius:14px;padding:16px 20px;max-width:430px}
+  .ring{--p:0;flex:0 0 64px;width:64px;height:64px;border-radius:50%;background:conic-gradient(var(--amber) calc(var(--p)*1%),rgba(255,255,255,.18) 0);display:flex;align-items:center;justify-content:center}
+  .ring .inner{width:50px;height:50px;border-radius:50%;background:#9e3320;display:flex;align-items:center;justify-content:center;font-family:Georgia,serif;font-weight:600;font-size:1.05rem;color:#fff}
+  .overall .lbl{font-size:.92rem;opacity:.92}
+  .overall .lbl b{display:block;font-size:1.05rem;font-family:Georgia,serif;margin-bottom:1px}
+  /* sections */
+  section{margin:30px 0}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px 26px;box-shadow:var(--shadow)}
+  h2.sec{color:var(--ink-soft);font-family:-apple-system,sans-serif;font-weight:700;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;margin:0 0 14px}
+  /* the honest bit */
+  .deal{border-left:5px solid var(--coral)}
+  .deal p{margin:.45rem 0;font-size:.97rem}
+  .deal p:first-of-type{font-size:1.04rem}
+  /* three lines banner */
+  .lines{background:var(--safe-tint);border:1px solid #bfe0cb;border-left:5px solid var(--safe);border-radius:14px;padding:18px 22px}
+  .lines h3{margin:0 0 4px;color:var(--safe);font-size:1.1rem;display:flex;align-items:center;gap:9px}
+  .lines p{margin:.3rem 0 0;font-size:.93rem}
+  .lines .tl{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .lines .chip{font-size:.84rem;font-weight:600;padding:5px 13px;border-radius:999px;background:#fff;border:1px solid var(--line)}
+  /* how it works */
+  .how{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .how .step{display:flex;gap:12px;align-items:flex-start}
+  .how .n{flex:0 0 30px;width:30px;height:30px;border-radius:9px;background:var(--coral-tint);color:var(--coral-deep);display:flex;align-items:center;justify-content:center;font-family:Georgia,serif;font-weight:600}
+  .how h3{margin:0 0 2px;font-size:1rem}
+  .how p{margin:0;font-size:.88rem;color:var(--ink-soft)}
+  @media(max-width:620px){.how{grid-template-columns:1fr}}
+  /* pathway */
+  .pathway{border-radius:18px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);margin-top:22px}
+  .pw-head{padding:22px 26px;color:#fff;position:relative}
+  .pw-head .tag{font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;opacity:.85;font-weight:600}
+  .pw-head h2{margin:.18rem 0 .2rem;font-size:1.7rem;color:#fff}
+  .pw-head p{margin:0;opacity:.93;font-size:.95rem;max-width:560px}
+  .pw-head .bar{height:7px;border-radius:99px;background:rgba(255,255,255,.25);margin-top:16px;overflow:hidden;max-width:340px}
+  .pw-head .bar span{display:block;height:100%;background:var(--amber);width:0;transition:width .5s ease}
+  .pw-head .barlbl{font-size:.8rem;opacity:.9;margin-top:6px;font-weight:600}
+  .pw-essentials .pw-head{background:linear-gradient(150deg,#d0452e,#9e3320)}
+  .pw-thinking .pw-head{background:linear-gradient(150deg,#3f6e72,#294b4e)}
+  .pw-creating .pw-head{background:linear-gradient(150deg,#565b5e,#34383b)}
+  .pw-body{background:var(--card);padding:14px 16px}
+  /* module card */
+  .mod{display:flex;align-items:center;gap:14px;padding:14px 14px;border-radius:12px;transition:.15s;border:1px solid transparent}
+  .mod:hover{background:#fbfaf6;border-color:var(--line)}
+  .mod+.mod{border-top:1px solid var(--line);border-radius:0}
+  .mod:hover+.mod,.mod:hover{border-top-color:transparent}
+  .mod .toggle{flex:0 0 30px;width:30px;height:30px;border-radius:50%;border:2px solid var(--line);background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;transition:.15s;font-size:1rem;padding:0}
+  .mod .num{flex:0 0 auto;font-family:Georgia,serif;font-weight:600;color:var(--ink-soft);width:30px;text-align:center;font-size:.95rem}
+  .mod .body{flex:1;min-width:0}
+  .mod .body h3{margin:0;font-size:1.05rem;font-family:Georgia,serif}
+  .mod .body .meta{font-size:.82rem;color:var(--ink-soft);margin-top:1px}
+  .mod .open{flex:0 0 auto;font-size:.86rem;font-weight:600;text-decoration:none;padding:8px 14px;border-radius:9px;border:1px solid var(--line);background:#fff;white-space:nowrap;transition:.15s}
+  .mod .open:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .mod.done{background:#f3f7f3}
+  .mod.done .body h3{color:var(--ink-soft)}
+  .mod.soon{opacity:.55}
+  .mod.soon:hover{background:none;border-color:transparent}
+  .mod .soonpill{flex:0 0 auto;font-size:.78rem;font-weight:600;color:var(--ink-soft);padding:6px 12px;border-radius:999px;background:var(--paper);border:1px dashed var(--line);white-space:nowrap}
+  .pw-essentials .mod .toggle.on{background:var(--coral);border-color:var(--coral)}
+  .pw-thinking .mod .toggle.on{background:var(--think);border-color:var(--think)}
+  .pw-creating .mod .toggle.on{background:var(--create);border-color:var(--create)}
+  .pw-essentials .mod .open:hover{background:var(--coral);border-color:var(--coral)}
+  .pw-thinking .mod .open:hover{background:var(--think);border-color:var(--think)}
+  .pw-creating .mod .open:hover{background:var(--create);border-color:var(--create)}
+  @media(max-width:560px){.mod .num{display:none}.mod .open{padding:8px 11px}}
+  /* footer */
+  footer{text-align:center;color:var(--ink-soft);font-size:.85rem;margin-top:40px;padding-top:24px;border-top:1px solid var(--line)}
+  footer button{background:none;border:none;color:var(--ink-soft);text-decoration:underline;cursor:pointer;font-size:.85rem;font-family:inherit}
+  .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(120%);background:var(--ink);color:#fff;padding:11px 20px;border-radius:10px;font-size:.9rem;box-shadow:var(--shadow);transition:.3s;z-index:50}
+  .toast.show{transform:translateX(-50%) translateY(0)}
+</style>
+  <link rel="icon" href="logo.svg">
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:12px;margin:0 0 14px"><img src="logo.svg" alt="Marriotts School" width="42" height="42" style="background:#fff;border-radius:9px;padding:5px;box-sizing:border-box;flex:0 0 auto"><p class="programme" style="margin:0">Marriotts School &middot; Student AI Guide</p></div>
+    <h1>You're the pilot. Keep it that way.</h1>
+    <p class="sub">AI is part of your world whether anyone likes it or not. This is how to use it safely, honestly — and without handing over your thinking.</p>
+    <div class="overall">
+      <div class="ring" id="ring"><div class="inner" id="ringTxt">0%</div></div>
+      <div class="lbl"><b id="overallCount">0 of 4 modules</b>complete — pick up wherever you left off</div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- THE HONEST BIT -->
+  <section class="panel deal">
+    <h2 class="sec">Let's be straight with you</h2>
+    <p><strong>AI tools are blocked on the school network and school devices.</strong> That's the rule, it's there for real reasons, and this site doesn't change it.</p>
+    <p>But we also know the truth: outside school, AI is on your phones, in your apps and all over your feeds — and pretending otherwise helps nobody. So instead of pretending, we made this. It's not homework and nobody's marking it. It's here so that when you <em>do</em> meet AI — at home, online, in your future job — you know exactly what it is, what it can do <em>to</em> you, and how to stay in charge of it.</p>
+  </section>
+
+  <!-- THREE LINES -->
+  <section class="lines">
+    <h3>🛡️ Three lines that never move</h3>
+    <p>Every module comes back to these. Everything else is detail.</p>
+    <div class="tl">
+      <span class="chip">🚫 Not at school — no AI on the school network or school devices</span>
+      <span class="chip">🔒 Nothing personal — never give a chatbot your details, or anyone else's</span>
+      <span class="chip">🧠 You stay the pilot — AI never does your thinking for you</span>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="panel">
+    <h2 class="sec">How it works</h2>
+    <div class="how">
+      <div class="step"><div class="n">1</div><div><h3>Start with Essentials</h3><p>Four short modules everyone should do. Thinking and Creating unlock after.</p></div></div>
+      <div class="step"><div class="n">2</div><div><h3>About 10 minutes each</h3><p>Interactive, no login, and nothing here needs an AI tool — it all runs on this page.</p></div></div>
+      <div class="step"><div class="n">3</div><div><h3>Your progress saves here</h3><p>Ticks are saved in this browser on this device. Use a progress code to move devices.</p></div></div>
+    </div>
+  </section>
+
+  <!-- PATHWAYS -->
+  <div id="pathways"></div>
+
+  <!-- SYNC ACROSS DEVICES -->
+  <section class="panel">
+    <h2 class="sec">Using more than one device?</h2>
+    <p style="margin:0 0 14px;font-size:.93rem;color:var(--ink-soft)">Your progress is saved on <em>this</em> device. To carry it to another one, copy your progress code below, then paste it into the same box on the other device and press <strong>Load</strong>.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:12px">
+      <button onclick="makeCode()" style="flex:0 0 auto;background:var(--coral);color:#fff;border:none;border-radius:10px;padding:12px 18px;font-weight:600;font-size:.9rem;cursor:pointer;font-family:inherit">📤 Copy my progress code</button>
+      <input id="codeOut" readonly placeholder="your code will appear here" style="flex:1;min-width:200px;border:1px solid var(--line);border-radius:10px;padding:11px 13px;font-size:.82rem;font-family:monospace;background:#fbfaf6;color:var(--ink-soft)">
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+      <input id="codeIn" placeholder="paste a code from another device…" style="flex:1;min-width:200px;border:1px solid var(--line);border-radius:10px;padding:11px 13px;font-size:.82rem;font-family:monospace">
+      <button onclick="loadCode()" style="flex:0 0 auto;background:var(--ink);color:#fff;border:none;border-radius:10px;padding:12px 18px;font-weight:600;font-size:.9rem;cursor:pointer;font-family:inherit">📥 Load progress</button>
+    </div>
+  </section>
+
+  <footer>
+    <p>Marriotts Student AI Guide · Essentials is live now — Thinking and Creating are on the way. Progress is saved in this browser on this device.</p>
+    <button onclick="resetProgress()">Reset my progress</button>
+  </footer>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  // ---- Module data ----
+  var PATHWAYS = [
+    { key:"essentials", tag:"Pathway 1 · Start here", title:"Essentials", blurb:"What AI actually is, the rules and the real risks, how to spot fakes — and the one principle that runs through everything.",
+      modules:[
+        {id:"E1", t:"What AI actually is (and isn't)", time:"10 min", f:"essentials-what-is-ai-module.html"},
+        {id:"E2", t:"The rules — and the real risks", time:"12 min", f:"essentials-rules-and-risks-module.html"},
+        {id:"E3", t:"Spot the fake", time:"12 min", f:"essentials-spot-the-fake-module.html"},
+        {id:"E4", t:"Copilot, not pilot", time:"10 min", f:"essentials-copilot-not-pilot-module.html"}
+      ]},
+    { key:"thinking", tag:"Pathway 2 · Coming soon", title:"Thinking", blurb:"Using AI to get smarter, not to skip the work — studying, honesty, and asking better questions.",
+      modules:[
+        {id:"T1", t:"Study smarter (without cheating yourself)", soon:true},
+        {id:"T2", t:"Homework, coursework and honesty", soon:true},
+        {id:"T3", t:"Question everything", soon:true},
+        {id:"T4", t:"AI and you — friends, feelings, wellbeing", soon:true}
+      ]},
+    { key:"creating", tag:"Pathway 3 · Coming soon", title:"Creating", blurb:"Making things with AI — your ideas, your voice, your name on it — and what AI means for your future.",
+      modules:[
+        {id:"C1", t:"Create, don't copy", soon:true},
+        {id:"C2", t:"Build something real", soon:true},
+        {id:"C3", t:"Share with care", soon:true},
+        {id:"C4", t:"AI and your future", soon:true}
+      ]}
+  ];
+  // Count only modules that are actually available.
+  var TOTAL = 0;
+  PATHWAYS.forEach(function(pw){ pw.modules.forEach(function(m){ if(!m.soon) TOTAL++; }); });
+
+  // ---- State (localStorage) ----
+  function getDone(){ try{ return JSON.parse(localStorage.getItem("saig_done")||"[]"); }catch(e){ return []; } }
+  function setDone(a){ try{ localStorage.setItem("saig_done", JSON.stringify(a)); }catch(e){} }
+
+  // ---- Render pathways ----
+  function render(){
+    var done = getDone();
+    var host = document.getElementById("pathways");
+    host.innerHTML = "";
+    PATHWAYS.forEach(function(pw){
+      var avail = pw.modules.filter(function(m){return !m.soon;});
+      var doneCount = avail.filter(function(m){return done.indexOf(m.id)>-1;}).length;
+      var pct = avail.length ? Math.round(doneCount/avail.length*100) : 0;
+      var cards = pw.modules.map(function(m){
+        if(m.soon){
+          return '<div class="mod soon">'+
+            '<span class="num">'+m.id+'</span>'+
+            '<div class="body"><h3>'+m.t+'</h3><div class="meta">In development</div></div>'+
+            '<span class="soonpill">Coming soon</span>'+
+          '</div>';
+        }
+        var isDone = done.indexOf(m.id)>-1;
+        return '<div class="mod'+(isDone?' done':'')+'">'+
+          '<button class="toggle'+(isDone?' on':'')+'" onclick="toggle(\''+m.id+'\')" aria-label="Mark complete">'+(isDone?'✓':'')+'</button>'+
+          '<span class="num">'+m.id+'</span>'+
+          '<div class="body"><h3>'+m.t+'</h3><div class="meta">⏱ '+m.time+'</div></div>'+
+          '<a class="open" href="'+m.f+'">Open →</a>'+
+        '</div>';
+      }).join("");
+      var head;
+      if(avail.length){
+        head = '<div class="pw-head"><span class="tag">'+pw.tag+'</span><h2>'+pw.title+'</h2><p>'+pw.blurb+'</p>'+
+          '<div class="bar"><span style="width:'+pct+'%"></span></div>'+
+          '<div class="barlbl">'+doneCount+' / '+avail.length+' complete</div></div>';
+      } else {
+        head = '<div class="pw-head"><span class="tag">'+pw.tag+'</span><h2>'+pw.title+'</h2><p>'+pw.blurb+'</p></div>';
+      }
+      var sec = document.createElement("section");
+      sec.className = "pathway pw-"+pw.key;
+      sec.innerHTML = head+'<div class="pw-body">'+cards+'</div>';
+      host.appendChild(sec);
+    });
+    // overall
+    var oc = done.length;
+    var opct = TOTAL ? Math.round(oc/TOTAL*100) : 0;
+    document.getElementById("overallCount").textContent = oc+" of "+TOTAL+" modules";
+    document.getElementById("ringTxt").textContent = opct+"%";
+    document.getElementById("ring").style.setProperty("--p", opct);
+  }
+
+  function toggle(id){
+    var done = getDone();
+    var i = done.indexOf(id);
+    if(i>-1){ done.splice(i,1); } else { done.push(id); showToast(id+" marked complete ✓"); }
+    setDone(done);
+    render();
+  }
+
+  function resetProgress(){
+    if(confirm("Clear your completed-module ticks on this device?")){ setDone([]); render(); showToast("Progress reset"); }
+  }
+
+  var toastTimer;
+  function showToast(msg){
+    var el=document.getElementById("toast"); el.textContent=msg; el.classList.add("show");
+    clearTimeout(toastTimer); toastTimer=setTimeout(function(){el.classList.remove("show");},1700);
+  }
+
+  // ---- Cross-device progress code ----
+  function makeCode(){
+    var payload = { d:getDone() };
+    var code;
+    try{ code = btoa(unescape(encodeURIComponent(JSON.stringify(payload)))); }catch(e){ showToast("Couldn't make a code"); return; }
+    var out = document.getElementById("codeOut");
+    out.value = code; out.select();
+    try{ navigator.clipboard.writeText(code); }catch(e){}
+    showToast("Progress code copied ✓");
+  }
+  function loadCode(){
+    var code = (document.getElementById("codeIn").value||"").trim();
+    if(!code){ showToast("Paste a code first"); return; }
+    try{
+      var payload = JSON.parse(decodeURIComponent(escape(atob(code))));
+      var cur = getDone();
+      (payload.d||[]).forEach(function(id){ if(cur.indexOf(id)<0) cur.push(id); });
+      setDone(cur);
+      render();
+      document.getElementById("codeIn").value = "";
+      showToast("Progress loaded ✓");
+    }catch(e){ showToast("That code didn't look right"); }
+  }
+
+  function storageWorks(){ try{ localStorage.setItem("saig_test","1"); localStorage.removeItem("saig_test"); return true; }catch(e){ return false; } }
+
+  // Re-render whenever the page is shown — including when returning via the browser
+  // Back button (the back-forward cache), so completed modules are always up to date.
+  window.addEventListener("pageshow", render);
+  window.addEventListener("focus", render);
+  window.addEventListener("storage", render);
+  document.addEventListener("visibilitychange", function(){ if(!document.hidden){ render(); } });
+
+  // If the browser is blocking saved data (e.g. a private/incognito window), say so plainly.
+  if(!storageWorks()){
+    var warn=document.createElement("div");
+    warn.style.cssText="max-width:880px;margin:16px auto 0;padding:13px 18px;background:#fbeae6;border:1px solid #eac6bb;border-radius:12px;color:#8a2b16;font-size:.9rem;line-height:1.5";
+    warn.innerHTML="⚠️ <strong>Saved progress is blocked in this browser right now.</strong> This usually means you're in a <strong>private/incognito window</strong>, or site data is switched off. Open the site in a normal window and your progress will save.";
+    var w=document.querySelector(".wrap"); if(w){ w.insertBefore(warn, w.firstChild); }
+  }
+
+  render();
+</script>
+</body>
+</html>
