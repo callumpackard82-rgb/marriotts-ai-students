@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Creating · Share with care — Student AI Guide</title>
+<style>
+  :root{
+    --paper:#f7f5ef;--card:#ffffff;--ink:#1f2421;--ink-soft:#4a534d;--line:#e3ded2;
+    --pw:#565b5e;--pw-deep:#3a3f42;--pw-tint:#eceef0;--clay:#b4532a;--amber:#e8b04b;
+    --safe:#1f7a4d;--safe-tint:#e8f3ec;
+    --shadow:0 1px 2px rgba(31,36,33,.05),0 6px 22px rgba(31,36,33,.07);
+  }
+  *{box-sizing:border-box}html{scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.62;font-size:17px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:760px;margin:0 auto;padding:0 22px 90px}
+  h1,h2,h3{font-family:Georgia,"Times New Roman",serif;line-height:1.22;letter-spacing:-.01em}
+  h2{font-size:1.5rem;margin:0 0 .5rem}h3{font-size:1.12rem;margin:0 0 .4rem}
+  p{margin:.55rem 0}a{color:var(--pw-deep)}
+  header{background:linear-gradient(155deg,#565b5e 0%,#34383b 100%);color:#f3efe4;padding:42px 22px 38px;border-bottom:4px solid var(--amber)}
+  .header-inner{max-width:760px;margin:0 auto}
+  .programme{font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;opacity:.82;margin:0 0 16px}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+  .badge{font-size:.74rem;letter-spacing:.04em;text-transform:uppercase;font-weight:600;padding:4px 11px;border-radius:999px;border:1px solid rgba(243,239,228,.35)}
+  .badge.path{background:var(--amber);color:#3a2a06;border-color:transparent}
+  header h1{font-size:2.05rem;margin:.1rem 0 .5rem;color:#fff}
+  .meta{display:flex;flex-wrap:wrap;gap:18px;font-size:.86rem;opacity:.9;margin-top:14px}
+  .meta span{display:flex;align-items:center;gap:6px}
+  section{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;margin:26px 0;box-shadow:var(--shadow)}
+  .kicker{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--pw);margin-bottom:10px}
+  .kicker .num{width:22px;height:22px;border-radius:50%;background:var(--pw);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-family:Georgia,serif;font-size:.8rem}
+  .lead{font-size:1.06rem}
+  .note{background:var(--pw-tint);border-radius:10px;padding:12px 15px;font-size:.92rem;margin:14px 0}
+  .note strong{color:var(--pw-deep)}
+  .toggle-btn{background:var(--pw);color:#fff;border:none;border-radius:9px;padding:10px 16px;font-size:.9rem;font-weight:600;cursor:pointer;margin:8px 0;transition:.15s}
+  .toggle-btn:hover{background:var(--pw-deep)}
+  .reveal{display:none}.reveal.show{display:block;animation:fade .3s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  .safety{background:var(--safe-tint);border:1px solid #bfe0cb;border-left:5px solid var(--safe)}
+  .safety .kicker{color:var(--safe)}.safety .kicker .num{background:var(--safe)}
+  .shield{font-size:1.15rem}
+  .check-item{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border:1px solid var(--line);border-radius:11px;margin:8px 0;cursor:pointer;transition:.15s;background:#fbfaf6}
+  .check-item:hover{border-color:var(--pw)}
+  .check-item.done{background:var(--pw-tint);border-color:var(--pw)}
+  .check-item .box{flex:0 0 22px;width:22px;height:22px;border:2px solid var(--pw);border-radius:6px;display:flex;align-items:center;justify-content:center;margin-top:1px;color:#fff;font-weight:700;font-size:.9rem}
+  .check-item.done .box{background:var(--pw)}.check-item .txt{font-size:.95rem}
+  .progress{font-size:.9rem;color:var(--ink-soft);margin:6px 0 14px;font-weight:600}.progress b{color:var(--pw-deep)}
+  .lights{display:flex;gap:10px;margin:16px 0 4px}
+  .light{flex:1;text-align:center;border:1px solid var(--line);border-radius:11px;padding:12px 8px;cursor:pointer;font-size:.85rem;font-weight:600;transition:.15s;background:#fbfaf6}
+  .light .em{font-size:1.4rem;display:block;margin-bottom:3px}
+  .light.sel{border-width:2px;transform:translateY(-2px)}
+  .light.r.sel{border-color:#c0392b;background:#fbeae6}.light.y.sel{border-color:#d9a528;background:#fbf3df}.light.g.sel{border-color:var(--safe);background:var(--safe-tint)}
+  .next{background:linear-gradient(155deg,#565b5e,#34383b);color:#f3efe4;border:none;text-align:center}
+  .next h2{color:#fff}.next p{opacity:.92}.next .arrow{font-size:1.6rem;display:block;margin-bottom:6px;color:var(--amber)}
+  .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(120%);background:var(--ink);color:#fff;padding:11px 20px;border-radius:10px;font-size:.9rem;box-shadow:var(--shadow);transition:.3s;z-index:50}
+  .toast.show{transform:translateX(-50%) translateY(0)}
+  ul.clean{padding-left:1.15rem}ul.clean li{margin:.3rem 0}
+  /* three questions */
+  .threeq{display:grid;grid-template-columns:1fr;gap:10px;margin:16px 0}
+  .threeq .tq{border:1px solid var(--line);border-left:4px solid var(--pw);border-radius:10px;padding:13px 16px;font-size:.93rem;background:#fbfaf6}
+  .threeq .tq b{font-family:Georgia,serif;font-size:1.02rem;color:var(--pw-deep)}
+  /* chain */
+  .chain{border:1px solid var(--line);border-radius:12px;background:#fbfaf6;padding:16px 18px;margin:14px 0}
+  .chain .step{display:flex;gap:11px;align-items:flex-start;padding:7px 0;font-size:.93rem}
+  .chain .step .t{flex:0 0 74px;font-size:.76rem;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.04em;padding-top:2px}
+  /* sorter */
+  .q{border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0;background:#fbfaf6}
+  .q .qtxt{margin:.1rem 0 .7rem;font-size:.97rem}
+  .q .qtxt em{font-family:Georgia,serif}
+  .opts{display:flex;gap:9px}
+  .opts button{flex:1;border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 8px;font-size:.88rem;font-weight:600;cursor:pointer;font-family:inherit;transition:.15s;color:var(--ink)}
+  .opts button:hover{border-color:var(--pw)}
+  .q.answered .opts button{cursor:default;opacity:.55}
+  .q.answered .opts button.right{opacity:1;border-color:var(--safe);background:var(--safe-tint)}
+  .q.answered .opts button.wrong{opacity:1;border-color:#c0392b;background:#fbeae6}
+  .q .why{display:none;margin-top:11px;font-size:.9rem;border-top:1px dashed var(--line);padding-top:10px}
+  .q.answered .why{display:block;animation:fade .3s ease}
+  .scorebox{font-size:.92rem;font-weight:600;color:var(--ink-soft);margin-top:14px}
+  .scorebox b{color:var(--pw-deep)}
+</style>
+  <link rel="icon" href="logo.svg">
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:12px;margin:0 0 14px"><img src="logo.svg" alt="Marriotts School" width="42" height="42" style="background:#fff;border-radius:9px;padding:5px;box-sizing:border-box;flex:0 0 auto"><p class="programme" style="margin:0">Marriotts School &middot; Student AI Guide</p></div>
+    <div class="badges"><span class="badge path">Creating · C3</span><span class="badge">No AI tool needed</span></div>
+    <h1>Share with care</h1>
+    <div class="meta"><span>⏱ About 12 minutes</span><span>🎯 Making is private, sharing is forever</span><span>📤 Post it or bin it</span></div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section>
+    <span class="kicker"><span class="num">1</span> Why this matters</span>
+    <p class="lead">Everything you make with AI is harmless while it's on your screen. The moment you hit send — to one group chat, one story, one stream — <strong>you've published it</strong>, and publishing has rules that don't care how old you are or how funny it was meant to be.</p>
+    <p>Here's the mental shift this module asks for: stop thinking like someone <em>posting</em> and start thinking like someone <em>publishing</em>. A newspaper can't print whatever it likes about people. As of the moment you share, neither can you — and "I only sent it to the group chat" has never once stopped a screenshot.</p>
+  </section>
+
+  <section>
+    <span class="kicker"><span class="num">2</span> The idea</span>
+    <h2>Three questions before anything AI-made leaves your phone</h2>
+    <div class="threeq">
+      <div class="tq"><b>1 · Is anyone real in it?</b> Faces, voices, names, anything recognisable. If yes: did they <em>actually</em> say yes — not "they'd find it funny", but asked-and-agreed? Other people's identities are not raw material. You know the hard edge of this from E3: fake images of real people range from bullying to actual crime. The consent bar isn't "harmless" — it's "they agreed".</div>
+      <div class="tq"><b>2 · Will people know it's AI?</b> If your hyper-real image, voice or "news" clip travels without a label, you haven't shared content — <strong>you've launched misinformation</strong>, and you've become the exact thing E3 trained you to catch. The fix costs four characters: "(AI)". Label it where the label can't be cropped off.</div>
+      <div class="tq"><b>3 · Would future-you sign it?</b> Posts outlive moods, friendships and accounts. Sixth-form interviews, part-time jobs, eventually employers — people look, and screenshots don't expire. E2's screenshot test, upgraded for publishing: <em>would I be comfortable with this on the form noticeboard, with my name on it, in five years?</em></div>
+    </div>
+    <div class="note"><strong>And one for the forwarders:</strong> sharing someone else's post <em>is</em> publishing it — same three questions, even though you made none of it. "I just forwarded it" makes you the distributor, not a bystander. Every viral harm is mostly made of forwarders.</div>
+  </section>
+
+  <section>
+    <span class="kicker"><span class="num">3</span> See it in action</span>
+    <h2>Anatomy of a "harmless joke"</h2>
+    <p>A made-up chain, assembled from very real patterns. A student makes an AI image of a teacher as a crying toddler in the lunch queue. Genuinely funny, honestly. Watch it travel:</p>
+    <div class="chain">
+      <div class="step"><span class="t">7:42pm</span><span>Sent to the five-person group chat. Everyone laughs. Best case scenario — it could have ended here. It never ends here.</span></div>
+      <div class="step"><span class="t">7:51pm</span><span>One of the five forwards it to a bigger chat — thirty people, half of whom don't know it's AI.</span></div>
+      <div class="step"><span class="t">9:15pm</span><span>It's on three year-group stories. Someone's added the teacher's name. The "obviously a joke" context evaporated two hops ago.</span></div>
+      <div class="step"><span class="t">Tuesday</span><span>The teacher sees it. They're a real person; it lands the way it would land on you. The school's behaviour policy covers conduct between members of the school community — including online, including made "as a joke", including AI.</span></div>
+      <div class="step"><span class="t">Wednesday</span><span>The original maker is identified in about four minutes — originals always trace back. Now it's parents, sanctions, and a teacher who looks at them differently for a year. Cost of the joke: everything it touched. Value: eight seconds of group-chat laughter.</span></div>
+    </div>
+    <p>Run it through the three questions: real person — no consent (question 1: fail). That's all it took. The same student making the same joke about a <em>fictional</em> grumpy wizard teacher? Genuinely fine, genuinely funny, zero victims. <strong>The line was never the humour. It was the human.</strong></p>
+  </section>
+
+  <section>
+    <span class="kicker"><span class="num">4</span> Your turn</span>
+    <h2>Post it or bin it?</h2>
+    <p>Six things made at home, thumb hovering over send. Call each one.</p>
+
+    <div class="q" data-ans="p">
+      <p class="qtxt"><em>An AI-generated fantasy landscape for the cover of your story, posted with "cover art I made with AI for chapter one!"</em></p>
+      <div class="opts"><button data-v="p" onclick="pick(this)">📤 Post it</button><button data-v="b" onclick="pick(this)">🗑️ Bin it</button></div>
+      <div class="why">📤 <strong>Post it.</strong> No real people, clearly labelled, attached to work that's genuinely yours. This is exactly what sharing AI-assisted creativity should look like — all three questions pass without breaking stride.</div>
+    </div>
+
+    <div class="q" data-ans="b">
+      <p class="qtxt"><em>An AI voice clip of your best mate "confessing" something embarrassing. He'd probably laugh. Probably.</em></p>
+      <div class="opts"><button data-v="p" onclick="pick(this)">📤 Post it</button><button data-v="b" onclick="pick(this)">🗑️ Bin it</button></div>
+      <div class="why">🗑️ <strong>Bin it.</strong> Question 1 fails on the word "probably" — that's you guessing, not him agreeing. His voice is his. And once it's sent, E3 applies: nobody downstream knows it's fake, and "probably fine" has no edit button. If he'd really find it funny, show him <em>in person</em> and let him decide if it goes anywhere. (Spoiler: watch how fast "hilarious" changes when it's about to be published.)</div>
+    </div>
+
+    <div class="q" data-ans="b">
+      <p class="qtxt"><em>A flawless AI "photo" of a shark in the flooded high street (E3 says hi), posted unlabelled "to see how many people fall for it".</em></p>
+      <div class="opts"><button data-v="p" onclick="pick(this)">📤 Post it</button><button data-v="b" onclick="pick(this)">🗑️ Bin it</button></div>
+      <div class="why">🗑️ <strong>Bin it.</strong> Question 2, failed on purpose. "Social experiment" is what misinformation calls itself when it's local. You spent E3 learning to catch exactly this — making it makes you the thing you were inoculated against. Label it "(AI — gotcha test for my mates)" and it becomes a legitimate game instead.</div>
+    </div>
+
+    <div class="q" data-ans="p">
+      <p class="qtxt"><em>Your short film for a youth competition — your script, your phone camera, AI background music, "Music: AI-generated" in the credits, and you checked the rules allow it.</em></p>
+      <div class="opts"><button data-v="p" onclick="pick(this)">📤 Post it</button><button data-v="b" onclick="pick(this)">🗑️ Bin it</button></div>
+      <div class="why">📤 <strong>Post it — this is the gold standard.</strong> Real creative work (C1's director), honest credits, <em>and</em> the competition rules checked first rather than hoped about. That last step is the one most people skip; it's also the one that protects the whole entry.</div>
+    </div>
+
+    <div class="q" data-ans="b">
+      <p class="qtxt"><em>An AI edit making a classmate look like he's being arrested. It's SO obviously fake. It's for the group chat. It's banter.</em></p>
+      <div class="opts"><button data-v="p" onclick="pick(this)">📤 Post it</button><button data-v="b" onclick="pick(this)">🗑️ Bin it</button></div>
+      <div class="why">🗑️ <strong>Bin it — every word of that excuse is load-bearing and none of it holds.</strong> "Obviously fake" stops being obvious two forwards from now (see section 3). "Just the group chat" is where section 3 <em>started</em>. A fake image of a real classmate committing a crime is reputation damage with his face on it — bullying at best, and the school's policy will read it exactly that way. The wizard-teacher rule: make it about someone who doesn't exist.</div>
+    </div>
+
+    <div class="q" data-ans="p">
+      <p class="qtxt"><em>An AI cartoon of your own dog as a knight, labelled, posted to your story.</em></p>
+      <div class="opts"><button data-v="p" onclick="pick(this)">📤 Post it</button><button data-v="b" onclick="pick(this)">🗑️ Bin it</button></div>
+      <div class="why">📤 <strong>Post it.</strong> The dog's consent is assumed under the universal Good Boy doctrine. No humans, labelled, future-you would frame it. Go forth.</div>
+    </div>
+
+    <p class="scorebox"><b id="score">0</b> of 6 called · <span id="scoreRight">0</span> publisher-grade</p>
+  </section>
+
+  <section class="safety">
+    <span class="kicker"><span class="num">5</span> <span class="shield">🛡️</span> Safety checkpoint</span>
+    <h2>The lines that carry legal weight</h2>
+    <ul class="clean">
+      <li><strong>The E3 law line, one more time, because it belongs here too:</strong> sexual or sexualised fake images of anyone under 18 — making, having, or sharing, <em>including of yourself, including "as a joke"</em> — is a serious crime for everyone involved, forwarders included. There is no banter exception.</li>
+      <li><strong>If something about you is out there:</strong> not your fault, fixable — evidence, trusted adult, <a href="https://www.childline.org.uk/info-advice/bullying-abuse-safety/online-mobile-safety/report-remove/" style="color:var(--safe);font-weight:600">Report Remove</a> and <a href="https://www.ceop.police.uk" style="color:var(--safe);font-weight:600">CEOP</a>. (E3 has the full kit; <a href="https://www.childline.org.uk" style="color:var(--safe);font-weight:600">Childline 0800 1111</a> any time.)</li>
+      <li><strong>School conduct reaches online conduct.</strong> What students publish about students or staff — on any app, made with any tool, at any hour — can land inside the behaviour policy. "It was AI" is not a defence; it's usually an aggravator.</li>
+      <li>The standing lines hold: <strong>no AI at school · nothing personal in the box</strong> — and other people's faces and voices count as personal, theirs.</li>
+    </ul>
+  </section>
+
+  <section>
+    <span class="kicker"><span class="num">6</span> Self-check</span>
+    <h2>Have you got it?</h2>
+    <p class="progress"><b id="pcount">0</b> of 4 ticked</p>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="box">✓</div><div class="txt">I can name the three questions: <strong>anyone real? · will they know it's AI? · would future-me sign it?</strong></div></div>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="box">✓</div><div class="txt">I know consent means <em>asked and agreed</em> — not "they'd probably laugh".</div></div>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="box">✓</div><div class="txt">I know forwarding is publishing, and "just the group chat" is where every chain starts.</div></div>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="box">✓</div><div class="txt">I know the legal lines around fake images of real people — and where help is if I'm ever the target.</div></div>
+
+    <button class="toggle-btn" onclick="toggleReveal('exemplar')">Show me a model answer ↓</button>
+    <div class="reveal" id="exemplar">
+      <div class="note" style="margin-top:6px">"The moment I share something AI-made — or forward someone else's — I'm publishing, so three questions first. Is anyone real in it? Then I need their actual agreement, not my guess. Will people know it's AI? Unlabelled real-looking fakes make me the misinformation. Would future-me sign it? Screenshots outlive everything. The hard line: fake images of real people are off the table — funny ones of fictional people are right there, free, with no victims."</div>
+    </div>
+
+    <h3 style="margin-top:20px">Your sharing instincts before this module were…</h3>
+    <div class="lights">
+      <div class="light r" onclick="setLight(this)"><span class="em">😬</span>Send first, think later</div>
+      <div class="light y" onclick="setLight(this)"><span class="em">🤔</span>Usually careful</div>
+      <div class="light g" onclick="setLight(this)"><span class="em">📰</span>Publisher-grade already</div>
+    </div>
+    <div class="note" style="margin-top:16px">🎒 <strong>This week:</strong> before you forward anything — AI or not — run question 1. "Is someone real in this, and did they agree?" One second. It's the whole module in a reflex.</div>
+  </section>
+
+  <section class="next">
+    <span class="arrow">↓</span>
+    <h2>Where next</h2>
+    <p>Last module of the whole guide — and it looks past school entirely. What does all of this mean for jobs, for skills, for the person you're becoming?</p>
+    <p style="margin-top:10px"><strong>Up next → Creating · C4: AI and your future</strong></p>
+    <div style="margin-top:22px">
+      <a href="creating-ai-and-your-future-module.html" data-done="C3" style="display:inline-block;background:#e8b04b;color:#3a2a06;font-weight:700;text-decoration:none;padding:13px 26px;border-radius:11px;font-size:1.02rem;box-shadow:0 4px 14px rgba(0,0,0,.18)">✓ Mark complete &amp; continue →</a>
+      <div style="margin-top:13px"><a href="index.html" data-done="C3" style="color:rgba(255,255,255,.82);font-size:.9rem">Save &amp; back to dashboard</a></div>
+    </div>
+  </section>
+
+</div>
+
+<div class="toast" id="toast">Nice ✓</div>
+<script>
+  var toastTimer;function showToast(msg){var el=document.getElementById('toast');el.textContent=msg||'Nice ✓';el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(function(){el.classList.remove('show')},1700);}
+  function toggleReveal(id){var el=document.getElementById(id);el.classList.toggle('show');var btn=event.currentTarget;if(el.classList.contains('show')){btn.innerHTML=btn.innerHTML.replace('↓','↑');}else{btn.innerHTML=btn.innerHTML.replace('↑','↓');}}
+  function toggleCheck(el){el.classList.toggle('done');document.getElementById('pcount').innerText=document.querySelectorAll('.check-item.done').length;}
+  function setLight(el){el.parentElement.querySelectorAll('.light').forEach(function(l){l.classList.remove('sel')});el.classList.add('sel');}
+
+  var answered=0, right=0;
+  function pick(btn){
+    var q=btn.closest('.q');
+    if(q.classList.contains('answered')) return;
+    q.classList.add('answered');
+    var ans=q.getAttribute('data-ans'), choice=btn.getAttribute('data-v');
+    q.querySelectorAll('.opts button').forEach(function(b){
+      if(b.getAttribute('data-v')===ans){ b.classList.add('right'); }
+      else if(b===btn){ b.classList.add('wrong'); }
+    });
+    answered++; if(choice===ans) right++;
+    document.getElementById('score').textContent=answered;
+    document.getElementById('scoreRight').textContent=right;
+    if(answered===6){ showToast(right===6?'6/6 — publisher-grade 📰':'Done — '+right+'/6. The chain in section 3 is why ↑'); }
+  }
+
+  // progress save links (script-block listener — never inline onclick on <a>, Netlify corrupts it)
+  (function(){document.querySelectorAll('a[data-done]').forEach(function(a){a.addEventListener('click',function(){try{var id=a.getAttribute('data-done');var d=JSON.parse(localStorage.getItem('saig_done')||'[]');if(d.indexOf(id)<0){d.push(id);localStorage.setItem('saig_done',JSON.stringify(d));}}catch(e){}});});})();
+</script>
+</body>
+</html>

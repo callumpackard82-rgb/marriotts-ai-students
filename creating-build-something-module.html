@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Creating · Build something real — Student AI Guide</title>
+<style>
+  :root{
+    --paper:#f7f5ef;--card:#ffffff;--ink:#1f2421;--ink-soft:#4a534d;--line:#e3ded2;
+    --pw:#565b5e;--pw-deep:#3a3f42;--pw-tint:#eceef0;--clay:#b4532a;--amber:#e8b04b;
+    --safe:#1f7a4d;--safe-tint:#e8f3ec;
+    --shadow:0 1px 2px rgba(31,36,33,.05),0 6px 22px rgba(31,36,33,.07);
+  }
+  *{box-sizing:border-box}html{scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.62;font-size:17px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:760px;margin:0 auto;padding:0 22px 90px}
+  h1,h2,h3{font-family:Georgia,"Times New Roman",serif;line-height:1.22;letter-spacing:-.01em}
+  h2{font-size:1.5rem;margin:0 0 .5rem}h3{font-size:1.12rem;margin:0 0 .4rem}
+  p{margin:.55rem 0}a{color:var(--pw-deep)}
+  header{background:linear-gradient(155deg,#565b5e 0%,#34383b 100%);color:#f3efe4;padding:42px 22px 38px;border-bottom:4px solid var(--amber)}
+  .header-inner{max-width:760px;margin:0 auto}
+  .programme{font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;opacity:.82;margin:0 0 16px}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+  .badge{font-size:.74rem;letter-spacing:.04em;text-transform:uppercase;font-weight:600;padding:4px 11px;border-radius:999px;border:1px solid rgba(243,239,228,.35)}
+  .badge.path{background:var(--amber);color:#3a2a06;border-color:transparent}
+  header h1{font-size:2.05rem;margin:.1rem 0 .5rem;color:#fff}
+  .meta{display:flex;flex-wrap:wrap;gap:18px;font-size:.86rem;opacity:.9;margin-top:14px}
+  .meta span{display:flex;align-items:center;gap:6px}
+  section{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;margin:26px 0;box-shadow:var(--shadow)}
+  .kicker{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--pw);margin-bottom:10px}
+  .kicker .num{width:22px;height:22px;border-radius:50%;background:var(--pw);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-family:Georgia,serif;font-size:.8rem}
+  .lead{font-size:1.06rem}
+  .note{background:var(--pw-tint);border-radius:10px;padding:12px 15px;font-size:.92rem;margin:14px 0}
+  .note strong{color:var(--pw-deep)}
+  .toggle-btn{background:var(--pw);color:#fff;border:none;border-radius:9px;padding:10px 16px;font-size:.9rem;font-weight:600;cursor:pointer;margin:8px 0;transition:.15s}
+  .toggle-btn:hover{background:var(--pw-deep)}
+  .reveal{display:none}.reveal.show{display:block;animation:fade .3s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  .safety{background:var(--safe-tint);border:1px solid #bfe0cb;border-left:5px solid var(--safe)}
+  .safety .kicker{color:var(--safe)}.safety .kicker .num{background:var(--safe)}
+  .shield{font-size:1.15rem}
+  .check-item{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border:1px solid var(--line);border-radius:11px;margin:8px 0;cursor:pointer;transition:.15s;background:#fbfaf6}
+  .check-item:hover{border-color:var(--pw)}
+  .check-item.done{background:var(--pw-tint);border-color:var(--pw)}
+  .check-item .box{flex:0 0 22px;width:22px;height:22px;border:2px solid var(--pw);border-radius:6px;display:flex;align-items:center;justify-content:center;margin-top:1px;color:#fff;font-weight:700;font-size:.9rem}
+  .check-item.done .box{background:var(--pw)}.check-item .txt{font-size:.95rem}
+  .progress{font-size:.9rem;color:var(--ink-soft);margin:6px 0 14px;font-weight:600}.progress b{color:var(--pw-deep)}
+  .lights{display:flex;gap:10px;margin:16px 0 4px}
+  .light{flex:1;text-align:center;border:1px solid var(--line);border-radius:11px;padding:12px 8px;cursor:pointer;font-size:.85rem;font-weight:600;transition:.15s;background:#fbfaf6}
+  .light .em{font-size:1.4rem;display:block;margin-bottom:3px}
+  .light.sel{border-width:2px;transform:translateY(-2px)}
+  .light.r.sel{border-color:#c0392b;background:#fbeae6}.light.y.sel{border-color:#d9a528;background:#fbf3df}.light.g.sel{border-color:var(--safe);background:var(--safe-tint)}
+  .next{background:linear-gradient(155deg,#565b5e,#34383b);color:#f3efe4;border:none;text-align:center}
+  .next h2{color:#fff}.next p{opacity:.92}.next .arrow{font-size:1.6rem;display:block;margin-bottom:6px;color:var(--amber)}
+  .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(120%);background:var(--ink);color:#fff;padding:11px 20px;border-radius:10px;font-size:.9rem;box-shadow:var(--shadow);transition:.3s;z-index:50}
+  .toast.show{transform:translateX(-50%) translateY(0)}
+  ul.clean{padding-left:1.15rem}ul.clean li{margin:.3rem 0}
+  .current{background:#fbf6ea;border:1px dashed #ddc488;border-radius:11px;padding:14px 16px;margin:18px 0;font-size:.88rem}
+  .current .hd{font-weight:700;color:#8a6516;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px}
+  /* loop steps */
+  .loop{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0}
+  .loop .s{border:1px solid var(--line);border-radius:12px;padding:12px 12px;background:#fbfaf6;font-size:.88rem;text-align:center}
+  .loop .s b{display:block;font-family:Georgia,serif;font-size:1rem;color:var(--pw-deep);margin-bottom:3px}
+  @media(max-width:560px){.loop{grid-template-columns:1fr 1fr}}
+  /* A/B duels */
+  .q{border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0;background:#fbfaf6}
+  .q .qhd{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:9px}
+  .opts{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+  @media(max-width:560px){.opts{grid-template-columns:1fr}}
+  .opts button{border:1px solid var(--line);background:#fff;border-radius:10px;padding:12px 12px;font-size:.9rem;font-weight:600;cursor:pointer;font-family:inherit;transition:.15s;color:var(--ink);text-align:left;line-height:1.45}
+  .opts button:hover{border-color:var(--pw)}
+  .q.answered .opts button{cursor:default;opacity:.55}
+  .q.answered .opts button.right{opacity:1;border-color:var(--safe);background:var(--safe-tint)}
+  .q.answered .opts button.wrong{opacity:1;border-color:#c0392b;background:#fbeae6}
+  .q .why{display:none;margin-top:11px;font-size:.9rem;border-top:1px dashed var(--line);padding-top:10px}
+  .q.answered .why{display:block;animation:fade .3s ease}
+  .scorebox{font-size:.92rem;font-weight:600;color:var(--ink-soft);margin-top:14px}
+  .scorebox b{color:var(--pw-deep)}
+</style>
+  <link rel="icon" href="logo.svg">
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:12px;margin:0 0 14px"><img src="logo.svg" alt="Marriotts School" width="42" height="42" style="background:#fff;border-radius:9px;padding:5px;box-sizing:border-box;flex:0 0 auto"><p class="programme" style="margin:0">Marriotts School &middot; Student AI Guide</p></div>
+    <div class="badges"><span class="badge path">Creating · C2</span><span class="badge">No AI tool needed</span></div>
+    <h1>Build something real</h1>
+    <div class="meta"><span>⏱ About 12 minutes</span><span>🎯 Ideas → working things</span><span>🔧 Five builder duels</span></div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section>
+    <span class="kicker"><span class="num">1</span> Why this matters</span>
+    <p class="lead">Here's the quiet revolution nobody put on a poster: <strong>plain English is now a programming language.</strong> People describe an app — a revision quiz, a fixture tracker for their football team, a little game — and AI writes the code. Working software, built by people who couldn't code last year.</p>
+    <p>That doesn't make programming dead — it makes a different skill suddenly precious: <strong>knowing exactly what you want, saying it precisely, and testing whether you got it.</strong> Engineers have a word for people who can do that: engineers. This module is about thinking like one — a skill you can build right now, with or without ever touching an AI.</p>
+  </section>
+
+  <section>
+    <span class="kicker"><span class="num">2</span> The idea</span>
+    <h2>The builder's loop</h2>
+    <p>Every AI-assisted project — every software project, honestly — runs on the same four-step loop:</p>
+    <div class="loop">
+      <div class="s"><b>1 · Describe</b> Say <em>exactly</em> what you want — who it's for, what it does, what "done" looks like.</div>
+      <div class="s"><b>2 · Build</b> The AI drafts it. Fast, confident, and — you know from E1 — not always right.</div>
+      <div class="s"><b>3 · Test</b> You try to <em>break</em> it. Weird inputs, wrong clicks, empty boxes. Whatever a real user would do.</div>
+      <div class="s"><b>4 · Refine</b> Report what broke, precisely. Repeat until it survives you.</div>
+    </div>
+    <p>Look at where the human is in that loop: steps 1, 3 and 4 — the <strong>deciding, the testing, the judging</strong>. The AI only owns step 2. That's the pilot's seat-map from E4, drawn for builders. Three habits separate real builders from passengers:</p>
+    <ul class="clean">
+      <li><strong>Specific beats vague, every time.</strong> "Make me a quiz app" gets you the average quiz app (E1's average machine, again). "Ten-question French vocab quiz, multiple choice, instant feedback, score at the end, works on a phone" gets you <em>your</em> app. The spec <em>is</em> the skill.</li>
+      <li><strong>Understand what you ship.</strong> If AI wrote code you can't explain, you're a passenger in your own project — and the first bug will prove it. The builder's move: <em>"explain every part until I could rebuild it."</em> (T1's explain-it-back, applied to code.)</li>
+      <li><strong>Report bugs like a scientist:</strong> "It's broken, fix it" gets guesses. "When I click submit with nothing selected, the score shows NaN — I expected an error message" gets fixes. Precision in, quality out.</li>
+    </ul>
+    <div class="current">
+      <div class="hd">Current as of June 2026 — where building actually happens (check E2's age table first)</div>
+      <p style="margin:.2rem 0">The big chatbots (13+ with consent — ChatGPT, Gemini, Copilot) can all draft small apps and games in chat; the heavier "agent" coding tools (like Claude Code) are 18+. <strong>Under 13, or rather build than prompt?</strong> Scratch (any age, scratch.mit.edu) teaches exactly the same loop with zero AI — and the school's Computer Science lessons and clubs are the real cheat code: the thinking transfers straight across.</p>
+    </div>
+  </section>
+
+  <section>
+    <span class="kicker"><span class="num">3</span> See it in action</span>
+    <h2>One weekend, one vocab quiz</h2>
+    <p>Year 10 student, French test coming, wants a phone quiz of her actual vocab list. Watch the loop run:</p>
+    <ul class="clean">
+      <li><strong>Describe:</strong> "A quiz web page: I'll give you 20 French–English word pairs. Ask one at a time, multiple choice with 4 options, tell me instantly if I'm right, score at the end, big buttons for a phone." <em>(Notice: someone who's done T1 even knows why the quiz beats re-reading the list.)</em></li>
+      <li><strong>Build:</strong> the AI produces a working page in one go. Looks perfect. <em>Looks.</em></li>
+      <li><strong>Test:</strong> she tries to break it — and does, twice. Answering super-fast double-counts the score; one French word appears as its own wrong-answer option. A passenger would have shipped both bugs.</li>
+      <li><strong>Refine:</strong> two precise bug reports later, it's solid. Then one more loop: "add a 'practise my mistakes' round at the end" — because <em>she</em> knows (T1 again) that's where the learning is.</li>
+    </ul>
+    <p>Total code she wrote: zero. Total engineering she did: all of it. The spec, the test plan, the bug reports, the feature that made it actually useful — <strong>none of that was in the machine.</strong></p>
+  </section>
+
+  <section>
+    <span class="kicker"><span class="num">4</span> Your turn</span>
+    <h2>Builder duels: which move builds better?</h2>
+    <p>Five head-to-heads. Pick the move a real builder makes.</p>
+
+    <div class="q" data-ans="b">
+      <div class="qhd">Duel 1 · The opening prompt</div>
+      <div class="opts">
+        <button data-v="a" onclick="pick(this)">A · "Make me a revision app."</button>
+        <button data-v="b" onclick="pick(this)">B · "A flashcard page for GCSE biology definitions: I provide the cards, it shuffles them, I self-mark right/wrong, wrong ones come back more often."</button>
+      </div>
+      <div class="why">🔧 <strong>B.</strong> A is a wish; B is a spec — who it's for, what it does, what "working" means. Vague in, average out. And writing spec B forced her to decide what she actually wanted, which is half the engineering.</div>
+    </div>
+
+    <div class="q" data-ans="b">
+      <div class="qhd">Duel 2 · The code appears and looks perfect</div>
+      <div class="opts">
+        <button data-v="a" onclick="pick(this)">A · It runs! Send it to your mates.</button>
+        <button data-v="b" onclick="pick(this)">B · Try to break it first: empty inputs, double-clicks, the back button, your little brother.</button>
+      </div>
+      <div class="why">🔧 <strong>B.</strong> "It runs" and "it works" are different claims — E1 told you the machine is confident, not correct. Testing is the step where <em>you</em> add the quality. Builders are proud of the bugs they catch, because each one is a bug their users never met.</div>
+    </div>
+
+    <div class="q" data-ans="a">
+      <div class="qhd">Duel 3 · It works, but you don't know how</div>
+      <div class="opts">
+        <button data-v="a" onclick="pick(this)">A · "Explain how this works, part by part, until I could rebuild it."</button>
+        <button data-v="b" onclick="pick(this)">B · Don't touch it — it works, and asking feels like admitting you're not a real coder.</button>
+      </div>
+      <div class="why">🔧 <strong>A.</strong> Code you can't explain is code you can't fix, extend or trust. And here's the secret: asking "explain it to me" is what the professionals do with AI all day — it's not the beginner move, it's <em>the</em> move. (B is the fluency trap from T1 wearing a hoodie.)</div>
+    </div>
+
+    <div class="q" data-ans="b">
+      <div class="qhd">Duel 4 · Something's broken</div>
+      <div class="opts">
+        <button data-v="a" onclick="pick(this)">A · "It doesn't work, fix it."</button>
+        <button data-v="b" onclick="pick(this)">B · "When I submit with no answer selected, the score shows NaN. I expected 'pick an answer first'. Here's the error from the console."</button>
+      </div>
+      <div class="why">🔧 <strong>B.</strong> What happened, what you expected, what the evidence says — that's a bug report, and it's a thinking skill worth more than any syntax. A makes the AI guess; B makes it fix. (Notice this is just T3's precision applied to machines: vague questions get vague answers everywhere.)</div>
+    </div>
+
+    <div class="q" data-ans="a">
+      <div class="qhd">Duel 5 · The bigger project</div>
+      <div class="opts">
+        <button data-v="a" onclick="pick(this)">A · You decide the plan — what it does, what's step one — and use AI to build each piece, testing as you go.</button>
+        <button data-v="b" onclick="pick(this)">B · "Build my whole idea, everything, in one go" — and hope.</button>
+      </div>
+      <div class="why">🔧 <strong>A.</strong> One giant wish produces one giant haystack of code nobody understands (including the AI). Piece by piece, tested as you go, means you always know what just broke: the last piece. Architects don't lay bricks — but they absolutely decide where the walls go. Stay the architect.</div>
+    </div>
+
+    <p class="scorebox"><b id="score">0</b> of 5 duels called · <span id="scoreRight">0</span> like a builder</p>
+  </section>
+
+  <section class="safety">
+    <span class="kicker"><span class="num">5</span> <span class="shield">🛡️</span> Safety checkpoint</span>
+    <h2>Building's extra rules</h2>
+    <ul class="clean">
+      <li><strong>Your projects inherit E2's rules.</strong> No real people's data in what you build or in your prompts — your quiz needs vocab words, not your friends' names. If an app you make collects <em>anything</em> from other people, stop and think hard (and don't collect it from under-13s at all).</li>
+      <li><strong>Sharing a thing you built = publishing.</strong> Before your quiz/game/tool goes to the group chat, it gets the same checks as anything else you publish — that's the whole of C3, next.</li>
+      <li><strong>Age rules apply to builder tools too</strong> — and there's zero shame in the no-AI path: Scratch, the school's CS lessons and code clubs build the identical thinking. The loop is the skill; the AI is one of several ways to run it.</li>
+      <li>The standing lines: <strong>no AI at school · nothing personal in the box</strong>. Computer Science homework also follows T2 — if AI wrote your coursework code, that's the same malpractice as an essay.</li>
+    </ul>
+  </section>
+
+  <section>
+    <span class="kicker"><span class="num">6</span> Self-check</span>
+    <h2>Have you got it?</h2>
+    <p class="progress"><b id="pcount">0</b> of 4 ticked</p>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="box">✓</div><div class="txt">I can name the four steps of the builder's loop — and which three belong to the human.</div></div>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="box">✓</div><div class="txt">I can turn a vague wish into a <strong>spec</strong>: who it's for, what it does, what "done" means.</div></div>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="box">✓</div><div class="txt">I know "it runs" isn't "it works" — and that my job is trying to break it.</div></div>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="box">✓</div><div class="txt">I know the rule for shipped code: if I can't explain it, I don't ship it.</div></div>
+
+    <button class="toggle-btn" onclick="toggleReveal('exemplar')">Show me a model answer ↓</button>
+    <div class="reveal" id="exemplar">
+      <div class="note" style="margin-top:6px">"Building with AI is a loop: describe precisely, let it build, test by trying to break it, refine with exact bug reports. The human owns three of those four steps — the spec, the testing and the judging — which is why vague prompts get average apps and passengers ship bugs. I don't ship what I can't explain, my projects never touch real people's data, and the same loop works in Scratch and CS club with no AI at all. The loop is the skill."</div>
+    </div>
+
+    <h3 style="margin-top:20px">Could you see yourself building something?</h3>
+    <div class="lights">
+      <div class="light r" onclick="setLight(this)"><span class="em">🤷</span>Not my thing (yet)</div>
+      <div class="light y" onclick="setLight(this)"><span class="em">💡</span>I've got an idea brewing</div>
+      <div class="light g" onclick="setLight(this)"><span class="em">🔧</span>Already building</div>
+    </div>
+    <div class="note" style="margin-top:16px">🎒 <strong>This week:</strong> no tools needed — write the spec. One thing you wish existed, one paragraph: who it's for, what it does, what "working" means. That paragraph is engineering, and it'll be ready whenever you are.</div>
+  </section>
+
+  <section class="next">
+    <span class="arrow">↓</span>
+    <h2>Where next</h2>
+    <p>You can make art (C1) and build things (C2). The moment you show anyone, you've become a publisher — and publishers have responsibilities.</p>
+    <p style="margin-top:10px"><strong>Up next → Creating · C3: Share with care</strong></p>
+    <div style="margin-top:22px">
+      <a href="creating-share-with-care-module.html" data-done="C2" style="display:inline-block;background:#e8b04b;color:#3a2a06;font-weight:700;text-decoration:none;padding:13px 26px;border-radius:11px;font-size:1.02rem;box-shadow:0 4px 14px rgba(0,0,0,.18)">✓ Mark complete &amp; continue →</a>
+      <div style="margin-top:13px"><a href="index.html" data-done="C2" style="color:rgba(255,255,255,.82);font-size:.9rem">Save &amp; back to dashboard</a></div>
+    </div>
+  </section>
+
+</div>
+
+<div class="toast" id="toast">Nice ✓</div>
+<script>
+  var toastTimer;function showToast(msg){var el=document.getElementById('toast');el.textContent=msg||'Nice ✓';el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(function(){el.classList.remove('show')},1700);}
+  function toggleReveal(id){var el=document.getElementById(id);el.classList.toggle('show');var btn=event.currentTarget;if(el.classList.contains('show')){btn.innerHTML=btn.innerHTML.replace('↓','↑');}else{btn.innerHTML=btn.innerHTML.replace('↑','↓');}}
+  function toggleCheck(el){el.classList.toggle('done');document.getElementById('pcount').innerText=document.querySelectorAll('.check-item.done').length;}
+  function setLight(el){el.parentElement.querySelectorAll('.light').forEach(function(l){l.classList.remove('sel')});el.classList.add('sel');}
+
+  var answered=0, right=0;
+  function pick(btn){
+    var q=btn.closest('.q');
+    if(q.classList.contains('answered')) return;
+    q.classList.add('answered');
+    var ans=q.getAttribute('data-ans'), choice=btn.getAttribute('data-v');
+    q.querySelectorAll('.opts button').forEach(function(b){
+      if(b.getAttribute('data-v')===ans){ b.classList.add('right'); }
+      else if(b===btn){ b.classList.add('wrong'); }
+    });
+    answered++; if(choice===ans) right++;
+    document.getElementById('score').textContent=answered;
+    document.getElementById('scoreRight').textContent=right;
+    if(answered===5){ showToast(right===5?'5/5 — built different 🔧':'Done — '+right+'/5. The habits are the lesson ↑'); }
+  }
+
+  // progress save links (script-block listener — never inline onclick on <a>, Netlify corrupts it)
+  (function(){document.querySelectorAll('a[data-done]').forEach(function(a){a.addEventListener('click',function(){try{var id=a.getAttribute('data-done');var d=JSON.parse(localStorage.getItem('saig_done')||'[]');if(d.indexOf(id)<0){d.push(id);localStorage.setItem('saig_done',JSON.stringify(d));}}catch(e){}});});})();
+</script>
+</body>
+</html>

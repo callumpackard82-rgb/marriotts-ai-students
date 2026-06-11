@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Creating · AI and your future — Student AI Guide</title>
+<style>
+  :root{
+    --paper:#f7f5ef;--card:#ffffff;--ink:#1f2421;--ink-soft:#4a534d;--line:#e3ded2;
+    --pw:#565b5e;--pw-deep:#3a3f42;--pw-tint:#eceef0;--clay:#b4532a;--amber:#e8b04b;
+    --safe:#1f7a4d;--safe-tint:#e8f3ec;
+    --shadow:0 1px 2px rgba(31,36,33,.05),0 6px 22px rgba(31,36,33,.07);
+  }
+  *{box-sizing:border-box}html{scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.62;font-size:17px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:760px;margin:0 auto;padding:0 22px 90px}
+  h1,h2,h3{font-family:Georgia,"Times New Roman",serif;line-height:1.22;letter-spacing:-.01em}
+  h2{font-size:1.5rem;margin:0 0 .5rem}h3{font-size:1.12rem;margin:0 0 .4rem}
+  p{margin:.55rem 0}a{color:var(--pw-deep)}
+  header{background:linear-gradient(155deg,#565b5e 0%,#34383b 100%);color:#f3efe4;padding:42px 22px 38px;border-bottom:4px solid var(--amber)}
+  .header-inner{max-width:760px;margin:0 auto}
+  .programme{font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;opacity:.82;margin:0 0 16px}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+  .badge{font-size:.74rem;letter-spacing:.04em;text-transform:uppercase;font-weight:600;padding:4px 11px;border-radius:999px;border:1px solid rgba(243,239,228,.35)}
+  .badge.path{background:var(--amber);color:#3a2a06;border-color:transparent}
+  header h1{font-size:2.05rem;margin:.1rem 0 .5rem;color:#fff}
+  .meta{display:flex;flex-wrap:wrap;gap:18px;font-size:.86rem;opacity:.9;margin-top:14px}
+  .meta span{display:flex;align-items:center;gap:6px}
+  section{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;margin:26px 0;box-shadow:var(--shadow)}
+  .kicker{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--pw);margin-bottom:10px}
+  .kicker .num{width:22px;height:22px;border-radius:50%;background:var(--pw);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-family:Georgia,serif;font-size:.8rem}
+  .lead{font-size:1.06rem}
+  .note{background:var(--pw-tint);border-radius:10px;padding:12px 15px;font-size:.92rem;margin:14px 0}
+  .note strong{color:var(--pw-deep)}
+  .toggle-btn{background:var(--pw);color:#fff;border:none;border-radius:9px;padding:10px 16px;font-size:.9rem;font-weight:600;cursor:pointer;margin:8px 0;transition:.15s}
+  .toggle-btn:hover{background:var(--pw-deep)}
+  .reveal{display:none}.reveal.show{display:block;animation:fade .3s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  .safety{background:var(--safe-tint);border:1px solid #bfe0cb;border-left:5px solid var(--safe)}
+  .safety .kicker{color:var(--safe)}.safety .kicker .num{background:var(--safe)}
+  .shield{font-size:1.15rem}
+  .check-item{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border:1px solid var(--line);border-radius:11px;margin:8px 0;cursor:pointer;transition:.15s;background:#fbfaf6}
+  .check-item:hover{border-color:var(--pw)}
+  .check-item.done{background:var(--pw-tint);border-color:var(--pw)}
+  .check-item .box{flex:0 0 22px;width:22px;height:22px;border:2px solid var(--pw);border-radius:6px;display:flex;align-items:center;justify-content:center;margin-top:1px;color:#fff;font-weight:700;font-size:.9rem}
+  .check-item.done .box{background:var(--pw)}.check-item .txt{font-size:.95rem}
+  .progress{font-size:.9rem;color:var(--ink-soft);margin:6px 0 14px;font-weight:600}.progress b{color:var(--pw-deep)}
+  .lights{display:flex;gap:10px;margin:16px 0 4px}
+  .light{flex:1;text-align:center;border:1px solid var(--line);border-radius:11px;padding:12px 8px;cursor:pointer;font-size:.85rem;font-weight:600;transition:.15s;background:#fbfaf6}
+  .light .em{font-size:1.4rem;display:block;margin-bottom:3px}
+  .light.sel{border-width:2px;transform:translateY(-2px)}
+  .light.r.sel{border-color:#c0392b;background:#fbeae6}.light.y.sel{border-color:#d9a528;background:#fbf3df}.light.g.sel{border-color:var(--safe);background:var(--safe-tint)}
+  .next{background:linear-gradient(155deg,#565b5e,#34383b);color:#f3efe4;border:none;text-align:center}
+  .next h2{color:#fff}.next p{opacity:.92}.next .arrow{font-size:1.6rem;display:block;margin-bottom:6px;color:var(--amber)}
+  .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(120%);background:var(--ink);color:#fff;padding:11px 20px;border-radius:10px;font-size:.9rem;box-shadow:var(--shadow);transition:.3s;z-index:50}
+  .toast.show{transform:translateX(-50%) translateY(0)}
+  ul.clean{padding-left:1.15rem}ul.clean li{margin:.3rem 0}
+  /* A/B duels */
+  .q{border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0;background:#fbfaf6}
+  .q .qhd{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:9px}
+  .opts{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+  @media(max-width:560px){.opts{grid-template-columns:1fr}}
+  .opts button{border:1px solid var(--line);background:#fff;border-radius:10px;padding:12px 12px;font-size:.9rem;font-weight:600;cursor:pointer;font-family:inherit;transition:.15s;color:var(--ink);text-align:left;line-height:1.45}
+  .opts button:hover{border-color:var(--pw)}
+  .q.answered .opts button{cursor:default;opacity:.55}
+  .q.answered .opts button.right{opacity:1;border-color:var(--safe);background:var(--safe-tint)}
+  .q.answered .opts button.wrong{opacity:1;border-color:#c0392b;background:#fbeae6}
+  .q .why{display:none;margin-top:11px;font-size:.9rem;border-top:1px dashed var(--line);padding-top:10px}
+  .q.answered .why{display:block;animation:fade .3s ease}
+  .scorebox{font-size:.92rem;font-weight:600;color:var(--ink-soft);margin-top:14px}
+  .scorebox b{color:var(--pw-deep)}
+  /* toolkit */
+  .kit{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+  .kit .k{border:1px solid #bfe0cb;border-radius:11px;padding:12px 14px;font-size:.88rem;background:#fff}
+  .kit .k b{display:block;color:var(--safe);font-size:.93rem;margin-bottom:2px}
+  .kit .k span{color:var(--ink-soft);font-size:.78rem}
+  @media(max-width:560px){.kit{grid-template-columns:1fr}}
+</style>
+  <link rel="icon" href="logo.svg">
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:12px;margin:0 0 14px"><img src="logo.svg" alt="Marriotts School" width="42" height="42" style="background:#fff;border-radius:9px;padding:5px;box-sizing:border-box;flex:0 0 auto"><p class="programme" style="margin:0">Marriotts School &middot; Student AI Guide</p></div>
+    <div class="badges"><span class="badge path">Creating · C4</span><span class="badge">The final module</span></div>
+    <h1>AI and your future</h1>
+    <div class="meta"><span>⏱ About 10 minutes</span><span>🎯 The long game</span><span>🎓 The capstone</span></div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section>
+    <span class="kicker"><span class="num">1</span> Why this matters</span>
+    <p class="lead">"Will AI take my job?" Every generation gets a version of this question — and the honest answer is the annoying one: <strong>it's the wrong question.</strong> Jobs aren't taken whole; they're reshaped. The spreadsheet didn't delete accountants — it deleted the adding-up and left the judgement. The camera didn't end painting — it ended painting's <em>boring</em> jobs and freed the interesting ones.</p>
+    <p>The right question is: <strong>"which abilities will still be scarce when machine-made words, images and code are basically free?"</strong> That question has real answers — and the slightly outrageous good news is that you've spent eleven modules building them.</p>
+  </section>
+
+  <section>
+    <span class="kicker"><span class="num">2</span> The idea</span>
+    <h2>What stays scarce when AI is everywhere</h2>
+    <p>When something becomes cheap, the things <em>around</em> it become valuable. AI makes drafts cheap — of text, images, code, plans. So what gets more valuable? Four things:</p>
+    <ul class="clean">
+      <li><strong>Knowing what good looks like.</strong> AI produces ten options; someone has to know which one is right, and why. That judgement comes from deep knowledge of a subject — which is built by doing the reps yourself (E4's whole argument). You cannot check the work of a machine in a field you never learned. <em>This is why school still matters in an AI world — more, not less.</em></li>
+      <li><strong>Asking the right question.</strong> The spec (C2), the frame (T3), the follow-up that exposes the weakness — AI multiplies the power of people who can think precisely and does almost nothing for people who can't. Garbage in, garbage at scale out.</li>
+      <li><strong>Being accountable.</strong> An AI can draft the bridge calculations, the medical letter, the contract — but someone with a name has to sign them. Trust, responsibility, "I checked this and I stand behind it" — machines can't carry that, by definition. People pay for someone to be responsible.</li>
+      <li><strong>Being human, at humans.</strong> The teacher who notices you're struggling, the nurse who calms a frightened patient, the teammate people want in the room. T4 taught you why a bot can't actually care; every job built on caring, persuading, leading or trusting keeps its human core.</li>
+    </ul>
+    <div class="note"><strong>The honest caveat:</strong> some of today's task-shaped work really will shrink — the careers that were <em>mostly</em> first drafts. Nobody serious can tell you exactly which or when. Which is why the realest future-proofing isn't picking the "safe job" — it's being someone who can <strong>learn the next thing</strong>. And learning fast is itself a skill you're building right now, every time you choose the retrieval struggle (T1) over the comfortable shortcut.</div>
+  </section>
+
+  <section>
+    <span class="kicker"><span class="num">3</span> See it in action</span>
+    <h2>The junior designer, 2026</h2>
+    <p>Real pattern from the working world: a junior graphic designer's old first year was banner ads and resizing logos — grunt work, but it's where taste got built. AI now does most of that in seconds. So is junior designer a dead job?</p>
+    <p>Watch what actually happened. The designers thriving are the ones who became <strong>directors of the machine</strong> (C1, in a salary): they generate twenty directions in an hour, but they're hired for knowing which one fits the client, the audience, the brief — and for being trusted to say so in the meeting. The ones who struggle are those who only ever learned to <em>execute</em> — because execution is what got cheap.</p>
+    <p>Now spot the trap hiding in that story: if AI does the grunt work, where does a junior's <em>taste</em> come from? The honest answer: from whoever still chooses to do the reps. The young designer who sketches daily, studies why great work is great, and uses AI as the assistant — builds the judgement that commands the room at 25. The one who vending-machined through their training never develops the one thing that was ever going to make them valuable. <strong>Same tool. Opposite futures. The difference is the whole message of this site.</strong></p>
+  </section>
+
+  <section>
+    <span class="kicker"><span class="num">4</span> Your turn</span>
+    <h2>Future-proof or fragile?</h2>
+    <p>Four pairs of students, four bets on the future. Pick who's building the more durable advantage.</p>
+
+    <div class="q" data-ans="b">
+      <div class="qhd">Duel 1 · The shortcut question</div>
+      <div class="opts">
+        <button data-v="a" onclick="pick(this)">A · "Why learn to write essays when AI writes essays?" — skips the struggle, gets the grades however.</button>
+        <button data-v="b" onclick="pick(this)">B · Learns to write properly <em>because</em> AI writes — "if I can't tell good writing from average, I can't direct the machine."</button>
+      </div>
+      <div class="why">🌱 <strong>B has seen the board.</strong> When everyone has a drafting machine, the scarce skill is judging and improving drafts — which only develops in people who learned to produce. A is optimising for a world where the grade was the product. E4 said it on day one: the brain was always the product.</div>
+    </div>
+
+    <div class="q" data-ans="a">
+      <div class="qhd">Duel 2 · Two ways to "learn AI"</div>
+      <div class="opts">
+        <button data-v="a" onclick="pick(this)">A · Gets good at one subject she loves, plus the asking-and-judging skills — and lets the tools change around her.</button>
+        <button data-v="b" onclick="pick(this)">B · Memorises this year's "50 secret prompt hacks" from a viral thread.</button>
+      </div>
+      <div class="why">🌱 <strong>A.</strong> Prompt tricks expire with every model update — this year's hacks are next year's compost. Deep knowledge plus precise thinking transfers to every tool that will ever exist. (You may notice this entire guide taught you approach, not tricks. That was on purpose.)</div>
+    </div>
+
+    <div class="q" data-ans="b">
+      <div class="qhd">Duel 3 · The creative bet</div>
+      <div class="opts">
+        <button data-v="a" onclick="pick(this)">A · Quits art — "what's the point, AI draws better than me already."</button>
+        <button data-v="b" onclick="pick(this)">B · Keeps drawing daily, studies what makes images <em>work</em>, treats AI as her tireless assistant.</button>
+      </div>
+      <div class="why">🌱 <strong>B — and the junior-designer story is her proof.</strong> AI didn't make taste worthless; it made taste the <em>entire job</em>. The person who quits hands the director's chair to whoever didn't. (And A's logic proves too much — cameras "drew better" than painters in 1850, and the world still pays for painters with something to say.)</div>
+    </div>
+
+    <div class="q" data-ans="b">
+      <div class="qhd">Duel 4 · Picking a path</div>
+      <div class="opts">
+        <button data-v="a" onclick="pick(this)">A · Hunts for the one career "guaranteed safe from AI" and locks it in at 15.</button>
+        <button data-v="b" onclick="pick(this)">B · Builds the portable kit — learns deeply, learns to learn, stays curious about the tools — and keeps options open.</button>
+      </div>
+      <div class="why">🌱 <strong>B.</strong> Every confident "safe list" from five years ago is already wrong in both directions. Nobody can sell you certainty about 2040 — but adaptability compounds no matter what arrives. The students who'll be fine aren't the ones who guessed right; they're the ones who can re-learn when the guess breaks.</div>
+    </div>
+
+    <p class="scorebox"><b id="score">0</b> of 4 bets placed · <span id="scoreRight">0</span> on the long game</p>
+  </section>
+
+  <section class="safety">
+    <span class="kicker"><span class="num">5</span> <span class="shield">🛡️</span> The toolkit you leave with</span>
+    <h2>Twelve modules, one pocket card</h2>
+    <p>Everything this guide gave you, in one place. These don't expire when the apps change:</p>
+    <div class="kit">
+      <div class="k"><b>The three lines</b>🚫 Not at school · 🔒 Nothing personal · 🧠 You stay the pilot<span> — the hub</span></div>
+      <div class="k"><b>The pilot question</b>"After this, could I do it without the AI?"<span> — E4</span></div>
+      <div class="k"><b>The screenshot test</b>Would I be okay with everyone seeing this?<span> — E2</span></div>
+      <div class="k"><b>SIFT</b>Stop · Investigate · Find coverage · Trace the original<span> — E3</span></div>
+      <div class="k"><b>Purpose + daylight tests</b>What skill is this building? Could I tell my teacher how I used it?<span> — T2</span></div>
+      <div class="k"><b>The three filters</b>True? Balanced? Mine?<span> — T3</span></div>
+      <div class="k"><b>The replacement signs</b>The swap · the hide · the agree<span> — T4</span></div>
+      <div class="k"><b>The publisher's questions</b>Anyone real? Labelled as AI? Would future-me sign it?<span> — C3</span></div>
+    </div>
+    <p>And the one that outranks them all: <strong>when something's genuinely wrong, find a human.</strong> A parent or carer, any teacher, <a href="https://www.childline.org.uk" style="color:var(--safe);font-weight:600">Childline 0800 1111</a>, text SHOUT to 85258. Machines predict words. People show up.</p>
+  </section>
+
+  <section>
+    <span class="kicker"><span class="num">6</span> Self-check</span>
+    <h2>The final one</h2>
+    <p class="progress"><b id="pcount">0</b> of 4 ticked</p>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="box">✓</div><div class="txt">I can explain why "will AI take my job" is the wrong question — and what the right one is.</div></div>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="box">✓</div><div class="txt">I can name the four things that stay scarce: <strong>judgement, questions, accountability, humanity</strong>.</div></div>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="box">✓</div><div class="txt">I can explain why school matters <em>more</em> in an AI world — you can't direct what you never learned.</div></div>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="box">✓</div><div class="txt">I could teach the pilot principle to a Year 7 in one minute. (Try it. Seriously.)</div></div>
+
+    <button class="toggle-btn" onclick="toggleReveal('exemplar')">Show me a model answer ↓</button>
+    <div class="reveal" id="exemplar">
+      <div class="note" style="margin-top:6px">"AI makes drafts of everything cheap, so the value moves to what's around the drafts: knowing what good looks like, asking precise questions, being the accountable human, and being good <em>at</em> humans. All four are built the slow way — by learning deeply and doing the reps myself — which is why outsourcing my thinking now would be selling the only thing the future pays for. The tools will keep changing. The person directing them is the part I'm in charge of."</div>
+    </div>
+
+    <h3 style="margin-top:20px">Last lights of the guide — how do you feel about the AI future?</h3>
+    <div class="lights">
+      <div class="light r" onclick="setLight(this)"><span class="em">😟</span>Still nervous</div>
+      <div class="light y" onclick="setLight(this)"><span class="em">🧭</span>Cautious but equipped</div>
+      <div class="light g" onclick="setLight(this)"><span class="em">🚀</span>Honestly? Excited</div>
+    </div>
+    <div class="note" style="margin-top:16px">🎒 <strong>Not this week — this year:</strong> pick one thing worth being properly good at, and do the unglamorous reps. That's the whole secret, and no machine can do it for you. That's the point of the machine <em>not</em> being able to do it for you.</div>
+  </section>
+
+  <section class="next">
+    <span class="arrow">↓</span>
+    <h2>That's the whole guide 🎓</h2>
+    <p>Twelve modules: what AI is, where the lines are, how to spot fakes, how to stay the pilot — then studying, honesty, sharp questions and real relationships — then creating, building, publishing and the long game. You didn't just learn about AI. You learned to be the kind of person AI can't replace.</p>
+    <p style="margin-top:10px"><strong>You're the pilot. Keep it that way.</strong></p>
+    <div style="margin-top:22px">
+      <a href="index.html" data-done="C4" style="display:inline-block;background:#e8b04b;color:#3a2a06;font-weight:700;text-decoration:none;padding:13px 26px;border-radius:11px;font-size:1.02rem;box-shadow:0 4px 14px rgba(0,0,0,.18)">✓ Mark the guide complete →</a>
+      <div style="margin-top:13px"><a href="index.html" data-done="C4" style="color:rgba(255,255,255,.82);font-size:.9rem">Back to dashboard</a></div>
+    </div>
+  </section>
+
+</div>
+
+<div class="toast" id="toast">Nice ✓</div>
+<script>
+  var toastTimer;function showToast(msg){var el=document.getElementById('toast');el.textContent=msg||'Nice ✓';el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(function(){el.classList.remove('show')},1700);}
+  function toggleReveal(id){var el=document.getElementById(id);el.classList.toggle('show');var btn=event.currentTarget;if(el.classList.contains('show')){btn.innerHTML=btn.innerHTML.replace('↓','↑');}else{btn.innerHTML=btn.innerHTML.replace('↑','↓');}}
+  function toggleCheck(el){el.classList.toggle('done');document.getElementById('pcount').innerText=document.querySelectorAll('.check-item.done').length;}
+  function setLight(el){el.parentElement.querySelectorAll('.light').forEach(function(l){l.classList.remove('sel')});el.classList.add('sel');}
+
+  var answered=0, right=0;
+  function pick(btn){
+    var q=btn.closest('.q');
+    if(q.classList.contains('answered')) return;
+    q.classList.add('answered');
+    var ans=q.getAttribute('data-ans'), choice=btn.getAttribute('data-v');
+    q.querySelectorAll('.opts button').forEach(function(b){
+      if(b.getAttribute('data-v')===ans){ b.classList.add('right'); }
+      else if(b===btn){ b.classList.add('wrong'); }
+    });
+    answered++; if(choice===ans) right++;
+    document.getElementById('score').textContent=answered;
+    document.getElementById('scoreRight').textContent=right;
+    if(answered===4){ showToast(right===4?'4/4 — playing the long game 🌱':'Done — '+right+'/4. Bet on adaptability ↑'); }
+  }
+
+  // progress save links (script-block listener — never inline onclick on <a>, Netlify corrupts it)
+  (function(){document.querySelectorAll('a[data-done]').forEach(function(a){a.addEventListener('click',function(){try{var id=a.getAttribute('data-done');var d=JSON.parse(localStorage.getItem('saig_done')||'[]');if(d.indexOf(id)<0){d.push(id);localStorage.setItem('saig_done',JSON.stringify(d));}}catch(e){}});});})();
+</script>
+</body>
+</html>

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Creating · Create, don't copy — Student AI Guide</title>
+<style>
+  :root{
+    --paper:#f7f5ef;--card:#ffffff;--ink:#1f2421;--ink-soft:#4a534d;--line:#e3ded2;
+    --pw:#565b5e;--pw-deep:#3a3f42;--pw-tint:#eceef0;--clay:#b4532a;--amber:#e8b04b;
+    --safe:#1f7a4d;--safe-tint:#e8f3ec;
+    --shadow:0 1px 2px rgba(31,36,33,.05),0 6px 22px rgba(31,36,33,.07);
+  }
+  *{box-sizing:border-box}html{scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.62;font-size:17px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:760px;margin:0 auto;padding:0 22px 90px}
+  h1,h2,h3{font-family:Georgia,"Times New Roman",serif;line-height:1.22;letter-spacing:-.01em}
+  h2{font-size:1.5rem;margin:0 0 .5rem}h3{font-size:1.12rem;margin:0 0 .4rem}
+  p{margin:.55rem 0}a{color:var(--pw-deep)}
+  header{background:linear-gradient(155deg,#565b5e 0%,#34383b 100%);color:#f3efe4;padding:42px 22px 38px;border-bottom:4px solid var(--amber)}
+  .header-inner{max-width:760px;margin:0 auto}
+  .programme{font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;opacity:.82;margin:0 0 16px}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+  .badge{font-size:.74rem;letter-spacing:.04em;text-transform:uppercase;font-weight:600;padding:4px 11px;border-radius:999px;border:1px solid rgba(243,239,228,.35)}
+  .badge.path{background:var(--amber);color:#3a2a06;border-color:transparent}
+  header h1{font-size:2.05rem;margin:.1rem 0 .5rem;color:#fff}
+  .meta{display:flex;flex-wrap:wrap;gap:18px;font-size:.86rem;opacity:.9;margin-top:14px}
+  .meta span{display:flex;align-items:center;gap:6px}
+  section{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;margin:26px 0;box-shadow:var(--shadow)}
+  .kicker{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--pw);margin-bottom:10px}
+  .kicker .num{width:22px;height:22px;border-radius:50%;background:var(--pw);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-family:Georgia,serif;font-size:.8rem}
+  .lead{font-size:1.06rem}
+  .note{background:var(--pw-tint);border-radius:10px;padding:12px 15px;font-size:.92rem;margin:14px 0}
+  .note strong{color:var(--pw-deep)}
+  .toggle-btn{background:var(--pw);color:#fff;border:none;border-radius:9px;padding:10px 16px;font-size:.9rem;font-weight:600;cursor:pointer;margin:8px 0;transition:.15s}
+  .toggle-btn:hover{background:var(--pw-deep)}
+  .reveal{display:none}.reveal.show{display:block;animation:fade .3s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  .twocol{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+  .twocol .c{border-radius:12px;padding:15px 16px;font-size:.93rem}
+  .twocol .good{background:var(--safe-tint);border:1px solid #bfe0cb}
+  .twocol .bad{background:#fbeae6;border:1px solid #eac6bb}
+  .twocol .tag{font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;display:block;margin-bottom:5px}
+  .twocol .good .tag{color:var(--safe)}.twocol .bad .tag{color:var(--clay)}
+  @media(max-width:560px){.twocol{grid-template-columns:1fr}}
+  .safety{background:var(--safe-tint);border:1px solid #bfe0cb;border-left:5px solid var(--safe)}
+  .safety .kicker{color:var(--safe)}.safety .kicker .num{background:var(--safe)}
+  .shield{font-size:1.15rem}
+  .check-item{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border:1px solid var(--line);border-radius:11px;margin:8px 0;cursor:pointer;transition:.15s;background:#fbfaf6}
+  .check-item:hover{border-color:var(--pw)}
+  .check-item.done{background:var(--pw-tint);border-color:var(--pw)}
+  .check-item .box{flex:0 0 22px;width:22px;height:22px;border:2px solid var(--pw);border-radius:6px;display:flex;align-items:center;justify-content:center;margin-top:1px;color:#fff;font-weight:700;font-size:.9rem}
+  .check-item.done .box{background:var(--pw)}.check-item .txt{font-size:.95rem}
+  .progress{font-size:.9rem;color:var(--ink-soft);margin:6px 0 14px;font-weight:600}.progress b{color:var(--pw-deep)}
+  .lights{display:flex;gap:10px;margin:16px 0 4px}
+  .light{flex:1;text-align:center;border:1px solid var(--line);border-radius:11px;padding:12px 8px;cursor:pointer;font-size:.85rem;font-weight:600;transition:.15s;background:#fbfaf6}
+  .light .em{font-size:1.4rem;display:block;margin-bottom:3px}
+  .light.sel{border-width:2px;transform:translateY(-2px)}
+  .light.r.sel{border-color:#c0392b;background:#fbeae6}.light.y.sel{border-color:#d9a528;background:#fbf3df}.light.g.sel{border-color:var(--safe);background:var(--safe-tint)}
+  .next{background:linear-gradient(155deg,#565b5e,#34383b);color:#f3efe4;border:none;text-align:center}
+  .next h2{color:#fff}.next p{opacity:.92}.next .arrow{font-size:1.6rem;display:block;margin-bottom:6px;color:var(--amber)}
+  .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(120%);background:var(--ink);color:#fff;padding:11px 20px;border-radius:10px;font-size:.9rem;box-shadow:var(--shadow);transition:.3s;z-index:50}
+  .toast.show{transform:translateX(-50%) translateY(0)}
+  ul.clean{padding-left:1.15rem}ul.clean li{margin:.3rem 0}
+  /* sorter */
+  .q{border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0;background:#fbfaf6}
+  .q .qtxt{margin:.1rem 0 .7rem;font-size:.97rem}
+  .q .qtxt em{font-family:Georgia,serif}
+  .opts{display:flex;gap:9px}
+  .opts button{flex:1;border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 8px;font-size:.86rem;font-weight:600;cursor:pointer;font-family:inherit;transition:.15s;color:var(--ink)}
+  .opts button:hover{border-color:var(--pw)}
+  .q.answered .opts button{cursor:default;opacity:.55}
+  .q.answered .opts button.right{opacity:1;border-color:var(--safe);background:var(--safe-tint)}
+  .q.answered .opts button.wrong{opacity:1;border-color:#c0392b;background:#fbeae6}
+  .q .why{display:none;margin-top:11px;font-size:.9rem;border-top:1px dashed var(--line);padding-top:10px}
+  .q.answered .why{display:block;animation:fade .3s ease}
+  .scorebox{font-size:.92rem;font-weight:600;color:var(--ink-soft);margin-top:14px}
+  .scorebox b{color:var(--pw-deep)}
+</style>
+  <link rel="icon" href="logo.svg">
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:12px;margin:0 0 14px"><img src="logo.svg" alt="Marriotts School" width="42" height="42" style="background:#fff;border-radius:9px;padding:5px;box-sizing:border-box;flex:0 0 auto"><p class="programme" style="margin:0">Marriotts School &middot; Student AI Guide</p></div>
+    <div class="badges"><span class="badge path">Creating · C1</span><span class="badge">No AI tool needed</span></div>
+    <h1>Create, don't copy</h1>
+    <div class="meta"><span>⏱ About 12 minutes</span><span>🎯 Director, not vending machine</span><span>🎬 Six creators to judge</span></div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section>
+    <span class="kicker"><span class="num">1</span> Why this matters</span>
+    <p class="lead">AI can paint an image in ten seconds, write a song in thirty, and finish a story before you've found a pen. So here's the question every creative person your age has quietly asked: <strong>what's the point of me?</strong></p>
+    <p>This module answers it. The short version: AI generates, but it doesn't <em>care</em> — it has no taste, no intentions, and nothing to say. Those are yours. The difference between people who are swallowed by these tools and people who are amplified by them is one mindset switch, and it's the whole of this module.</p>
+  </section>
+
+  <section>
+    <span class="kicker"><span class="num">2</span> The idea</span>
+    <h2>Director or vending machine?</h2>
+    <p>There are two ways to use a creative AI, and they look similar from the outside:</p>
+    <ul class="clean">
+      <li><strong>The vending machine. 🥤</strong> Type "cool dragon wallpaper", take what drops out, slap your name on it. No idea of your own went in; no skill of yours came out. You didn't make anything — you <em>ordered</em> something. (E1 explains what you ordered: the average of everything the model has seen. Generic by definition.)</li>
+      <li><strong>The director. 🎬</strong> You arrive with an idea — a mood, a story, a sound in your head. The AI becomes a tireless assistant: you try versions, reject most, push it somewhere specific, combine its output with work that's genuinely yours, and the final thing matches <em>your</em> intention. The taste, the decisions, the point of it all — those stayed in your chair.</li>
+    </ul>
+    <div class="note"><strong>The test (you know it from E4):</strong> who did the creative thinking? A director can explain every choice in the finished piece — why this colour, why this line, why not the first ten versions. A vending-machine user can only explain what they typed. If there are no decisions to explain, there's no creation to claim.</div>
+    <h3 style="margin-top:18px">Whose name goes on it?</h3>
+    <ul class="clean">
+      <li><strong>Honesty rule:</strong> if AI made it or heavily shaped it, <strong>say so</strong> — "made with AI" costs you nothing; getting caught pretending costs you everything (and you will get caught — pure AI output has a recognisable flavour of generic).</li>
+      <li><strong>Schoolwork and competitions:</strong> art, music, DT and creative-writing coursework follow the same JCQ malpractice rules as essays (T2) — and most competitions ban or require disclosure of AI work. Entering the vending machine's output under your name is the creative version of the passenger from E4, with the same consequences.</li>
+      <li><strong>Other creators are real people:</strong> these models learned from millions of artists' and writers' work, mostly without their say — which is why many artists are angry, and why "make it in the style of [living artist]" then posting it as your sound or style is legal grey area and ethical red. Borrow from the dead and the willing; develop your own voice with the living.</li>
+    </ul>
+  </section>
+
+  <section>
+    <span class="kicker"><span class="num">3</span> See it in action</span>
+    <h2>Two posters for the school production</h2>
+    <p>Drama department needs a poster for <em>Blood Brothers</em>. Two volunteers, both using AI at home:</p>
+    <div class="twocol">
+      <div class="c bad">
+        <span class="tag">🥤 The vending machine</span>
+        Types "Blood Brothers poster dramatic". Takes the second result. It's… fine. It's also exactly what anyone on Earth would get from the same prompt: generic theatrical figures, meaningless shadows, text that needs fixing anyway.<br><br>
+        <strong>What it says:</strong> nothing. About the play, or them.
+      </div>
+      <div class="c good">
+        <span class="tag">🎬 The director</span>
+        Starts with her own idea: two identical paper dolls, one cut from a bank note, one from a bus ticket — the play's whole class divide in one image. Uses AI to explore moods and layouts, rejects fifteen versions, sketches the final concept herself, photographs real paper cut-outs, uses an AI tool only to clean up the background — and credits it.<br><br>
+        <strong>What it says:</strong> she understood the play. The idea was never in the machine. It was in her.
+      </div>
+    </div>
+    <p>Same tool, same evening, same play. One poster is a product of a prompt; the other is a product of a <em>person</em> — and everyone who sees them can tell.</p>
+  </section>
+
+  <section>
+    <span class="kicker"><span class="num">4</span> Your turn</span>
+    <h2>Director or vending machine?</h2>
+    <p>Six creators, all working at home. Call each one.</p>
+
+    <div class="q" data-ans="v">
+      <p class="qtxt"><em>Types "epic wolf digital art 4k", posts the first output with the caption "my new piece 🎨".</em></p>
+      <div class="opts"><button data-v="d" onclick="pick(this)">🎬 Director</button><button data-v="v" onclick="pick(this)">🥤 Vending machine</button></div>
+      <div class="why">🥤 <strong>Vending machine — twice over.</strong> No idea went in, and "my new piece" is a lie on top. Post it as "AI wolf I generated, isn't it cool" and it's harmless fun. The caption is the difference between sharing and stealing credit from a machine.</div>
+    </div>
+
+    <div class="q" data-ans="d">
+      <p class="qtxt"><em>Designs her own comic character, then uses AI to try ten colour palettes on her sketch before painting the final version herself.</em></p>
+      <div class="opts"><button data-v="d" onclick="pick(this)">🎬 Director</button><button data-v="v" onclick="pick(this)">🥤 Vending machine</button></div>
+      <div class="why">🎬 <strong>Director.</strong> The character, the sketch, the final paint — hers. The AI did what assistants do: fast experiments she judged. Every choice in the finished piece is one she can explain.</div>
+    </div>
+
+    <div class="q" data-ans="v">
+      <p class="qtxt"><em>Art homework due tomorrow: generates thirty images, picks the least obviously AI one, hands it in.</em></p>
+      <div class="opts"><button data-v="d" onclick="pick(this)">🎬 Director</button><button data-v="v" onclick="pick(this)">🥤 Vending machine</button></div>
+      <div class="why">🥤 <strong>Vending machine — and worse, it's submitted work.</strong> Picking from thirty random outputs isn't curation, it's a fruit machine. And handing it in crosses from lazy into dishonest (T2's red light) — in assessed art coursework, into malpractice.</div>
+    </div>
+
+    <div class="q" data-ans="d">
+      <p class="qtxt"><em>Writes his own song lyrics, asks AI "where does the rhythm stumble? don't rewrite anything — just point", then fixes the lines himself.</em></p>
+      <div class="opts"><button data-v="d" onclick="pick(this)">🎬 Director</button><button data-v="v" onclick="pick(this)">🥤 Vending machine</button></div>
+      <div class="why">🎬 <strong>Director.</strong> Notice the instruction: <em>don't rewrite — point.</em> That's a creator protecting their own voice while taking feedback. The lyrics that come out the other end are still 100% his, just better.</div>
+    </div>
+
+    <div class="q" data-ans="v">
+      <p class="qtxt"><em>"Make me a track that sounds exactly like [a current chart artist]" — uploads it to streaming as his own sound.</em></p>
+      <div class="opts"><button data-v="d" onclick="pick(this)">🎬 Director</button><button data-v="v" onclick="pick(this)">🥤 Vending machine</button></div>
+      <div class="why">🥤 <strong>Vending machine, plus an ethics problem.</strong> The "sound" he's claiming is a living artist's, laundered through a model. It's the least creative act on this page: someone else's voice, a machine's execution, his name. Building <em>your</em> sound is the entire job of being an artist — there's no shortcut to having something to say.</div>
+    </div>
+
+    <div class="q" data-ans="d">
+      <p class="qtxt"><em>Finishes writing her short story, then asks AI for ten title ideas — hates all of them, but one sparks a better idea of her own.</em></p>
+      <div class="opts"><button data-v="d" onclick="pick(this)">🎬 Director</button><button data-v="v" onclick="pick(this)">🥤 Vending machine</button></div>
+      <div class="why">🎬 <strong>Director — the everyday kind.</strong> The story is hers; the AI was a brainstorm partner whose ideas she rejected on taste. "It sparked a better idea of my own" is maybe the single healthiest sentence in all of AI-assisted creativity.</div>
+    </div>
+
+    <p class="scorebox"><b id="score">0</b> of 6 judged · <span id="scoreRight">0</span> with the director's eye</p>
+  </section>
+
+  <section class="safety">
+    <span class="kicker"><span class="num">5</span> <span class="shield">🛡️</span> Safety checkpoint</span>
+    <h2>Hard lines in creative AI</h2>
+    <ul class="clean">
+      <li><strong>Never generate images of real people.</strong> Not classmates, not teachers, not celebrities, not "just as a joke". You know the law from E3 — and even the legal kinds are someone's face used without their consent. Fictional characters and invented people: go wild.</li>
+      <li><strong>Label what's AI-made</strong> whenever you share it. Unlabelled AI passed off as real is how you become the fake that E3 taught you to catch.</li>
+      <li><strong>Assessed creative work follows T2's rules:</strong> if AI touched coursework, your teacher needs to know — before, not after.</li>
+      <li>And always: <strong>no AI at school · nothing personal in the box</strong> — your prompts don't need your name, school or photos of anyone real.</li>
+    </ul>
+  </section>
+
+  <section>
+    <span class="kicker"><span class="num">6</span> Self-check</span>
+    <h2>Have you got it?</h2>
+    <p class="progress"><b id="pcount">0</b> of 4 ticked</p>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="box">✓</div><div class="txt">I can explain the <strong>director vs vending machine</strong> difference — and the test (can I explain my choices?).</div></div>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="box">✓</div><div class="txt">I know why pure AI output is generic by definition (it's the average — E1).</div></div>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="box">✓</div><div class="txt">I know the honesty rule: label AI work, never enter it as my own in homework or competitions.</div></div>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="box">✓</div><div class="txt">I know the hard lines: no images of real people, and living artists' styles aren't mine to take.</div></div>
+
+    <button class="toggle-btn" onclick="toggleReveal('exemplar')">Show me a model answer ↓</button>
+    <div class="reveal" id="exemplar">
+      <div class="note" style="margin-top:6px">"A vending-machine user types a prompt and takes what drops out — no ideas in, no skill out, and the result is the model's average, not a creation. A director arrives with an intention, uses AI as a fast assistant, rejects most of what it offers, and can explain every choice in the final piece. Whatever I make, I label what's AI, keep it out of assessed work unless my teacher's agreed, and never generate real people. The taste and the point of the work — that's the part that's mine, and it's the part worth building."</div>
+    </div>
+
+    <h3 style="margin-top:20px">When you've used creative AI, which seat were you in?</h3>
+    <div class="lights">
+      <div class="light r" onclick="setLight(this)"><span class="em">🥤</span>Vending machine, honestly</div>
+      <div class="light y" onclick="setLight(this)"><span class="em">🔁</span>Bit of both</div>
+      <div class="light g" onclick="setLight(this)"><span class="em">🎬</span>Director's chair</div>
+    </div>
+    <div class="note" style="margin-top:16px">🎒 <strong>This week:</strong> make one small thing where you're clearly the director — your idea, your decisions, AI (if you use it at all, and you're old enough) strictly as the assistant. Notice how different it feels to finish it.</div>
+  </section>
+
+  <section class="next">
+    <span class="arrow">↓</span>
+    <h2>Where next</h2>
+    <p>Art and music are one kind of making. The other kind is the one almost nobody your age realises is now open to them: <em>building things that work</em>.</p>
+    <p style="margin-top:10px"><strong>Up next → Creating · C2: Build something real</strong></p>
+    <div style="margin-top:22px">
+      <a href="creating-build-something-module.html" data-done="C1" style="display:inline-block;background:#e8b04b;color:#3a2a06;font-weight:700;text-decoration:none;padding:13px 26px;border-radius:11px;font-size:1.02rem;box-shadow:0 4px 14px rgba(0,0,0,.18)">✓ Mark complete &amp; continue →</a>
+      <div style="margin-top:13px"><a href="index.html" data-done="C1" style="color:rgba(255,255,255,.82);font-size:.9rem">Save &amp; back to dashboard</a></div>
+    </div>
+  </section>
+
+</div>
+
+<div class="toast" id="toast">Nice ✓</div>
+<script>
+  var toastTimer;function showToast(msg){var el=document.getElementById('toast');el.textContent=msg||'Nice ✓';el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(function(){el.classList.remove('show')},1700);}
+  function toggleReveal(id){var el=document.getElementById(id);el.classList.toggle('show');var btn=event.currentTarget;if(el.classList.contains('show')){btn.innerHTML=btn.innerHTML.replace('↓','↑');}else{btn.innerHTML=btn.innerHTML.replace('↑','↓');}}
+  function toggleCheck(el){el.classList.toggle('done');document.getElementById('pcount').innerText=document.querySelectorAll('.check-item.done').length;}
+  function setLight(el){el.parentElement.querySelectorAll('.light').forEach(function(l){l.classList.remove('sel')});el.classList.add('sel');}
+
+  var answered=0, right=0;
+  function pick(btn){
+    var q=btn.closest('.q');
+    if(q.classList.contains('answered')) return;
+    q.classList.add('answered');
+    var ans=q.getAttribute('data-ans'), choice=btn.getAttribute('data-v');
+    q.querySelectorAll('.opts button').forEach(function(b){
+      if(b.getAttribute('data-v')===ans){ b.classList.add('right'); }
+      else if(b===btn){ b.classList.add('wrong'); }
+    });
+    answered++; if(choice===ans) right++;
+    document.getElementById('score').textContent=answered;
+    document.getElementById('scoreRight').textContent=right;
+    if(answered===6){ showToast(right===6?'6/6 — a director’s eye 🎬':'Done — '+right+'/6. The whys are the lesson ↑'); }
+  }
+
+  // progress save links (script-block listener — never inline onclick on <a>, Netlify corrupts it)
+  (function(){document.querySelectorAll('a[data-done]').forEach(function(a){a.addEventListener('click',function(){try{var id=a.getAttribute('data-done');var d=JSON.parse(localStorage.getItem('saig_done')||'[]');if(d.indexOf(id)<0){d.push(id);localStorage.setItem('saig_done',JSON.stringify(d));}}catch(e){}});});})();
+</script>
+</body>
+</html>

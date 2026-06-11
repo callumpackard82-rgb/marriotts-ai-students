@@ -26,13 +26,13 @@ self-check → where next). Pathway triad reuses the Marriotts staff palette:
 **Essentials = coral-red `#d0452e`**, **Thinking = slate-teal `#3f6e72`**, **Creating = charcoal
 `#565b5e`**.
 
-Module plan (built ✅ / planned ⏳):
-- **Essentials**: E1 what-is-ai ✅ → E2 rules-and-risks ✅ → E3 spot-the-fake ✅ → E4 copilot-not-pilot ✅
-- **Thinking**: T1 study-smarter ✅ → T2 homework-honesty ✅ → T3 question-everything ✅ → T4 ai-and-you (wellbeing) ✅
-- **Creating**: C1 create-not-copy ⏳ → C2 build-something ⏳ → C3 share-with-care ⏳ → C4 ai-and-your-future ⏳
+Module plan (all 12 built ✅):
+- **Essentials**: E1 what-is-ai → E2 rules-and-risks → E3 spot-the-fake → E4 copilot-not-pilot
+- **Thinking**: T1 study-smarter → T2 homework-honesty → T3 question-everything → T4 ai-and-you (wellbeing)
+- **Creating**: C1 create-not-copy → C2 build-something → C3 share-with-care → C4 ai-and-your-future
 
-The hub lists all 12; unbuilt ones render as "coming soon" (no links). `TOTAL` in `index.html` counts
-**available** modules only — update it when adding modules.
+`TOTAL` in `index.html` is computed from modules without a `soon:true` flag — if a future module is
+added as "coming soon", give it `soon:true` and no `f:` filename and the hub renders it unlinked.
 
 **Branding.** Identical to the staff site: coral `#d0452e` + grey `#73797c` from `logo.svg` (repo
 root); logo in every header in a white rounded tile beside the eyebrow **"Marriotts School · Student
