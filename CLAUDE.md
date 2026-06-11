@@ -73,7 +73,7 @@ live in ~1 min.
 |---|---|
 | GitHub repo | https://github.com/callumpackard82-rgb/marriotts-ai-students |
 | Deploy branch | `main` |
-| Live URL | (Netlify site — see repo's Netlify dashboard) |
+| Live URL | https://marriotts-ai-students.netlify.app |
 | Build command | *(none — static site)* |
 | Publish directory | repository root |
 
