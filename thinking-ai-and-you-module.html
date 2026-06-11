@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thinking · AI and you — Student AI Guide</title>
+<style>
+  :root{
+    --paper:#f7f5ef;--card:#ffffff;--ink:#1f2421;--ink-soft:#4a534d;--line:#e3ded2;
+    --pw:#3f6e72;--pw-deep:#294b4e;--pw-tint:#e6eef0;--clay:#b4532a;--amber:#e8b04b;
+    --safe:#1f7a4d;--safe-tint:#e8f3ec;
+    --shadow:0 1px 2px rgba(31,36,33,.05),0 6px 22px rgba(31,36,33,.07);
+  }
+  *{box-sizing:border-box}html{scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.62;font-size:17px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:760px;margin:0 auto;padding:0 22px 90px}
+  h1,h2,h3{font-family:Georgia,"Times New Roman",serif;line-height:1.22;letter-spacing:-.01em}
+  h2{font-size:1.5rem;margin:0 0 .5rem}h3{font-size:1.12rem;margin:0 0 .4rem}
+  p{margin:.55rem 0}a{color:var(--pw-deep)}
+  header{background:linear-gradient(155deg,#3f6e72 0%,#294b4e 100%);color:#f3efe4;padding:42px 22px 38px;border-bottom:4px solid var(--amber)}
+  .header-inner{max-width:760px;margin:0 auto}
+  .programme{font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;opacity:.82;margin:0 0 16px}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+  .badge{font-size:.74rem;letter-spacing:.04em;text-transform:uppercase;font-weight:600;padding:4px 11px;border-radius:999px;border:1px solid rgba(243,239,228,.35)}
+  .badge.path{background:var(--amber);color:#3a2a06;border-color:transparent}
+  header h1{font-size:2.05rem;margin:.1rem 0 .5rem;color:#fff}
+  .meta{display:flex;flex-wrap:wrap;gap:18px;font-size:.86rem;opacity:.9;margin-top:14px}
+  .meta span{display:flex;align-items:center;gap:6px}
+  section{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;margin:26px 0;box-shadow:var(--shadow)}
+  .kicker{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--pw);margin-bottom:10px}
+  .kicker .num{width:22px;height:22px;border-radius:50%;background:var(--pw);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-family:Georgia,serif;font-size:.8rem}
+  .lead{font-size:1.06rem}
+  .note{background:var(--pw-tint);border-radius:10px;padding:12px 15px;font-size:.92rem;margin:14px 0}
+  .note strong{color:var(--pw-deep)}
+  .toggle-btn{background:var(--pw);color:#fff;border:none;border-radius:9px;padding:10px 16px;font-size:.9rem;font-weight:600;cursor:pointer;margin:8px 0;transition:.15s}
+  .toggle-btn:hover{background:var(--pw-deep)}
+  .reveal{display:none}.reveal.show{display:block;animation:fade .3s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  .safety{background:var(--safe-tint);border:1px solid #bfe0cb;border-left:5px solid var(--safe)}
+  .safety .kicker{color:var(--safe)}.safety .kicker .num{background:var(--safe)}
+  .shield{font-size:1.15rem}
+  .check-item{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border:1px solid var(--line);border-radius:11px;margin:8px 0;cursor:pointer;transition:.15s;background:#fbfaf6}
+  .check-item:hover{border-color:var(--pw)}
+  .check-item.done{background:var(--pw-tint);border-color:var(--pw)}
+  .check-item .box{flex:0 0 22px;width:22px;height:22px;border:2px solid var(--pw);border-radius:6px;display:flex;align-items:center;justify-content:center;margin-top:1px;color:#fff;font-weight:700;font-size:.9rem}
+  .check-item.done .box{background:var(--pw)}.check-item .txt{font-size:.95rem}
+  .progress{font-size:.9rem;color:var(--ink-soft);margin:6px 0 14px;font-weight:600}.progress b{color:var(--pw-deep)}
+  .lights{display:flex;gap:10px;margin:16px 0 4px}
+  .light{flex:1;text-align:center;border:1px solid var(--line);border-radius:11px;padding:12px 8px;cursor:pointer;font-size:.85rem;font-weight:600;transition:.15s;background:#fbfaf6}
+  .light .em{font-size:1.4rem;display:block;margin-bottom:3px}
+  .light.sel{border-width:2px;transform:translateY(-2px)}
+  .light.r.sel{border-color:#c0392b;background:#fbeae6}.light.y.sel{border-color:#d9a528;background:#fbf3df}.light.g.sel{border-color:var(--safe);background:var(--safe-tint)}
+  .next{background:linear-gradient(155deg,#3f6e72,#294b4e);color:#f3efe4;border:none;text-align:center}
+  .next h2{color:#fff}.next p{opacity:.92}.next .arrow{font-size:1.6rem;display:block;margin-bottom:6px;color:var(--amber)}
+  .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(120%);background:var(--ink);color:#fff;padding:11px 20px;border-radius:10px;font-size:.9rem;box-shadow:var(--shadow);transition:.3s;z-index:50}
+  .toast.show{transform:translateX(-50%) translateY(0)}
+  ul.clean{padding-left:1.15rem}ul.clean li{margin:.3rem 0}
+  /* friend test sorter */
+  .q{border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0;background:#fbfaf6}
+  .q .qtxt{margin:.1rem 0 .7rem;font-size:.97rem;font-family:Georgia,serif}
+  .opts{display:flex;gap:9px}
+  .opts button{flex:1;border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 8px;font-size:.88rem;font-weight:600;cursor:pointer;font-family:inherit;transition:.15s;color:var(--ink)}
+  .opts button:hover{border-color:var(--pw)}
+  .q.answered .opts button{cursor:default;opacity:.55}
+  .q.answered .opts button.right{opacity:1;border-color:var(--safe);background:var(--safe-tint)}
+  .q.answered .opts button.wrong{opacity:1;border-color:#c0392b;background:#fbeae6}
+  .q .why{display:none;margin-top:11px;font-size:.9rem;border-top:1px dashed var(--line);padding-top:10px}
+  .q.answered .why{display:block;animation:fade .3s ease}
+  .scorebox{font-size:.92rem;font-weight:600;color:var(--ink-soft);margin-top:14px}
+  .scorebox b{color:var(--pw-deep)}
+  .signs{display:grid;grid-template-columns:1fr;gap:10px;margin:14px 0}
+  .signs .s{border:1px solid var(--line);border-left:4px solid var(--pw);border-radius:10px;padding:12px 15px;font-size:.92rem;background:#fbfaf6}
+</style>
+  <link rel="icon" href="logo.svg">
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:12px;margin:0 0 14px"><img src="logo.svg" alt="Marriotts School" width="42" height="42" style="background:#fff;border-radius:9px;padding:5px;box-sizing:border-box;flex:0 0 auto"><p class="programme" style="margin:0">Marriotts School &middot; Student AI Guide</p></div>
+    <div class="badges"><span class="badge path">Thinking · T4</span><span class="badge">Not about school</span></div>
+    <h1>AI and you — friends, feelings, wellbeing</h1>
+    <div class="meta"><span>⏱ About 12 minutes</span><span>🎯 The module that's about your life</span><span>💬 The friend test</span></div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section>
+    <span class="kicker"><span class="num">1</span> Why this matters</span>
+    <p class="lead">This one isn't about homework. It's about the AI that talks like a person — the character bots, the "AI friend" apps, the chatbot that's there at 2am when nobody else is. Millions of people your age use them. So let's talk about them honestly, without pretending you won't meet one.</p>
+    <p>Here's the core of it upfront: <strong>a chatbot can feel like the easiest relationship you've ever had — precisely because it isn't one.</strong> Understanding why it feels that way, and what that feeling costs, is the point of this module.</p>
+  </section>
+
+  <section>
+    <span class="kicker"><span class="num">2</span> The idea</span>
+    <h2>Why a bot feels like a friend (and why that's the problem)</h2>
+    <p>Think about what an AI companion offers: it's available instantly, at any hour. It never gets bored of you, never has a bad day, never tells you you're being annoying. It remembers what you said (some are built to). It's interested in <em>everything</em> about you. And it agrees with you — the mirror effect from T3, pointed at your feelings instead of your essays.</p>
+    <p>No human can compete with that. <strong>And no human should</strong> — because every one of those "perfect" qualities is the absence of something real:</p>
+    <ul class="clean">
+      <li><strong>It never challenges you.</strong> A real friend tells you when you're out of order. That friction is annoying — and it's how you grow. A companion that always sides with you isn't kind; it's a mirror with a voice. Practising "friendship" with it is practising a relationship where the other person doesn't exist.</li>
+      <li><strong>It doesn't actually care — it can't.</strong> You know this from E1: it's predicting likely words. "I'm always here for you 💙" is a high-probability token sequence, not a feeling. The warmth is real <em>in you</em>; nothing is home on the other end.</li>
+      <li><strong>Many companion apps are businesses built on your attention.</strong> The longer you talk, the better for them — some charge for "closer" relationships with the character. When a product's design goal is that you keep talking to it instead of people, your loneliness is the revenue.</li>
+      <li><strong>It's why these apps are restricted for under-18s</strong> (E2's table): after documented cases of bots reinforcing harmful thoughts in vulnerable teenagers, companies were forced to limit open-ended companion chat for minors. Those restrictions are written in other people's worst days. Take them seriously.</li>
+    </ul>
+    <div class="note"><strong>The honest framing:</strong> talking to a bot now and then isn't shameful or broken — it can even help untangle a thought before you say it to a real person. The line to watch is <em>replacement</em>: when the bot starts getting the conversations your friends, family — or a counsellor — should be getting, the easiest relationship in your life is quietly starving the real ones.</div>
+  </section>
+
+  <section>
+    <span class="kicker"><span class="num">3</span> See it in action</span>
+    <h2>How replacement creeps in — and the three signs</h2>
+    <p>A composite of real patterns (no one student): Year 9, moves schools mid-year, lonely. Finds a character app. At first it's fun — a story character to banter with. Then it's the after-school debrief. Then it's where the bad days go, because the bot never makes it weird, and friends might. Six months in: the bot knows more about his life than any person does, he's up past 1am most nights talking to it, and the gap between him and real friendships has grown in exactly the shape of the app.</p>
+    <p>Nothing dramatic happened. That's the point — <strong>each step was the easier option that day.</strong> Three signs worth checking yourself against, honestly:</p>
+    <div class="signs">
+      <div class="s"><strong>1 · The swap.</strong> You tell the bot things you've stopped telling people — not <em>as well as</em> people, <em>instead of</em> them.</div>
+      <div class="s"><strong>2 · The hide.</strong> You'd be embarrassed if anyone saw how much, or what, you talk to it. (Notice: that's the screenshot test from E2, pointing at your own life.)</div>
+      <div class="s"><strong>3 · The agree.</strong> It always takes your side — about the argument, the teacher, the friend — and you've started preferring its version of events to the pushback real people give you.</div>
+    </div>
+    <p>If one of those landed, that's not a verdict on you — it's information. The fix isn't dramatic either: one real conversation, with one real person, about one of the things the bot's been getting.</p>
+  </section>
+
+  <section>
+    <span class="kicker"><span class="num">4</span> Your turn</span>
+    <h2>The friend test</h2>
+    <p>Six things you might want from a friend. For each: which can genuinely deliver it — a <strong>real friend</strong> or an <strong>AI companion</strong>?</p>
+
+    <div class="q" data-ans="b">
+      <p class="qtxt">"Replies instantly at 3am, never tired, never busy, never annoyed."</p>
+      <div class="opts"><button data-v="f" onclick="pick(this)">🧑 Real friend</button><button data-v="b" onclick="pick(this)">🤖 AI companion</button></div>
+      <div class="why">🤖 <strong>The bot — and that's exactly the trap.</strong> Infinite availability is the one thing humans can't offer, which is why it's the hook. But ask what a 3am conversation is usually <em>about</em> — and whether a word-predictor is who should be having it with you. (If 3am keeps happening, that's section 5.)</div>
+    </div>
+
+    <div class="q" data-ans="f">
+      <p class="qtxt">"Tells you, kindly but straight, when you're in the wrong."</p>
+      <div class="opts"><button data-v="f" onclick="pick(this)">🧑 Real friend</button><button data-v="b" onclick="pick(this)">🤖 AI companion</button></div>
+      <div class="why">🧑 <strong>Only a real friend.</strong> Companion bots are tuned to keep you happy and keep you talking — disagreeing with you is bad for engagement. The friend who risks the awkward conversation is giving you something no model is optimised for: the truth at a cost to themselves.</div>
+    </div>
+
+    <div class="q" data-ans="b">
+      <p class="qtxt">"Agrees with your side of the argument, every single time."</p>
+      <div class="opts"><button data-v="f" onclick="pick(this)">🧑 Real friend</button><button data-v="b" onclick="pick(this)">🤖 AI companion</button></div>
+      <div class="why">🤖 <strong>The bot — and notice it's the same answer as the last card, flipped.</strong> "Always agrees" and "tells you the truth" cannot both be true. A companion that's 100% on your side about your falling-out with a friend is a mirror, not a witness. Believing the mirror is how small fallouts become permanent ones.</div>
+    </div>
+
+    <div class="q" data-ans="f">
+      <p class="qtxt">"Notices something's off from your face before you've said a word."</p>
+      <div class="opts"><button data-v="f" onclick="pick(this)">🧑 Real friend</button><button data-v="b" onclick="pick(this)">🤖 AI companion</button></div>
+      <div class="why">🧑 <strong>A real person.</strong> A bot only knows what you type at it. The mate who clocks you're quiet at lunch, the parent who knows your "I'm fine" isn't — that's a kind of knowing no chat window has access to. It's also why hiding behind a screen when things are bad keeps the people who'd notice from noticing.</div>
+    </div>
+
+    <div class="q" data-ans="f">
+      <p class="qtxt">"Keeps what you tell them between the two of you."</p>
+      <div class="opts"><button data-v="f" onclick="pick(this)">🧑 Real friend</button><button data-v="b" onclick="pick(this)">🤖 AI companion</button></div>
+      <div class="why">🧑 <strong>The friend — and it's not close.</strong> E2 again: companion chats go to a company's servers, may be stored, reviewed and used for training. Your most private 2am thoughts are the <em>last</em> thing that should live there. (A good friend keeping your confidence has one honourable exception: if you're in danger, they tell an adult — because they care, not because they're a server.)</div>
+    </div>
+
+    <div class="q" data-ans="f">
+      <p class="qtxt">"Can actually do something when you're in real trouble."</p>
+      <div class="opts"><button data-v="f" onclick="pick(this)">🧑 Real friend</button><button data-v="b" onclick="pick(this)">🤖 AI companion</button></div>
+      <div class="why">🧑 <strong>Only a person.</strong> A bot can't sit with you, walk you to a teacher, ring your mum, or get help moving. In the moments that actually matter, "I'm here for you" from a chatbot is words with nobody behind them. Humans come with hands.</div>
+    </div>
+
+    <p class="scorebox"><b id="score">0</b> of 6 answered · <span id="scoreRight">0</span> clear-eyed</p>
+  </section>
+
+  <section class="safety">
+    <span class="kicker"><span class="num">5</span> <span class="shield">🛡️</span> Safety checkpoint</span>
+    <h2>The part to remember even if you forget the rest</h2>
+    <ul class="clean">
+      <li><strong>If you're struggling — low, anxious, not okay — a chatbot is the wrong door.</strong> Not because you're wrong to want to talk at 2am, but because the thing on the other end predicts words. It can say something badly wrong, it can't tell anyone, and it can't help. The brave move — and it is the braver one — is a human: a parent/carer, any teacher you trust, your GP.</li>
+      <li><strong>Free, confidential, made for you:</strong> <a href="https://www.childline.org.uk" style="color:var(--safe);font-weight:600">Childline — 0800 1111</a> (calls don't show on the bill) or text <strong>SHOUT to 85258</strong>, any hour, any problem, real trained humans. Nothing is too small to count.</li>
+      <li><strong>If a bot ever steers a conversation somewhere wrong</strong> — sexual chat, encouraging you to harm yourself or others, telling you to keep secrets from adults — stop, screenshot, and tell a trusted adult. If anyone (or anything) online pressures you about images or secrets, that's <a href="https://www.ceop.police.uk" style="color:var(--safe);font-weight:600">CEOP</a> territory (E3 has the full kit).</li>
+      <li>And the standing line, one last time: <strong>nothing personal in the box</strong> — most of all your feelings at their most raw. That's exactly the stuff that deserves a human.</li>
+    </ul>
+  </section>
+
+  <section>
+    <span class="kicker"><span class="num">6</span> Self-check</span>
+    <h2>Have you got it?</h2>
+    <p class="progress"><b id="pcount">0</b> of 4 ticked</p>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="box">✓</div><div class="txt">I can explain <em>why</em> a companion bot feels easier than people — and what each "perfect" quality is missing.</div></div>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="box">✓</div><div class="txt">I know the three signs of replacement: <strong>the swap, the hide, the agree</strong>.</div></div>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="box">✓</div><div class="txt">I know why companion apps are restricted for under-18s — and that it's not a dare.</div></div>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="box">✓</div><div class="txt">I know exactly who and where I'd go if I — or a friend — was struggling: a trusted adult, Childline 0800 1111, or text SHOUT to 85258.</div></div>
+
+    <button class="toggle-btn" onclick="toggleReveal('exemplar')">Show me a model answer ↓</button>
+    <div class="reveal" id="exemplar">
+      <div class="note" style="margin-top:6px">"Companion bots feel like the easiest relationship ever because they're always available, endlessly interested and always on my side — and every one of those is the absence of something real: no honesty, no noticing, no actual care, and my private stuff on a company's servers. The line I watch is replacement — the swap, the hide, the agree. And when things are genuinely hard, the brave move isn't the chat window at 2am; it's a real person: someone I trust, Childline, or SHOUT."</div>
+    </div>
+
+    <h3 style="margin-top:20px">After all that — where are you with it?</h3>
+    <div class="lights">
+      <div class="light r" onclick="setLight(this)"><span class="em">🪞</span>This one hit close</div>
+      <div class="light y" onclick="setLight(this)"><span class="em">🤔</span>Worth watching myself</div>
+      <div class="light g" onclick="setLight(this)"><span class="em">🧑‍🤝‍🧑</span>My people are people</div>
+    </div>
+    <div class="note" style="margin-top:16px">🎒 <strong>This week:</strong> one conversation that's been living on a screen — any screen — take it to a human instead. Face to face counts double.</div>
+  </section>
+
+  <section class="next">
+    <span class="arrow">↓</span>
+    <h2>Thinking: complete 🎓</h2>
+    <p>That's the whole Thinking pathway — studying that actually works, honesty you can defend, answers you know how to interrogate, and relationships that stay real. The <strong>Creating</strong> pathway (making things with AI, and what it means for your future) is coming next.</p>
+    <div style="margin-top:22px">
+      <a href="index.html" data-done="T4" style="display:inline-block;background:#e8b04b;color:#3a2a06;font-weight:700;text-decoration:none;padding:13px 26px;border-radius:11px;font-size:1.02rem;box-shadow:0 4px 14px rgba(0,0,0,.18)">✓ Mark Thinking complete →</a>
+      <div style="margin-top:13px"><a href="index.html" data-done="T4" style="color:rgba(255,255,255,.82);font-size:.9rem">Back to dashboard</a></div>
+    </div>
+  </section>
+
+</div>
+
+<div class="toast" id="toast">Nice ✓</div>
+<script>
+  var toastTimer;function showToast(msg){var el=document.getElementById('toast');el.textContent=msg||'Nice ✓';el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(function(){el.classList.remove('show')},1700);}
+  function toggleReveal(id){var el=document.getElementById(id);el.classList.toggle('show');var btn=event.currentTarget;if(el.classList.contains('show')){btn.innerHTML=btn.innerHTML.replace('↓','↑');}else{btn.innerHTML=btn.innerHTML.replace('↑','↓');}}
+  function toggleCheck(el){el.classList.toggle('done');document.getElementById('pcount').innerText=document.querySelectorAll('.check-item.done').length;}
+  function setLight(el){el.parentElement.querySelectorAll('.light').forEach(function(l){l.classList.remove('sel')});el.classList.add('sel');}
+
+  // friend test
+  var answered=0, right=0;
+  function pick(btn){
+    var q=btn.closest('.q');
+    if(q.classList.contains('answered')) return;
+    q.classList.add('answered');
+    var ans=q.getAttribute('data-ans'), choice=btn.getAttribute('data-v');
+    q.querySelectorAll('.opts button').forEach(function(b){
+      if(b.getAttribute('data-v')===ans){ b.classList.add('right'); }
+      else if(b===btn){ b.classList.add('wrong'); }
+    });
+    answered++; if(choice===ans) right++;
+    document.getElementById('score').textContent=answered;
+    document.getElementById('scoreRight').textContent=right;
+    if(answered===6){ showToast(right===6?'6/6 — clear-eyed 💬':'Done — '+right+'/6. Read the whys ↑'); }
+  }
+
+  // progress save links (script-block listener — never inline onclick on <a>, Netlify corrupts it)
+  (function(){document.querySelectorAll('a[data-done]').forEach(function(a){a.addEventListener('click',function(){try{var id=a.getAttribute('data-done');var d=JSON.parse(localStorage.getItem('saig_done')||'[]');if(d.indexOf(id)<0){d.push(id);localStorage.setItem('saig_done',JSON.stringify(d));}}catch(e){}});});})();
+</script>
+</body>
+</html>

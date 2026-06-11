@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thinking · Study smarter — Student AI Guide</title>
+<style>
+  :root{
+    --paper:#f7f5ef;--card:#ffffff;--ink:#1f2421;--ink-soft:#4a534d;--line:#e3ded2;
+    --pw:#3f6e72;--pw-deep:#294b4e;--pw-tint:#e6eef0;--clay:#b4532a;--amber:#e8b04b;
+    --safe:#1f7a4d;--safe-tint:#e8f3ec;
+    --shadow:0 1px 2px rgba(31,36,33,.05),0 6px 22px rgba(31,36,33,.07);
+  }
+  *{box-sizing:border-box}html{scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.62;font-size:17px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:760px;margin:0 auto;padding:0 22px 90px}
+  h1,h2,h3{font-family:Georgia,"Times New Roman",serif;line-height:1.22;letter-spacing:-.01em}
+  h2{font-size:1.5rem;margin:0 0 .5rem}h3{font-size:1.12rem;margin:0 0 .4rem}
+  p{margin:.55rem 0}a{color:var(--pw-deep)}
+  header{background:linear-gradient(155deg,#3f6e72 0%,#294b4e 100%);color:#f3efe4;padding:42px 22px 38px;border-bottom:4px solid var(--amber)}
+  .header-inner{max-width:760px;margin:0 auto}
+  .programme{font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;opacity:.82;margin:0 0 16px}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+  .badge{font-size:.74rem;letter-spacing:.04em;text-transform:uppercase;font-weight:600;padding:4px 11px;border-radius:999px;border:1px solid rgba(243,239,228,.35)}
+  .badge.path{background:var(--amber);color:#3a2a06;border-color:transparent}
+  header h1{font-size:2.05rem;margin:.1rem 0 .5rem;color:#fff}
+  .meta{display:flex;flex-wrap:wrap;gap:18px;font-size:.86rem;opacity:.9;margin-top:14px}
+  .meta span{display:flex;align-items:center;gap:6px}
+  section{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;margin:26px 0;box-shadow:var(--shadow)}
+  .kicker{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--pw);margin-bottom:10px}
+  .kicker .num{width:22px;height:22px;border-radius:50%;background:var(--pw);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-family:Georgia,serif;font-size:.8rem}
+  .lead{font-size:1.06rem}
+  .note{background:var(--pw-tint);border-radius:10px;padding:12px 15px;font-size:.92rem;margin:14px 0}
+  .note strong{color:var(--pw-deep)}
+  .toggle-btn{background:var(--pw);color:#fff;border:none;border-radius:9px;padding:10px 16px;font-size:.9rem;font-weight:600;cursor:pointer;margin:8px 0;transition:.15s}
+  .toggle-btn:hover{background:var(--pw-deep)}
+  .reveal{display:none}.reveal.show{display:block;animation:fade .3s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  .twocol{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+  .twocol .c{border-radius:12px;padding:15px 16px;font-size:.93rem}
+  .twocol .good{background:var(--safe-tint);border:1px solid #bfe0cb}
+  .twocol .bad{background:#fbeae6;border:1px solid #eac6bb}
+  .twocol .tag{font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;display:block;margin-bottom:5px}
+  .twocol .good .tag{color:var(--safe)}.twocol .bad .tag{color:var(--clay)}
+  @media(max-width:560px){.twocol{grid-template-columns:1fr}}
+  .safety{background:var(--safe-tint);border:1px solid #bfe0cb;border-left:5px solid var(--safe)}
+  .safety .kicker{color:var(--safe)}.safety .kicker .num{background:var(--safe)}
+  .shield{font-size:1.15rem}
+  .check-item{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border:1px solid var(--line);border-radius:11px;margin:8px 0;cursor:pointer;transition:.15s;background:#fbfaf6}
+  .check-item:hover{border-color:var(--pw)}
+  .check-item.done{background:var(--pw-tint);border-color:var(--pw)}
+  .check-item .box{flex:0 0 22px;width:22px;height:22px;border:2px solid var(--pw);border-radius:6px;display:flex;align-items:center;justify-content:center;margin-top:1px;color:#fff;font-weight:700;font-size:.9rem}
+  .check-item.done .box{background:var(--pw)}.check-item .txt{font-size:.95rem}
+  .progress{font-size:.9rem;color:var(--ink-soft);margin:6px 0 14px;font-weight:600}.progress b{color:var(--pw-deep)}
+  .lights{display:flex;gap:10px;margin:16px 0 4px}
+  .light{flex:1;text-align:center;border:1px solid var(--line);border-radius:11px;padding:12px 8px;cursor:pointer;font-size:.85rem;font-weight:600;transition:.15s;background:#fbfaf6}
+  .light .em{font-size:1.4rem;display:block;margin-bottom:3px}
+  .light.sel{border-width:2px;transform:translateY(-2px)}
+  .light.r.sel{border-color:#c0392b;background:#fbeae6}.light.y.sel{border-color:#d9a528;background:#fbf3df}.light.g.sel{border-color:var(--safe);background:var(--safe-tint)}
+  .next{background:linear-gradient(155deg,#3f6e72,#294b4e);color:#f3efe4;border:none;text-align:center}
+  .next h2{color:#fff}.next p{opacity:.92}.next .arrow{font-size:1.6rem;display:block;margin-bottom:6px;color:var(--amber)}
+  .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(120%);background:var(--ink);color:#fff;padding:11px 20px;border-radius:10px;font-size:.9rem;box-shadow:var(--shadow);transition:.3s;z-index:50}
+  .toast.show{transform:translateX(-50%) translateY(0)}
+  ul.clean{padding-left:1.15rem}ul.clean li{margin:.3rem 0}
+  /* A/B chooser */
+  .q{border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0;background:#fbfaf6}
+  .q .qhd{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:9px}
+  .opts{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+  @media(max-width:560px){.opts{grid-template-columns:1fr}}
+  .opts button{border:1px solid var(--line);background:#fff;border-radius:10px;padding:12px 12px;font-size:.9rem;font-weight:600;cursor:pointer;font-family:inherit;transition:.15s;color:var(--ink);text-align:left;line-height:1.45}
+  .opts button:hover{border-color:var(--pw)}
+  .q.answered .opts button{cursor:default;opacity:.55}
+  .q.answered .opts button.right{opacity:1;border-color:var(--safe);background:var(--safe-tint)}
+  .q.answered .opts button.wrong{opacity:1;border-color:#c0392b;background:#fbeae6}
+  .q .why{display:none;margin-top:11px;font-size:.9rem;border-top:1px dashed var(--line);padding-top:10px}
+  .q.answered .why{display:block;animation:fade .3s ease}
+  .scorebox{font-size:.92rem;font-weight:600;color:var(--ink-soft);margin-top:14px}
+  .scorebox b{color:var(--pw-deep)}
+</style>
+  <link rel="icon" href="logo.svg">
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:12px;margin:0 0 14px"><img src="logo.svg" alt="Marriotts School" width="42" height="42" style="background:#fff;border-radius:9px;padding:5px;box-sizing:border-box;flex:0 0 auto"><p class="programme" style="margin:0">Marriotts School &middot; Student AI Guide</p></div>
+    <div class="badges"><span class="badge path">Thinking · T1</span><span class="badge">No AI tool needed</span></div>
+    <h1>Study smarter (without cheating yourself)</h1>
+    <div class="meta"><span>⏱ About 12 minutes</span><span>🎯 What actually builds memory</span><span>🧪 Five revision duels</span></div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section>
+    <span class="kicker"><span class="num">1</span> Why this matters</span>
+    <p class="lead">Here's an uncomfortable fact about revision: <strong>the methods that feel best work worst.</strong> Re-reading notes feels productive. Highlighting feels organised. Watching the video again feels like learning. Mostly, they're not.</p>
+    <p>Learning science has known for decades what actually builds memory — and it's the same answer whether your study partner is a friend, a flashcard or (at home, if you're old enough) an AI. This module is about that answer, because AI can be the best revision tool you've ever had <em>or</em> the most comfortable way ever invented to avoid learning. Same tool. Your choice.</p>
+  </section>
+
+  <section>
+    <span class="kicker"><span class="num">2</span> The idea</span>
+    <h2>Memory is built by pulling things out, not putting things in</h2>
+    <p>The single biggest finding in the science of learning is called <strong>retrieval practice</strong>: you remember things by <em>struggling to recall them</em>, not by looking at them again. Every time you drag a fact out of your brain — without peeking — the path to it gets stronger. Every time you just re-read it, almost nothing happens, except it gets more <em>familiar</em>. And familiar is the trap:</p>
+    <div class="note"><strong>The fluency trap:</strong> "I recognise this page" feels exactly like "I know this" — until the exam, where there's no page to recognise. If your revision never feels effortful, it isn't working. The strain of <em>almost</em> remembering is literally the feeling of learning. (Recognise this from E4? Same principle: the struggle is the workout.)</div>
+    <p>This flips how a smart student uses any helper — friend, parent, flashcards, or AI as a copilot:</p>
+    <ul class="clean">
+      <li><strong>Make it ask you, not tell you.</strong> "Quiz me, one question at a time, don't show the answer until I've tried" beats any summary it could ever write.</li>
+      <li><strong>Produce first, check second.</strong> Write your own summary from memory, <em>then</em> compare: "what did I miss, what did I get wrong?" The gap between yours and the real thing is your exact revision list.</li>
+      <li><strong>Explain it back.</strong> If you can teach a topic in your own words to someone (or something) playing the confused beginner, you know it. Where your explanation collapses is where your revision starts.</li>
+      <li><strong>Space it out.</strong> Three 20-minute sessions across a week beat one 3-hour cram, every time. A helper is great at building that schedule — you still do the remembering.</li>
+    </ul>
+    <p>Notice what all four have in common: <strong>the effort stays in your head.</strong> And every one of them works without AI too — a parent with your flashcards, a friend with the textbook, a blank page and a pen. The method is the magic, not the tool.</p>
+  </section>
+
+  <section>
+    <span class="kicker"><span class="num">3</span> See it in action</span>
+    <h2>Two revisers, same biology test</h2>
+    <div class="twocol">
+      <div class="c bad">
+        <span class="tag">📖 The re-reader</span>
+        Reads the cells topic four times. Gets AI to summarise it "to consolidate". Reads the summary twice. Highlights it. Everything feels familiar; confidence is high.<br><br>
+        <strong>Test day:</strong> the questions ask her to <em>produce</em> what she's only ever <em>recognised</em>. The familiar feeling was fluency, not knowledge. She scores far below how ready she felt.
+      </div>
+      <div class="c good">
+        <span class="tag">🧠 The retriever</span>
+        Closes the book and writes down everything she remembers about cells — messy, full of gaps. Checks it against her notes. The gaps become her question list. Gets quizzed on exactly those, closed-book, two more times across the week.<br><br>
+        <strong>Test day:</strong> she's already practised the exact skill the test demands — recalling under pressure. It felt harder all week. That was the point.
+      </div>
+    </div>
+    <p>The re-reader did more <em>hours</em>. The retriever did more <em>remembering</em>. Hours don't get marks.</p>
+  </section>
+
+  <section>
+    <span class="kicker"><span class="num">4</span> Your turn</span>
+    <h2>Revision duels: which move builds more memory?</h2>
+    <p>Five head-to-heads. In each one, pick the move that the science says wins.</p>
+
+    <div class="q" data-ans="b">
+      <div class="qhd">Duel 1 · The night before a quiz</div>
+      <div class="opts">
+        <button data-v="a" onclick="pick(this)">A · Re-read your notes one more time, slowly and carefully</button>
+        <button data-v="b" onclick="pick(this)">B · Close the notes and write down everything you can remember, then check</button>
+      </div>
+      <div class="why">🧠 <strong>B wins — and it's not close.</strong> This is called a "brain dump" and it's pure retrieval practice. The re-read makes the notes familiar; the brain dump makes the knowledge <em>yours</em>, and shows you exactly what's missing while there's still time to fix it.</div>
+    </div>
+
+    <div class="q" data-ans="b">
+      <div class="qhd">Duel 2 · Summaries</div>
+      <div class="opts">
+        <button data-v="a" onclick="pick(this)">A · Ask AI (or copy a friend's) summary of the topic, read it well</button>
+        <button data-v="b" onclick="pick(this)">B · Write your own summary from memory, then compare it to the real thing</button>
+      </div>
+      <div class="why">🧠 <strong>B wins.</strong> A ready-made summary — however good — is someone else's retrieval practice. Writing your own is the workout; the comparison afterwards turns your mistakes into a precise to-do list. (This is the copilot pattern from E4: produce first, then use help to check.)</div>
+    </div>
+
+    <div class="q" data-ans="a">
+      <div class="qhd">Duel 3 · Using a helper</div>
+      <div class="opts">
+        <button data-v="a" onclick="pick(this)">A · "Quiz me one question at a time — don't show answers until I've tried"</button>
+        <button data-v="b" onclick="pick(this)">B · "Show me model answers so I know what a good answer looks like"</button>
+      </div>
+      <div class="why">🧠 <strong>A wins.</strong> Model answers have a place — <em>after</em> you've attempted your own. Reading them first turns revision back into recognition. Being quizzed cold, with the squirm of not-quite-remembering, is the strongest single move in revision.</div>
+    </div>
+
+    <div class="q" data-ans="b">
+      <div class="qhd">Duel 4 · The textbook chapter</div>
+      <div class="opts">
+        <button data-v="a" onclick="pick(this)">A · Highlight the key points as you read</button>
+        <button data-v="b" onclick="pick(this)">B · Turn the key points into questions, and test yourself tomorrow</button>
+      </div>
+      <div class="why">🧠 <strong>B wins.</strong> Highlighting is one of the most-studied revision methods — and one of the weakest. It marks what matters without making your brain do anything with it. Questions + a day's gap = retrieval <em>and</em> spacing in one move.</div>
+    </div>
+
+    <div class="q" data-ans="b">
+      <div class="qhd">Duel 5 · Past-paper question</div>
+      <div class="opts">
+        <button data-v="a" onclick="pick(this)">A · Do it with your notes open, so the answer is solid</button>
+        <button data-v="b" onclick="pick(this)">B · Do it closed-book under time, then mark it harshly against the scheme</button>
+      </div>
+      <div class="why">🧠 <strong>B wins.</strong> Notes-open practice rehearses a situation that will never happen. Closed-book under time is a dress rehearsal for the real thing — and marking your own work against the scheme teaches you to think like an examiner, which is half the game.</div>
+    </div>
+
+    <p class="scorebox"><b id="score">0</b> of 5 duels called · <span id="scoreRight">0</span> with the science</p>
+  </section>
+
+  <section class="safety">
+    <span class="kicker"><span class="num">5</span> <span class="shield">🛡️</span> Safety checkpoint</span>
+    <h2>Three reminders before you revise with any helper</h2>
+    <ul class="clean">
+      <li><strong>The lines from Essentials don't move:</strong> no AI on the school network or school devices; if you use one at home you need to be old enough (E2's table) — and every technique on this page works just as well with a friend, a parent/carer or a stack of flashcards.</li>
+      <li><strong>Nothing personal in the chat box, ever</strong> — your revision needs topics, not your name, school or anything private. "Quiz me on GCSE biology cells" carries zero personal data. Keep it that way.</li>
+      <li><strong>Check what it tells you.</strong> An AI quizmaster can hallucinate a "fact" into a question (E1). If an answer surprises you, verify against your notes or textbook — they were checked by humans; the chatbot wasn't.</li>
+      <li><strong>Revision needs a working brain:</strong> a tired brain retrieves almost nothing. Sleep is a revision strategy — the 1am session is worth less than the sleep it cost.</li>
+    </ul>
+  </section>
+
+  <section>
+    <span class="kicker"><span class="num">6</span> Self-check</span>
+    <h2>Have you got it?</h2>
+    <p class="progress"><b id="pcount">0</b> of 4 ticked</p>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="box">✓</div><div class="txt">I can explain <strong>retrieval practice</strong> and why it beats re-reading.</div></div>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="box">✓</div><div class="txt">I know the <strong>fluency trap</strong> — why "this looks familiar" lies to me about what I know.</div></div>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="box">✓</div><div class="txt">I can name three pilot-seat study moves (quiz me · produce-then-compare · explain it back).</div></div>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="box">✓</div><div class="txt">I know every one of these techniques works without AI — and what the rules are if I use it.</div></div>
+
+    <button class="toggle-btn" onclick="toggleReveal('exemplar')">Show me a model answer ↓</button>
+    <div class="reveal" id="exemplar">
+      <div class="note" style="margin-top:6px">"Memory is built by pulling information out of my head, not putting it in front of my eyes — that's retrieval practice. Re-reading and highlighting feel good because of the fluency trap: familiar isn't the same as known. So I make my helper ask me questions instead of giving me answers, I write my own summaries before comparing, and I space sessions out. The effort stays in my head — and that works with flashcards and friends, not just AI."</div>
+    </div>
+
+    <h3 style="margin-top:20px">How does your current revision compare?</h3>
+    <div class="lights">
+      <div class="light r" onclick="setLight(this)"><span class="em">📖</span>Mostly re-reading</div>
+      <div class="light y" onclick="setLight(this)"><span class="em">🔁</span>A mix</div>
+      <div class="light g" onclick="setLight(this)"><span class="em">🧠</span>Mostly retrieval</div>
+    </div>
+    <div class="note" style="margin-top:16px">🎒 <strong>This week:</strong> before opening your notes for any subject, spend five minutes writing down everything you remember first. Then open them. The gap you find is your revision plan.</div>
+  </section>
+
+  <section class="next">
+    <span class="arrow">↓</span>
+    <h2>Where next</h2>
+    <p>Studying is the easy case — the work stays yours. The harder question is homework and coursework: <em>where exactly is the line between help and cheating?</em></p>
+    <p style="margin-top:10px"><strong>Up next → Thinking · T2: Homework, coursework and honesty</strong></p>
+    <div style="margin-top:22px">
+      <a href="thinking-homework-honesty-module.html" data-done="T1" style="display:inline-block;background:#e8b04b;color:#3a2a06;font-weight:700;text-decoration:none;padding:13px 26px;border-radius:11px;font-size:1.02rem;box-shadow:0 4px 14px rgba(0,0,0,.18)">✓ Mark complete &amp; continue →</a>
+      <div style="margin-top:13px"><a href="index.html" data-done="T1" style="color:rgba(255,255,255,.82);font-size:.9rem">Save &amp; back to dashboard</a></div>
+    </div>
+  </section>
+
+</div>
+
+<div class="toast" id="toast">Nice ✓</div>
+<script>
+  var toastTimer;function showToast(msg){var el=document.getElementById('toast');el.textContent=msg||'Nice ✓';el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(function(){el.classList.remove('show')},1700);}
+  function toggleReveal(id){var el=document.getElementById(id);el.classList.toggle('show');var btn=event.currentTarget;if(el.classList.contains('show')){btn.innerHTML=btn.innerHTML.replace('↓','↑');}else{btn.innerHTML=btn.innerHTML.replace('↑','↓');}}
+  function toggleCheck(el){el.classList.toggle('done');document.getElementById('pcount').innerText=document.querySelectorAll('.check-item.done').length;}
+  function setLight(el){el.parentElement.querySelectorAll('.light').forEach(function(l){l.classList.remove('sel')});el.classList.add('sel');}
+
+  // duels
+  var answered=0, right=0;
+  function pick(btn){
+    var q=btn.closest('.q');
+    if(q.classList.contains('answered')) return;
+    q.classList.add('answered');
+    var ans=q.getAttribute('data-ans'), choice=btn.getAttribute('data-v');
+    q.querySelectorAll('.opts button').forEach(function(b){
+      if(b.getAttribute('data-v')===ans){ b.classList.add('right'); }
+      else if(b===btn){ b.classList.add('wrong'); }
+    });
+    answered++; if(choice===ans) right++;
+    document.getElementById('score').textContent=answered;
+    document.getElementById('scoreRight').textContent=right;
+    if(answered===5){ showToast(right===5?'5/5 — the science agrees 🧠':'Done — '+right+'/5. The why matters most ↑'); }
+  }
+
+  // progress save links (script-block listener — never inline onclick on <a>, Netlify corrupts it)
+  (function(){document.querySelectorAll('a[data-done]').forEach(function(a){a.addEventListener('click',function(){try{var id=a.getAttribute('data-done');var d=JSON.parse(localStorage.getItem('saig_done')||'[]');if(d.indexOf(id)<0){d.push(id);localStorage.setItem('saig_done',JSON.stringify(d));}}catch(e){}});});})();
+</script>
+</body>
+</html>

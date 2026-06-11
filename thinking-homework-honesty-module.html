@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thinking · Homework, coursework and honesty — Student AI Guide</title>
+<style>
+  :root{
+    --paper:#f7f5ef;--card:#ffffff;--ink:#1f2421;--ink-soft:#4a534d;--line:#e3ded2;
+    --pw:#3f6e72;--pw-deep:#294b4e;--pw-tint:#e6eef0;--clay:#b4532a;--amber:#e8b04b;
+    --safe:#1f7a4d;--safe-tint:#e8f3ec;
+    --shadow:0 1px 2px rgba(31,36,33,.05),0 6px 22px rgba(31,36,33,.07);
+  }
+  *{box-sizing:border-box}html{scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.62;font-size:17px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:760px;margin:0 auto;padding:0 22px 90px}
+  h1,h2,h3{font-family:Georgia,"Times New Roman",serif;line-height:1.22;letter-spacing:-.01em}
+  h2{font-size:1.5rem;margin:0 0 .5rem}h3{font-size:1.12rem;margin:0 0 .4rem}
+  p{margin:.55rem 0}a{color:var(--pw-deep)}
+  header{background:linear-gradient(155deg,#3f6e72 0%,#294b4e 100%);color:#f3efe4;padding:42px 22px 38px;border-bottom:4px solid var(--amber)}
+  .header-inner{max-width:760px;margin:0 auto}
+  .programme{font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;opacity:.82;margin:0 0 16px}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+  .badge{font-size:.74rem;letter-spacing:.04em;text-transform:uppercase;font-weight:600;padding:4px 11px;border-radius:999px;border:1px solid rgba(243,239,228,.35)}
+  .badge.path{background:var(--amber);color:#3a2a06;border-color:transparent}
+  header h1{font-size:2.05rem;margin:.1rem 0 .5rem;color:#fff}
+  .meta{display:flex;flex-wrap:wrap;gap:18px;font-size:.86rem;opacity:.9;margin-top:14px}
+  .meta span{display:flex;align-items:center;gap:6px}
+  section{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;margin:26px 0;box-shadow:var(--shadow)}
+  .kicker{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--pw);margin-bottom:10px}
+  .kicker .num{width:22px;height:22px;border-radius:50%;background:var(--pw);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-family:Georgia,serif;font-size:.8rem}
+  .lead{font-size:1.06rem}
+  .note{background:var(--pw-tint);border-radius:10px;padding:12px 15px;font-size:.92rem;margin:14px 0}
+  .note strong{color:var(--pw-deep)}
+  .toggle-btn{background:var(--pw);color:#fff;border:none;border-radius:9px;padding:10px 16px;font-size:.9rem;font-weight:600;cursor:pointer;margin:8px 0;transition:.15s}
+  .toggle-btn:hover{background:var(--pw-deep)}
+  .reveal{display:none}.reveal.show{display:block;animation:fade .3s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  .safety{background:var(--safe-tint);border:1px solid #bfe0cb;border-left:5px solid var(--safe)}
+  .safety .kicker{color:var(--safe)}.safety .kicker .num{background:var(--safe)}
+  .shield{font-size:1.15rem}
+  .check-item{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border:1px solid var(--line);border-radius:11px;margin:8px 0;cursor:pointer;transition:.15s;background:#fbfaf6}
+  .check-item:hover{border-color:var(--pw)}
+  .check-item.done{background:var(--pw-tint);border-color:var(--pw)}
+  .check-item .box{flex:0 0 22px;width:22px;height:22px;border:2px solid var(--pw);border-radius:6px;display:flex;align-items:center;justify-content:center;margin-top:1px;color:#fff;font-weight:700;font-size:.9rem}
+  .check-item.done .box{background:var(--pw)}.check-item .txt{font-size:.95rem}
+  .progress{font-size:.9rem;color:var(--ink-soft);margin:6px 0 14px;font-weight:600}.progress b{color:var(--pw-deep)}
+  .lights{display:flex;gap:10px;margin:16px 0 4px}
+  .light{flex:1;text-align:center;border:1px solid var(--line);border-radius:11px;padding:12px 8px;cursor:pointer;font-size:.85rem;font-weight:600;transition:.15s;background:#fbfaf6}
+  .light .em{font-size:1.4rem;display:block;margin-bottom:3px}
+  .light.sel{border-width:2px;transform:translateY(-2px)}
+  .light.r.sel{border-color:#c0392b;background:#fbeae6}.light.y.sel{border-color:#d9a528;background:#fbf3df}.light.g.sel{border-color:var(--safe);background:var(--safe-tint)}
+  .next{background:linear-gradient(155deg,#3f6e72,#294b4e);color:#f3efe4;border:none;text-align:center}
+  .next h2{color:#fff}.next p{opacity:.92}.next .arrow{font-size:1.6rem;display:block;margin-bottom:6px;color:var(--amber)}
+  .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(120%);background:var(--ink);color:#fff;padding:11px 20px;border-radius:10px;font-size:.9rem;box-shadow:var(--shadow);transition:.3s;z-index:50}
+  .toast.show{transform:translateX(-50%) translateY(0)}
+  ul.clean{padding-left:1.15rem}ul.clean li{margin:.3rem 0}
+  /* traffic-light framework cards */
+  .tlgrid{display:grid;grid-template-columns:1fr;gap:10px;margin:16px 0}
+  .tl{border-radius:12px;padding:14px 16px;font-size:.93rem;border:1px solid var(--line)}
+  .tl b{display:block;font-size:1rem;margin-bottom:4px;font-family:Georgia,serif}
+  .tl.g{background:var(--safe-tint);border-color:#bfe0cb}.tl.g b{color:var(--safe)}
+  .tl.y{background:#fbf3df;border-color:#e7d59b}.tl.y b{color:#8a6516}
+  .tl.r{background:#fbeae6;border-color:#eac6bb}.tl.r b{color:#b23b22}
+  /* sorter */
+  .q{border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0;background:#fbfaf6}
+  .q .qtxt{margin:.1rem 0 .7rem;font-size:.97rem}
+  .q .qtxt em{font-family:Georgia,serif}
+  .opts{display:flex;gap:9px}
+  .opts button{flex:1;border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 6px;font-size:.86rem;font-weight:600;cursor:pointer;font-family:inherit;transition:.15s;color:var(--ink)}
+  .opts button:hover{border-color:var(--pw)}
+  .q.answered .opts button{cursor:default;opacity:.55}
+  .q.answered .opts button.right{opacity:1;border-color:var(--safe);background:var(--safe-tint)}
+  .q.answered .opts button.wrong{opacity:1;border-color:#c0392b;background:#fbeae6}
+  .q .why{display:none;margin-top:11px;font-size:.9rem;border-top:1px dashed var(--line);padding-top:10px}
+  .q.answered .why{display:block;animation:fade .3s ease}
+  .scorebox{font-size:.92rem;font-weight:600;color:var(--ink-soft);margin-top:14px}
+  .scorebox b{color:var(--pw-deep)}
+</style>
+  <link rel="icon" href="logo.svg">
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:12px;margin:0 0 14px"><img src="logo.svg" alt="Marriotts School" width="42" height="42" style="background:#fff;border-radius:9px;padding:5px;box-sizing:border-box;flex:0 0 auto"><p class="programme" style="margin:0">Marriotts School &middot; Student AI Guide</p></div>
+    <div class="badges"><span class="badge path">Thinking · T2</span><span class="badge">No AI tool needed</span></div>
+    <h1>Homework, coursework and honesty</h1>
+    <div class="meta"><span>⏱ About 12 minutes</span><span>🎯 Where the line actually is</span><span>🚦 Six calls to make</span></div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section>
+    <span class="kicker"><span class="num">1</span> Why this matters</span>
+    <p class="lead">"Is using AI on homework cheating?" is the wrong question — it's like asking "is using a calculator cheating?" In a mental-arithmetic test, yes. In an engineering exam, no. <strong>It depends what the work is for.</strong></p>
+    <p>This module gives you the actual map: a traffic-light system for any piece of schoolwork, the test that tells you which light you're at, and the hard rules around GCSE and A-level coursework — where getting this wrong isn't a telling-off, it's the exam board's word for it: <strong>malpractice</strong>.</p>
+  </section>
+
+  <section>
+    <span class="kicker"><span class="num">2</span> The idea</span>
+    <h2>The purpose test, then the traffic light</h2>
+    <p>Every task a teacher sets has a hidden second product. The visible one is the essay, the worksheet, the translation. The real one is <strong>the skill the task builds in you</strong>. So the test is:</p>
+    <div class="note"><strong>The purpose test:</strong> what skill is this task supposed to build — and if AI does it, does that skill still get built in me? If the answer is no, the AI isn't helping you do the work. It's helping you not do it.</div>
+    <p>Run any AI use through that test and it lands on one of three lights:</p>
+    <div class="tlgrid">
+      <div class="tl g"><b>🟢 Green — fine, no question</b> The AI works on your understanding, not your answers: explaining things differently, quizzing you, giving feedback on a draft <em>you</em> wrote, building a revision plan. The skill still gets built — often faster. (All of T1 lives here.)</div>
+      <div class="tl y"><b>🟡 Amber — ask, and say what you did</b> The grey zone: brainstorming angles, suggesting a structure, checking your grammar. Sometimes that's fine; sometimes generating the angles <em>was the task</em>. You usually can't tell from the outside — your teacher can. The amber rule: <strong>ask first if you can, and always be ready to say exactly what the AI did.</strong> If you'd rather not mention it, that's your conscience answering the question for you.</div>
+      <div class="tl r"><b>🔴 Red — never</b> AI writes, solves or translates anything you submit with your name on it. Doesn't matter how much you "edited" it — if the thinking in the work isn't yours, the work isn't yours. For everyday homework that's dishonest and it sabotages you (E4). For GCSE/A-level coursework it's a different category entirely — see below.</div>
+    </div>
+    <h3 style="margin-top:18px">The coursework rules are not school rules</h3>
+    <p>For assessed coursework and NEA (non-exam assessment), the rules come from <strong>JCQ — the exam boards themselves</strong>. You sign a declaration that the work is your own. Submitting AI-written work as yours, or failing to acknowledge AI use where it was allowed, counts as <strong>malpractice</strong> — same category as plagiarism. Penalties run from losing the marks for that section, to losing the whole qualification. A teacher can't make that go away; it's above their heads.</p>
+    <p>And about getting caught: forget "AI detectors" — your teachers have something better. They've read your classwork all year. <strong>They know your voice.</strong> When paragraph three suddenly sounds like a corporate website, nobody needs software.</p>
+  </section>
+
+  <section>
+    <span class="kicker"><span class="num">3</span> See it in action</span>
+    <h2>One essay, three students, three lights</h2>
+    <p>Year 11, English coursework-style essay on <em>A Christmas Carol</em>. Three students, three different evenings:</p>
+    <ul class="clean">
+      <li><strong>Student one (🟢):</strong> wrote her plan and draft herself; at home asked an AI to quiz her on Scrooge quotes until she knew them cold, then asked "what would a strict marker challenge in my argument?" — and fixed it herself. Every word hers, sharper than it would've been.</li>
+      <li><strong>Student two (🟡 handled right):</strong> was stuck on structure, asked AI for three ways to organise an essay comparing Scrooge's past and present. Picked one, wrote everything himself — then told his teacher "I used AI to suggest structures, is that okay for this piece?" Teacher said fine, noted it. Done, honest, zero risk.</li>
+      <li><strong>Student three (🔴):</strong> pasted the question, smoothed the output "into his own words", signed the declaration. The voice shift was obvious; the school had to treat it as suspected malpractice. Best case now: redo the work under supervision and a hard conversation with his parents. Worst case: it goes to the exam board.</li>
+    </ul>
+    <p>Same essay title. The difference was never the tool — it was <strong>whose thinking ended up on the page, and whether they'd say so out loud.</strong></p>
+  </section>
+
+  <section>
+    <span class="kicker"><span class="num">4</span> Your turn</span>
+    <h2>Call the light</h2>
+    <p>Six situations, all at home on someone's own account. Green, amber or red?</p>
+
+    <div class="q" data-ans="g">
+      <p class="qtxt"><em>"Quiz me on quadratic equations until I stop making sign errors — maths test Friday."</em></p>
+      <div class="opts"><button data-v="g" onclick="pick(this)">🟢 Green</button><button data-v="y" onclick="pick(this)">🟡 Amber</button><button data-v="r" onclick="pick(this)">🔴 Red</button></div>
+      <div class="why">🟢 <strong>Green.</strong> Purpose test: the homework's skill is solving equations — and that skill is exactly what's being drilled into <em>you</em>. The AI never touches a submitted answer.</div>
+    </div>
+
+    <div class="q" data-ans="r">
+      <p class="qtxt"><em>"Translate this paragraph into Spanish for my homework" — then copy it out neatly.</em></p>
+      <div class="opts"><button data-v="g" onclick="pick(this)">🟢 Green</button><button data-v="y" onclick="pick(this)">🟡 Amber</button><button data-v="r" onclick="pick(this)">🔴 Red</button></div>
+      <div class="why">🔴 <strong>Red.</strong> The skill being built was translating. The AI built it for itself. Your teacher now plans next lesson believing you can do something you can't — so the help you need never arrives, and the speaking exam can't be outsourced.</div>
+    </div>
+
+    <div class="q" data-ans="y">
+      <p class="qtxt"><em>"Give me five possible angles for my history essay on the causes of the Cold War — I'll choose one and write it all myself."</em></p>
+      <div class="opts"><button data-v="g" onclick="pick(this)">🟢 Green</button><button data-v="y" onclick="pick(this)">🟡 Amber</button><button data-v="r" onclick="pick(this)">🔴 Red</button></div>
+      <div class="why">🟡 <strong>Amber.</strong> This is the classic grey zone: in some tasks, <em>finding the angle</em> is the skill being assessed. You can't tell from the outside — so ask, and be upfront about what the AI contributed. If you'd hide it, you already know.</div>
+    </div>
+
+    <div class="q" data-ans="r">
+      <p class="qtxt"><em>"Write the analysis section of my geography NEA — I'll adjust the wording so it sounds like me."</em></p>
+      <div class="opts"><button data-v="g" onclick="pick(this)">🟢 Green</button><button data-v="y" onclick="pick(this)">🟡 Amber</button><button data-v="r" onclick="pick(this)">🔴 Red</button></div>
+      <div class="why">🔴 <strong>Red — the most serious one on this page.</strong> NEA is exam-board assessed work with a signed declaration. "Adjusting the wording" changes nothing: the analysis isn't yours. This is JCQ malpractice territory, where the penalty can be the qualification itself.</div>
+    </div>
+
+    <div class="q" data-ans="g">
+      <p class="qtxt"><em>"Here's the essay I've finished and my teacher's feedback from last time. Does this draft fix the problems she raised? Be specific."</em></p>
+      <div class="opts"><button data-v="g" onclick="pick(this)">🟢 Green</button><button data-v="y" onclick="pick(this)">🟡 Amber</button><button data-v="r" onclick="pick(this)">🔴 Red</button></div>
+      <div class="why">🟢 <strong>Green.</strong> The work is done, by you. Using AI as a feedback mirror against your teacher's own criteria is the copilot pattern at its best — as long as <em>you</em> make the fixes. (One care from E2: the essay text itself is fine to share, but keep your name and school out of it.)</div>
+    </div>
+
+    <div class="q" data-ans="y">
+      <p class="qtxt"><em>"Fix the spelling and grammar in my English homework before I hand it in."</em></p>
+      <div class="opts"><button data-v="g" onclick="pick(this)">🟢 Green</button><button data-v="y" onclick="pick(this)">🟡 Amber</button><button data-v="r" onclick="pick(this)">🔴 Red</button></div>
+      <div class="why">🟡 <strong>Amber — and most people guess green.</strong> Purpose test: in English, spelling, grammar and expression are often <em>part of what's being assessed and taught</em>. Auto-fixing them hides exactly the errors your teacher needs to see to help you. Sometimes it's fine (a science write-up, maybe) — which is why it's an ask-first, not a free pass.</div>
+    </div>
+
+    <p class="scorebox"><b id="score">0</b> of 6 called · <span id="scoreRight">0</span> matched</p>
+  </section>
+
+  <section class="safety">
+    <span class="kicker"><span class="num">5</span> <span class="shield">🛡️</span> Safety checkpoint</span>
+    <h2>The two questions that settle everything</h2>
+    <ul class="clean">
+      <li><strong>The purpose test:</strong> "what skill is this building — and does it still get built in me?"</li>
+      <li><strong>The daylight test (from E4):</strong> "could I tell my teacher exactly how I used AI on this, out loud, comfortably?" If yes, you're almost certainly fine. If no, stop.</li>
+      <li><strong>For coursework and NEA</strong>, don't navigate it alone: the safe move is always to ask your teacher <em>before</em> using AI for anything connected to assessed work. They'd far rather answer that question than open a malpractice case.</li>
+    </ul>
+    <p>And the standing lines: <strong>no AI at school</strong>, <strong>nothing personal in the box</strong> — your essays don't need your name attached to travel to a chatbot.</p>
+  </section>
+
+  <section>
+    <span class="kicker"><span class="num">6</span> Self-check</span>
+    <h2>Have you got it?</h2>
+    <p class="progress"><b id="pcount">0</b> of 4 ticked</p>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="box">✓</div><div class="txt">I can run the <strong>purpose test</strong> on any homework before deciding how to use AI.</div></div>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="box">✓</div><div class="txt">I can describe all three lights, with an example of each.</div></div>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="box">✓</div><div class="txt">I know amber means <strong>ask first and say what the AI did</strong> — not "probably fine".</div></div>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="box">✓</div><div class="txt">I know what JCQ malpractice means for coursework/NEA, and that the safe move is asking my teacher first.</div></div>
+
+    <button class="toggle-btn" onclick="toggleReveal('exemplar')">Show me a model answer ↓</button>
+    <div class="reveal" id="exemplar">
+      <div class="note" style="margin-top:6px">"Before using AI on schoolwork I ask what skill the task is meant to build in me. If the AI feeds that skill — explaining, quizzing, feedback on my own draft — that's green. If it might be doing the skill for me — brainstorming, structure, grammar — that's amber: ask the teacher and be open about it. If it produces anything I'd submit as mine, that's red — and on coursework it's JCQ malpractice, which can cost the qualification. My honesty check is whether I could describe my AI use to my teacher's face."</div>
+    </div>
+
+    <h3 style="margin-top:20px">Be honest: where has your homework been living?</h3>
+    <div class="lights">
+      <div class="light r" onclick="setLight(this)"><span class="em">🔴</span>Some red, truthfully</div>
+      <div class="light y" onclick="setLight(this)"><span class="em">🟡</span>Grey-zone drifting</div>
+      <div class="light g" onclick="setLight(this)"><span class="em">🟢</span>Green and staying there</div>
+    </div>
+    <div class="note" style="margin-top:16px">🎒 <strong>This week:</strong> if there's any AI-and-homework habit you wouldn't say out loud to your teacher — retire it this week, before it follows you into Year 10, 11 and the declaration you'll one day sign.</div>
+  </section>
+
+  <section class="next">
+    <span class="arrow">↓</span>
+    <h2>Where next</h2>
+    <p>You've sorted out <em>your</em> honesty. Next: the AI's. Even when nothing is made up, its answers can be slanted, one-sided or suspiciously agreeable — and it will never warn you.</p>
+    <p style="margin-top:10px"><strong>Up next → Thinking · T3: Question everything</strong></p>
+    <div style="margin-top:22px">
+      <a href="thinking-question-everything-module.html" data-done="T2" style="display:inline-block;background:#e8b04b;color:#3a2a06;font-weight:700;text-decoration:none;padding:13px 26px;border-radius:11px;font-size:1.02rem;box-shadow:0 4px 14px rgba(0,0,0,.18)">✓ Mark complete &amp; continue →</a>
+      <div style="margin-top:13px"><a href="index.html" data-done="T2" style="color:rgba(255,255,255,.82);font-size:.9rem">Save &amp; back to dashboard</a></div>
+    </div>
+  </section>
+
+</div>
+
+<div class="toast" id="toast">Nice ✓</div>
+<script>
+  var toastTimer;function showToast(msg){var el=document.getElementById('toast');el.textContent=msg||'Nice ✓';el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(function(){el.classList.remove('show')},1700);}
+  function toggleReveal(id){var el=document.getElementById(id);el.classList.toggle('show');var btn=event.currentTarget;if(el.classList.contains('show')){btn.innerHTML=btn.innerHTML.replace('↓','↑');}else{btn.innerHTML=btn.innerHTML.replace('↑','↓');}}
+  function toggleCheck(el){el.classList.toggle('done');document.getElementById('pcount').innerText=document.querySelectorAll('.check-item.done').length;}
+  function setLight(el){el.parentElement.querySelectorAll('.light').forEach(function(l){l.classList.remove('sel')});el.classList.add('sel');}
+
+  // traffic-light sorter
+  var answered=0, right=0;
+  function pick(btn){
+    var q=btn.closest('.q');
+    if(q.classList.contains('answered')) return;
+    q.classList.add('answered');
+    var ans=q.getAttribute('data-ans'), choice=btn.getAttribute('data-v');
+    q.querySelectorAll('.opts button').forEach(function(b){
+      if(b.getAttribute('data-v')===ans){ b.classList.add('right'); }
+      else if(b===btn){ b.classList.add('wrong'); }
+    });
+    answered++; if(choice===ans) right++;
+    document.getElementById('score').textContent=answered;
+    document.getElementById('scoreRight').textContent=right;
+    if(answered===6){ showToast(right===6?'6/6 — your compass works 🧭':'Done — '+right+'/6. The ambers are the hard ones ↑'); }
+  }
+
+  // progress save links (script-block listener — never inline onclick on <a>, Netlify corrupts it)
+  (function(){document.querySelectorAll('a[data-done]').forEach(function(a){a.addEventListener('click',function(){try{var id=a.getAttribute('data-done');var d=JSON.parse(localStorage.getItem('saig_done')||'[]');if(d.indexOf(id)<0){d.push(id);localStorage.setItem('saig_done',JSON.stringify(d));}}catch(e){}});});})();
+</script>
+</body>
+</html>

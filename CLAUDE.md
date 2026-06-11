@@ -28,7 +28,7 @@ self-check → where next). Pathway triad reuses the Marriotts staff palette:
 
 Module plan (built ✅ / planned ⏳):
 - **Essentials**: E1 what-is-ai ✅ → E2 rules-and-risks ✅ → E3 spot-the-fake ✅ → E4 copilot-not-pilot ✅
-- **Thinking**: T1 study-smarter ⏳ → T2 homework-and-honesty ⏳ → T3 question-everything ⏳ → T4 ai-and-you (wellbeing) ⏳
+- **Thinking**: T1 study-smarter ✅ → T2 homework-honesty ✅ → T3 question-everything ✅ → T4 ai-and-you (wellbeing) ✅
 - **Creating**: C1 create-not-copy ⏳ → C2 build-something ⏳ → C3 share-with-care ⏳ → C4 ai-and-your-future ⏳
 
 The hub lists all 12; unbuilt ones render as "coming soon" (no links). `TOTAL` in `index.html` counts
@@ -92,9 +92,11 @@ HTML).
 - **Be accurate about age limits** (quarantined in the dashed "Current as of {month year}" panel in
   E2 for termly refresh): ChatGPT/Gemini/Copilot/Meta AI 13+, **Claude 18+**. Under-18s generally
   need parent/carer consent. Don't recommend or link tools — name them factually.
-- **Safeguarding content must stay firm and specific** (E3): making sexual deepfakes of anyone,
+- **Safeguarding content must stay firm and specific** (E3, T4): making sexual deepfakes of anyone,
   including classmates, is a crime even for under-18s; victims should save evidence, tell a trusted
-  adult, and use Childline/IWF **Report Remove** and **CEOP**. Don't soften or cut this in edits.
+  adult, and use Childline/IWF **Report Remove** and **CEOP**. T4 (wellbeing/AI companions) must keep
+  the helplines — **Childline 0800 1111** and **text SHOUT to 85258** — and the "struggling → human,
+  not chatbot" message. Don't soften or cut any of this in edits.
 - **Academic integrity:** GCSE/A-level references use JCQ malpractice language (unacknowledged AI in
   coursework/NEA can void a qualification). Exams are handwritten, no AI.
 - The copilot-not-pilot principle and the "three lines that never move" (not at school / nothing
